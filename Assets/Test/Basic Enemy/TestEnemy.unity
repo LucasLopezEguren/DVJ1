@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 630508517}
   - component: {fileID: 630508515}
   - component: {fileID: 630508516}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BasicEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 8
-  distance: 1.5
+  distance: 2
 --- !u!1 &773308734
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,7 +2371,7 @@ GameObject:
   - component: {fileID: 1318264229}
   - component: {fileID: 1318264228}
   - component: {fileID: 1318264232}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2543,7 +2543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1820325035}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
