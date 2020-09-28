@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     private bool canJump;
 
-    private Rigidbody2D rb;
+    private Rigidbody rb;
     private Animator anim;
 
     public int amountOfJumps = 1;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         amountOfJumpsLeft = amountOfJumps;
     }
