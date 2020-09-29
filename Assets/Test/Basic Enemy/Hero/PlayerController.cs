@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public int amountOfJumps = 1;
 
     public float movementSpeed = 10.0f;
-    public float jumpForce = 16.0f;
+    public float jumpForce = 7.0f;
     public float groundCheckRadius;
 
     public Transform groundCheck;
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyMovement()
     {
-        rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
+        rb.velocity = new Vector3(movementSpeed * movementInputDirection, rb.velocity.y);
     }
 
     private void Flip()
