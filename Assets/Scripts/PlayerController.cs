@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public Transform pivot;
     public float RotateSpeed;
 
+    public bool isFacingRight = true;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -24,7 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, 0f, 0f);
 
-        if(Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
             moveDirection.y = jumpForce;
         }
@@ -34,6 +36,27 @@ public class PlayerController : MonoBehaviour
 
 
         anim.SetBool("isGrounded", controller.isGrounded);
+
         anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Horizontal"))));
+
+        CheckMovementDirection();
+    }
+
+    private void CheckMovementDirection()
+    {
+        if (isFacingRight && moveDirection.x < 0)
+        {
+            Flip();
+        }
+        else if (!isFacingRight && moveDirection.x > 0)
+        {
+            Flip();
+        }
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 }
