@@ -1997,7 +1997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a5563d20fa064459328c421e1c155c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadLevel: testHubSceneDuplicate
+  loadLevel: FirstLevel
 --- !u!65 &1896979796
 BoxCollider:
   m_ObjectHideFlags: 0
