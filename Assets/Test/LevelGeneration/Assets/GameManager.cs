@@ -10,9 +10,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         int amountChunksTypes = levelChunks.Length;
+        float nextPosition = 0f;
         for (int i = 0; i <= amountChunks; i++) {
             GameObject toInitiatie = levelChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(amountChunksTypes)))];
-            Instantiate(toInitiatie, new Vector3(i*50, 0, 0), Quaternion.identity);
+            if (nextPosition == 0f) {
+                nextPosition = ((toInitiatie.GetComponent<Transform>().localScale.x) / 2) + 4;
+            }
+            Instantiate(toInitiatie, new Vector3(nextPosition, 0, 0), Quaternion.identity);
+            nextPosition = nextPosition + toInitiatie.GetComponent<Transform>().localScale.x;
         }
     }
 
