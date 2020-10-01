@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public Transform pivot;
     public float RotateSpeed;
 
+    public GameObject weapon;
+
     public bool isFacingRight = true;
 
     void Start()
@@ -32,6 +34,10 @@ public class PlayerController : MonoBehaviour
             {
                 moveDirection.y = jumpForce;
             }
+        }
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            weapon.GetComponent<WeaponController>().Attack();
         }
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         controller.Move(moveDirection * Time.deltaTime);
