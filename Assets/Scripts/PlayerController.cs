@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Horizontal"))));
 
         CheckMovementDirection();
+
+        Debug.Log(moveSpeed);
     }
 
     private void CheckMovementDirection()
