@@ -1,4 +1,4 @@
-# RetroFuturism
+# RetroFuturismo.exe
 - Santiago Revetria - 219893
 - Federico Pirez - 227327
 - Lucas Lopez - 181830
