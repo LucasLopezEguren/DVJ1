@@ -5,7 +5,15 @@ using UnityEngine;
 
 public class RestartLevel : MonoBehaviour
 {
+    public GameObject player;
+    void Start () {
+        player = GameObject.FindGameObjectsWithTag("Player")[0];
+    }
     void OnTriggerEnter(Collider other) {
-        SceneManager.LoadScene("hub");
+        if (other.gameObject == player) {
+            SceneManager.LoadScene("hub");
+        } else {
+            Destroy(other.gameObject);
+        }
     }
 }

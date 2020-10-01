@@ -11,18 +11,20 @@ public class PlayerInteraction : MonoBehaviour
 
     void Update()
     {
-        if (triggering)
-        {
-            npcText.SetActive(true);
-
-            if (Input.GetKeyDown(KeyCode.V))
+        if(npcText){
+            if (triggering)
             {
-                print("you triggered");
+                npcText.SetActive(true);
+
+                if (Input.GetKeyDown(KeyCode.V))
+                {
+                    print("you triggered");
+                }
             }
-        }
-        else
-        {
-            npcText.SetActive(false);
+            else
+            {
+                npcText.SetActive(false);
+            }
         }
     }
 
