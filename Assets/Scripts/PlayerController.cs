@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
 
     public bool isFacingRight = true;
 
-    private GameObject enemy;
-
     void Start()
     {
         controller = GetComponent<CharacterController>();
