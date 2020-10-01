@@ -130,7 +130,8 @@ MonoBehaviour:
   life: 100
   damage: 10
   isFacingRight: 0
-  isWalking: 0
+  isWalking: 1
+  rangeForChasing: 5
 --- !u!54 &4874737682469985073
 Rigidbody:
   m_ObjectHideFlags: 0
