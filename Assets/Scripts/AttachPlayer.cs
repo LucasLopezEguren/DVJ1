@@ -7,7 +7,7 @@ public class AttachPlayer : MonoBehaviour{
     public GameObject player;
 
     void Start () {
-        player = GameObject.FindGameObjectsWithTag("Player")[0];
+        player = GameObject.Find("Player");
     }
 
     void OnTriggerEnter(Collider other) {
