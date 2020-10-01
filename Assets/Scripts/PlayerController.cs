@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
     public bool isFacingRight = true;
 
+    private GameObject enemy;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -56,5 +58,19 @@ public class PlayerController : MonoBehaviour
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0.0f, 180.0f, 0.0f);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")     
+        {
+            Debug.Log("Trigger");
+            other.GetComponent<EnemyController>().TakeDamage(10);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+
     }
 }

@@ -111,6 +111,7 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         //play a die animation
+        Debug.Log("Die");
 
     }
 
