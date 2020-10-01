@@ -85,7 +85,6 @@ public class EnemyController : MonoBehaviour
     {
         if (positionX < targetPositionX)
         {
-            transform.localScale = new Vector3(1, 1, 1);
             if (!isFacingRight)
             {
                 Flip();
@@ -93,12 +92,10 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            transform.localScale = new Vector3(-1, 1, 1);
             if (isFacingRight)
             {
                 Flip();
             }
-            isFacingRight = false;
         }
     }
 

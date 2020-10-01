@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-   private GameObject triggeringNpc;
+    private GameObject triggeringNpc;
     private bool triggering;
 
     public GameObject npcText;
 
     void Update()
     {
-        if(triggering)
+        if (triggering)
         {
             npcText.SetActive(true);
 
-            if(Input.GetKeyDown(KeyCode.V))
+            if (Input.GetKeyDown(KeyCode.V))
             {
                 print("you triggered");
             }
-        }else{
+        }
+        else
+        {
             npcText.SetActive(false);
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "NPC")
+        if (other.tag == "NPC")
         {
             triggering = true;
             triggeringNpc = other.gameObject;
@@ -35,7 +37,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if(other.tag == "NPC")
+        if (other.tag == "NPC")
         {
             triggering = false;
             triggeringNpc = null;
