@@ -10,18 +10,23 @@ public class EnemyController : MonoBehaviour
 
     public float distance = 2.0f;
 
+    public float life = 100.0f;
+
+    public float damage = 10.0f;
+
     public bool isFacingRight = false;
 
     public bool isWalking;
 
     private Rigidbody rb;
-    private Animator anim;
+
+    //private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
@@ -36,7 +41,7 @@ public class EnemyController : MonoBehaviour
         }
         if (transform.position.x < targetPlayer.position.x)
         {
-            transform.localScale = new Vector3(10, 10, 10);
+            transform.localScale = new Vector3(1, 1, 1);
             if (!isFacingRight)
             {
                 Flip();
@@ -44,7 +49,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            transform.localScale = new Vector3(-10, 10, 10);
+            transform.localScale = new Vector3(-1, 1, 1);
             if (isFacingRight)
             {
                 Flip();
@@ -73,6 +78,6 @@ public class EnemyController : MonoBehaviour
 
     private void UpdateAnimations()
     {
-        anim.SetBool("isWalking", isWalking);
+        //anim.SetBool("isWalking", isWalking);
     }
 }

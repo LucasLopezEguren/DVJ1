@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
 
         CheckMovementDirection();
 
-        Debug.Log(moveSpeed);
     }
 
     private void CheckMovementDirection()
