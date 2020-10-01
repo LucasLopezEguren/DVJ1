@@ -45,6 +45,13 @@ public class EnemyController : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, movementSpeed * Time.deltaTime);
         }
+        else
+        {
+            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distance){
+                isChasing = false;
+                Debug.Log("Attacking");
+            }
+        }
     }
 
     private void CheckStartChasing()
