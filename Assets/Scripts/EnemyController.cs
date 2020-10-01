@@ -10,7 +10,9 @@ public class EnemyController : MonoBehaviour
 
     public float distance = 1.0f;
 
-    public float life = 100.0f;
+    public int health;
+
+    public int maxHealth = 100;
 
     public float damage = 10.0f;
 
@@ -31,6 +33,7 @@ public class EnemyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         //anim = GetComponent<Animator>();
+        health = maxHealth;
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
@@ -47,7 +50,8 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distance){
+            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distance)
+            {
                 isChasing = false;
                 Debug.Log("Attacking");
             }
@@ -96,6 +100,21 @@ public class EnemyController : MonoBehaviour
             }
             isFacingRight = false;
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        //play a die animation
+
     }
 
     private void UpdateAnimations()
