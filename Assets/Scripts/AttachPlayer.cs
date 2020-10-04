@@ -11,15 +11,10 @@ public class AttachPlayer : MonoBehaviour{
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.gameObject == player) {
-            player.transform.parent = transform;
-        }
+            other.gameObject.transform.parent = transform;
     }
-
     void OnTriggerExit(Collider other) {
-        if (other.gameObject == player) {
-            player.transform.parent = null;
-        }
+            other.gameObject.transform.parent = null;
         
     }
 }

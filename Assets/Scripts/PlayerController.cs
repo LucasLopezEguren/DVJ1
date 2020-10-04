@@ -39,7 +39,9 @@ public class PlayerController : MonoBehaviour
         {
             weapon.GetComponent<WeaponController>().Attack();
         }
-        moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
+        if (!controller.isGrounded){
+            moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
+        }
         controller.Move(moveDirection * Time.deltaTime);
         anim.SetBool("isGrounded", controller.isGrounded);
         anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Horizontal"))));
@@ -68,7 +70,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Enemy")     
         {
-            Debug.Log("Trigger");
             other.GetComponent<EnemyController>().TakeDamage(10);
         }
     }

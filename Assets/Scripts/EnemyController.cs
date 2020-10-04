@@ -53,7 +53,6 @@ public class EnemyController : MonoBehaviour
             if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distance)
             {
                 isChasing = false;
-                Debug.Log("Attacking");
             }
         }
     }
