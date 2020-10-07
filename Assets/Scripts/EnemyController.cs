@@ -26,13 +26,12 @@ public class EnemyController : MonoBehaviour
 
     private Rigidbody rb;
 
-    //private Animator anim;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //anim = GetComponent<Animator>();
         health = maxHealth;
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
