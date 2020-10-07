@@ -15,17 +15,27 @@ public class PlayerController : MonoBehaviour
     public Transform pivot;
     public float RotateSpeed;
 
+    public int maxHealth = 200;
+    public int currentHealth;
+
     public GameObject weapon;
+    public HealthBar healthBar;
 
     public bool isFacingRight = true;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T)){
+            currentHealth -= 25;
+            healthBar.SetHealth(currentHealth);
+        }
         moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, 0f);
 
         if (controller.isGrounded)
