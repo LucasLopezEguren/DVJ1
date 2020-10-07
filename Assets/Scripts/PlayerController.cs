@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public HealthBar healthBar;
 
     public bool isFacingRight = true;
+    private int attackPhase = 0;
 
     void Start()
     {
@@ -32,12 +33,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T)){
+        if (Input.GetKeyDown(KeyCode.T))
+        {
             currentHealth -= 25;
             healthBar.SetHealth(currentHealth);
         }
         moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, 0f);
-
         if (controller.isGrounded)
         {
             if (Input.GetButtonDown("Jump"))
@@ -45,17 +46,37 @@ public class PlayerController : MonoBehaviour
                 moveDirection.y = jumpForce;
             }
         }
-        if(Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             weapon.GetComponent<WeaponController>().Attack();
+            attackPhase++;
+            anim.SetInteger("attacking", attackPhase);
         }
-        if (!controller.isGrounded){
+        if (!controller.isGrounded)
+        {
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         }
         controller.Move(moveDirection * Time.deltaTime);
         anim.SetBool("isGrounded", controller.isGrounded);
         anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Horizontal"))));
         CheckMovementDirection();
+        CheckAttackAnimation();
+    }
+
+    private void CheckAttackAnimation()
+    {
+        if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle"))
+            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        {  //If normalizedTime is 0 to 1 means animation is playing, if greater than 1 means finished
+            //Debug.Log("not playing");
+            attackPhase = 0;
+            anim.SetInteger("attacking", attackPhase);
+        }
+        else
+        {
+            //Debug.Log("playing");
+        }
     }
 
     private void CheckMovementDirection()
@@ -78,7 +99,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")     
+        if (other.tag == "Enemy")
         {
             other.GetComponent<EnemyController>().TakeDamage(10);
         }

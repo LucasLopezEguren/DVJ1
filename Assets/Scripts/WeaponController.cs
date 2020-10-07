@@ -11,7 +11,7 @@ public class WeaponController : MonoBehaviour
 
     public void Attack()
     {
-        if(canAttack)
+        if (canAttack)
         {
             enemy.GetComponent<EnemyController>().TakeDamage(10);
         }
@@ -19,7 +19,7 @@ public class WeaponController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Enemy")
+        if (other.tag == "Enemy")
         {
             canAttack = true;
             enemy = other.gameObject;
