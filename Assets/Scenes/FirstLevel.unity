@@ -394,6 +394,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5807258557600647952, guid: b49168c2ec1964451a9bb78efc46aad7, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 246031173}
     - target: {fileID: 5807258557600647953, guid: b49168c2ec1964451a9bb78efc46aad7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.919448
