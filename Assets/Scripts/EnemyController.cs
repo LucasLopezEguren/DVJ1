@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -28,11 +29,15 @@ public class EnemyController : MonoBehaviour
 
     public Animator anim;
 
+    public GameObject healthBarUI;
+    public Slider slider;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         health = maxHealth;
+        slider.value = CalculateHealth();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
@@ -54,6 +59,8 @@ public class EnemyController : MonoBehaviour
                 isChasing = false;
             }
         }
+
+        slider.value = CalculateHealth();
     }
 
     private void CheckStartChasing()
@@ -100,6 +107,7 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        healthBarUI.SetActive(true);
         if (health <= 0)
         {
             Die();
@@ -116,5 +124,10 @@ public class EnemyController : MonoBehaviour
     private void UpdateAnimations()
     {
         //anim.SetBool("isWalking", isWalking);
+    }
+
+    float CalculateHealth()
+    {
+        return health;
     }
 }
