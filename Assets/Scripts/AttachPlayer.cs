@@ -9,8 +9,6 @@ public class AttachPlayer : MonoBehaviour{
     Vector3 lastPosition;
     Transform _transform;
     [HideInInspector] public Rigidbody _rigidBody;
-    public GameObject player;
-    Rigidbody playerRB;
     void Start () {
         _transform = transform;
         lastPosition = _transform.position;
@@ -20,9 +18,6 @@ public class AttachPlayer : MonoBehaviour{
                 sensor.carrier = this;
             }
         }
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerRB = player.GetComponent<Rigidbody>();
-        rigidbodies.Add(playerRB);
     }
     void LateUpdate() {
         if (rigidbodies.Count > 0) {
@@ -52,13 +47,11 @@ public class AttachPlayer : MonoBehaviour{
     }
     
     public void AddRigidBody(Rigidbody rb) {
-        if (rb == playerRB) return;
         if(!rigidbodies.Contains(rb)){
             rigidbodies.Add(rb);
         }
     }
     public void RemoveRigidBody(Rigidbody rb) {
-        if (rb == playerRB) return;
         if(rigidbodies.Contains(rb)){
             rigidbodies.Remove(rb);
         }
