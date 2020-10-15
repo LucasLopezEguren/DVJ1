@@ -20,6 +20,7 @@ public class AttachPlayer : MonoBehaviour{
                 sensor.carrier = this;
             }
         }
+        player = GameObject.FindGameObjectWithTag("Player");
         playerRB = player.GetComponent<Rigidbody>();
         rigidbodies.Add(playerRB);
     }
