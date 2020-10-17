@@ -6,11 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     public float jumpForce;
-    public CharacterController controller;
-
+    private Collider _collider;
     private Vector3 moveDirection;
     public float gravityScale;
-
+    public Rigidbody rigidbody;
     public Animator anim;
     public Transform pivot;
     public float RotateSpeed;
@@ -26,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        _collider = GetComponent<Collider>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -38,13 +37,21 @@ public class PlayerController : MonoBehaviour
             currentHealth -= 25;
             healthBar.SetHealth(currentHealth);
         }
+        if(Input.GetKey("d")){
+            rigidbody.AddForce(moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+        if(Input.GetKey("a")){
+            rigidbody.AddForce(-moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
         moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, 0f);
-        if (controller.isGrounded)
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
+        if (isGrounded() ) {
+            Debug.Log("isGrounded" + isGrounded());
+        } else {
+            Debug.Log("in air" + !isGrounded());
+        }
+        
+        if (isGrounded() && Input.GetButtonDown("Jump")) {
                 moveDirection.y = jumpForce;
-            }
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -52,12 +59,11 @@ public class PlayerController : MonoBehaviour
             attackPhase++;
             anim.SetInteger("attacking", attackPhase);
         }
-        if (!controller.isGrounded)
+        if (!isGrounded())
         {
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         }
-        controller.Move(moveDirection * Time.deltaTime);
-        anim.SetBool("isGrounded", controller.isGrounded);
+        rigidbody.velocity = moveDirection;
         anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Horizontal"))));
         CheckMovementDirection();
         CheckAttackAnimation();
@@ -89,6 +95,20 @@ public class PlayerController : MonoBehaviour
         {
             Flip();
         }
+    }
+
+
+    private bool isGrounded() {
+        float extraHeightText = 0.01f;
+        RaycastHit[] raycastHit = Physics.RaycastAll(_collider.bounds.center, Vector2.down, _collider.bounds.extents.y);
+        Color rayColor;
+        Debug.DrawLine(_collider.bounds.center, Vector2.down * (_collider.bounds.extents.y));
+        if (raycastHit.Length > 0 && raycastHit[0].collider != null){
+            rayColor = Color.green;
+        } else {
+            rayColor = Color.red;
+        }
+        return raycastHit.Length > 0 && raycastHit[0].collider != null;
     }
 
     private void Flip()

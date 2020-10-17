@@ -142,8 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   jumpForce: 15
-  controller: {fileID: 0}
   gravityScale: 5
+  rigidbody: {fileID: 5878538962860269881}
   anim: {fileID: 5807258556541317420}
   pivot: {fileID: 0}
   RotateSpeed: 0
