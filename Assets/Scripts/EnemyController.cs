@@ -32,6 +32,8 @@ public class EnemyController : MonoBehaviour
     public GameObject healthBarUI;
     public Slider slider;
 
+    public GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,7 @@ public class EnemyController : MonoBehaviour
         health = maxHealth;
         slider.value = CalculateHealth();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -107,6 +110,13 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        Debug.Log("gameManager" + gameManager);
+        if (gameManager == null) {
+            Debug.Log("not null");
+            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        } else {
+            gameManager.addComboHit();
+        }
         healthBarUI.SetActive(true);
         if (health <= 0)
         {
