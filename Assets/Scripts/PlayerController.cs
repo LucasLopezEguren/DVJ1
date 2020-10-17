@@ -44,11 +44,6 @@ public class PlayerController : MonoBehaviour
             rigidbody.AddForce(-moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
         moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, 0f);
-        if (isGrounded() ) {
-            Debug.Log("isGrounded" + isGrounded());
-        } else {
-            Debug.Log("in air" + !isGrounded());
-        }
         
         if (isGrounded() && Input.GetButtonDown("Jump")) {
                 moveDirection.y = jumpForce;
