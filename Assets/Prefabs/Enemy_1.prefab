@@ -413,6 +413,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   healthBarUI: {fileID: 8298847903654598775}
   slider: {fileID: 7542343964402340313}
+  gameManager: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
 --- !u!54 &4874737682469985073
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -639,13 +640,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 186069ff8c1aa4dd1be440e230f92cf6, type: 3}
---- !u!1 &6393848965298155862 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 186069ff8c1aa4dd1be440e230f92cf6, type: 3}
-  m_PrefabInstance: {fileID: 6087435217429416967}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6048426034131905516 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 186069ff8c1aa4dd1be440e230f92cf6, type: 3}
+  m_PrefabInstance: {fileID: 6087435217429416967}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6393848965298155862 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 186069ff8c1aa4dd1be440e230f92cf6, type: 3}
   m_PrefabInstance: {fileID: 6087435217429416967}
   m_PrefabAsset: {fileID: 0}
