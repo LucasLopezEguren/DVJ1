@@ -30,9 +30,12 @@ public class EnemyController : MonoBehaviour
     public Animator anim;
 
     public GameObject healthBarUI;
+
     public Slider slider;
 
     public GameManager gameManager;
+
+    public CheckEdge checkEdge;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +45,7 @@ public class EnemyController : MonoBehaviour
         slider.value = CalculateHealth();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
     }
 
     // Update is called once per frame
@@ -51,24 +55,31 @@ public class EnemyController : MonoBehaviour
         UpdateAnimations();
         CheckDirection(transform.position.x, targetPlayer.position.x);
         CheckStartChasing();
-        if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distance)
+        if (!IsNearEdge())
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, movementSpeed * Time.deltaTime);
-        }
-        else
-        {
-            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distance)
+            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distance)
             {
-                isChasing = false;
+                transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, movementSpeed * Time.deltaTime);
+            }
+            else
+            {
+                if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distance)
+                {
+                    isChasing = false;
+                }
             }
         }
-
         slider.value = CalculateHealth();
     }
 
     private void CheckStartChasing()
     {
         if (Vector3.Distance(transform.position, targetPlayer.position) <= rangeForChasing) isChasing = true;
+    }
+
+    private bool IsNearEdge()
+    {
+        return checkEdge.isNearEdge;
     }
 
     private void Flip()
@@ -110,11 +121,12 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        Debug.Log("gameManager" + gameManager);
-        if (gameManager == null) {
-            Debug.Log("not null");
+        if (gameManager == null)
+        {
             gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        } else {
+        }
+        else
+        {
             gameManager.addComboHit();
         }
         healthBarUI.SetActive(true);
