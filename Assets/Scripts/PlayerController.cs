@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         _collider = GetComponent<Collider>();
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        if (healthBar != null) healthBar.SetMaxHealth(maxHealth);
     }
 
     void Update()

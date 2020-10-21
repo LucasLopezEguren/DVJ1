@@ -1022,6 +1022,10 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
+      propertyPath: FinishingChunks.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
       propertyPath: levelChunks.Array.data[1]
       value: 
       objectReference: {fileID: 3736424406299464701, guid: 98f21d372957548e2b33f5ff90f8df7b, type: 3}
@@ -1037,6 +1041,10 @@ PrefabInstance:
       propertyPath: comboText
       value: 
       objectReference: {fileID: 191931607}
+    - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
+      propertyPath: FinishingChunks.Array.data[0]
+      value: 
+      objectReference: {fileID: 2013269785397235603, guid: 125779682955842b7a84adf970bda8c6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
 --- !u!1 &1881214289
