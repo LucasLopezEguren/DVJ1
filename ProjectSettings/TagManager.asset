@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Weapon
   - GameManager
+  - Ground
   layers:
   - Default
   - TransparentFX
