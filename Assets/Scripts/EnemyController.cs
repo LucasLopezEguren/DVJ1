@@ -37,6 +37,8 @@ public class EnemyController : MonoBehaviour
 
     public CheckEdge checkEdge;
 
+    public GameObject bloodSplash;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -121,6 +123,7 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        Instantiate(bloodSplash, transform.position, Quaternion.identity);
         if (gameManager == null)
         {
             gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();

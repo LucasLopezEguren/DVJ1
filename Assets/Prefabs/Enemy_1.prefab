@@ -2908,6 +2908,7 @@ MonoBehaviour:
   slider: {fileID: 7542343964402340313}
   gameManager: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
   checkEdge: {fileID: 992625368442067046}
+  bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
 --- !u!54 &4874737682469985073
 Rigidbody:
   m_ObjectHideFlags: 0
