@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public bool isFacingRight = true;
     private int attackPhase = 0;
+    
 
     void Start()
     {
@@ -50,9 +51,9 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            weapon.GetComponent<WeaponController>().Attack();
             attackPhase++;
             anim.SetInteger("attacking", attackPhase);
+            //PlayerAttack();
         }
         if (!isGrounded())
         {
@@ -112,16 +113,5 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Enemy")
-        {
-            other.GetComponent<EnemyController>().TakeDamage(10);
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-
-    }
+    
 }
