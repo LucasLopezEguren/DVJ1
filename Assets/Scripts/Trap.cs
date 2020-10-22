@@ -33,7 +33,7 @@ public class Trap : MonoBehaviour
     void Rearm() {
 
         if (transform.position.y != initialY){
-            spikes.
+            // spikes
         }
     }
 }
