@@ -51,8 +51,10 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            attackPhase++;
-            anim.SetInteger("attacking", attackPhase);
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle") && !anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack")) {
+                ComboAttack();
+                anim.SetInteger("attacking", attackPhase);
+            }
             //PlayerAttack();
         }
         if (!isGrounded())
@@ -65,8 +67,7 @@ public class PlayerController : MonoBehaviour
         CheckAttackAnimation();
     }
 
-    private void CheckAttackAnimation()
-    {
+    private void CheckAttackAnimation() {
         if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
             || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle"))
             && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
@@ -75,14 +76,24 @@ public class PlayerController : MonoBehaviour
             attackPhase = 0;
             anim.SetInteger("attacking", attackPhase);
         }
-        else
-        {
+        else {
             //Debug.Log("playing");
         }
     }
 
-    private void CheckMovementDirection()
-    {
+    private void ComboAttack() {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack")) {
+            attackPhase = 2;
+        } else if (anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")) {
+            attackPhase = 3;
+        } else if (anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle")) {
+            attackPhase = 0;
+        } else {
+            attackPhase = 1;
+        }
+    }
+
+    private void CheckMovementDirection() {
         if (isFacingRight && moveDirection.x < 0)
         {
             Flip();
