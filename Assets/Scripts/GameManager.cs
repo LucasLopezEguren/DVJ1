@@ -52,9 +52,6 @@ public class GameManager : MonoBehaviour
         }
         if (comboCount > 3) {
             transparency = (comboCountLifeTime - comboCurrentTime)/comboCountLifeTime;
-            Debug.Log("comboCurrentTime: " + comboCurrentTime);
-            Debug.Log("transparency: " + transparency);  
-            Debug.Log("combo: " + comboCount);  
             comboNumber.text = comboCount.ToString();
             comboText.text = "hits";
             transparencyNumber.a = transparency;
@@ -68,7 +65,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void addComboHit () {
-        Debug.Log("comboCount: " + comboCount);
         comboCount++;
         comboCurrentTime = 0f;
     }

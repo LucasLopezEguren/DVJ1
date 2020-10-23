@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour
                 ComboAttack();
                 anim.SetInteger("attacking", attackPhase);
             }
-            //PlayerAttack();
         }
         if (!isGrounded())
         {

@@ -7,13 +7,14 @@ public class PlayerAttackEvent : MonoBehaviour
     public Transform attackPoint;
     public float attackRange;
     public LayerMask enemyLayers;
+    public int damage = 5;
 
     public void PlayerAttack()
     {
         Collider[] hitColliders = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider hitEnemy in hitColliders)
         {
-            hitEnemy.GetComponent<EnemyController>().TakeDamage(5);
+            hitEnemy.GetComponent<EnemyController>().TakeDamage(damage);
         }
     }
 }

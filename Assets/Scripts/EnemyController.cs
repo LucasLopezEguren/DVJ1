@@ -13,15 +13,17 @@ public class EnemyController : MonoBehaviour
 
     public int health;
 
-    public int maxHealth = 100;
+    public int maxHealth = 15;
 
-    public float damage = 10.0f;
+    //public float damage = 10.0f;
 
-    public bool isFacingRight = false;
+    private bool isFacingRight = false;
 
-    public bool isWalking;
+    private bool isWalking;
 
     private bool isChasing = false;
+
+    private bool isAttacking = false;
 
     public float rangeForChasing = 5.0f;
 
@@ -44,10 +46,10 @@ public class EnemyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         health = maxHealth;
+        slider.maxValue = maxHealth;
         slider.value = CalculateHealth();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-
     }
 
     // Update is called once per frame
@@ -57,17 +59,20 @@ public class EnemyController : MonoBehaviour
         UpdateAnimations();
         CheckDirection(transform.position.x, targetPlayer.position.x);
         CheckStartChasing();
+        //CheckAttacking();
         if (!IsNearEdge())
         {
-            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distance)
+            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distance && !anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_1_attack"))
             {
                 transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, movementSpeed * Time.deltaTime);
+                //isAttacking = false;
             }
             else
             {
                 if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distance)
                 {
                     isChasing = false;
+                    isAttacking = true;
                 }
             }
         }
@@ -76,13 +81,24 @@ public class EnemyController : MonoBehaviour
 
     private void CheckStartChasing()
     {
-        if (Vector3.Distance(transform.position, targetPlayer.position) <= rangeForChasing) isChasing = true;
+        if (Vector3.Distance(transform.position, targetPlayer.position) <= rangeForChasing)
+        {
+            isAttacking = false;
+            isChasing = true;
+        }
+        
     }
 
     private bool IsNearEdge()
     {
         return checkEdge.isNearEdge;
     }
+
+    //private void CheckAttacking()
+    //{
+    //    if (!isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distance) isAttacking = true;
+    //    else isAttacking = false;
+    //}
 
     private void Flip()
     {
@@ -142,13 +158,13 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         //play a die animation
-        Debug.Log("Die");
         Destroy(gameObject);
     }
 
     private void UpdateAnimations()
     {
         //anim.SetBool("isWalking", isWalking);
+        anim.SetBool("isAttacking", isAttacking);
     }
 
     float CalculateHealth()

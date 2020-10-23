@@ -2896,14 +2896,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 2
-  distance: 2
+  distance: 0.8
   health: 0
-  maxHealth: 100
-  damage: 10
-  isFacingRight: 0
-  isWalking: 1
+  maxHealth: 15
   rangeForChasing: 5
-  anim: {fileID: 0}
+  anim: {fileID: 2618390594361260405}
   healthBarUI: {fileID: 8298847903654598775}
   slider: {fileID: 7542343964402340313}
   gameManager: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
@@ -4004,6 +4001,7 @@ GameObject:
   - component: {fileID: 7688641282598167139}
   - component: {fileID: 810982614594167381}
   - component: {fileID: 3796116284703161263}
+  - component: {fileID: 5838370535691626079}
   m_Layer: 0
   m_Name: ENEMY_1_SWORD
   m_TagString: Untagged
@@ -4074,6 +4072,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5838370535691626079
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7050697645494553185}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0010988604, y: 0.0016093544, z: 0.011066745}
+  m_Center: {x: 0.00000026557527, y: -0.00022448291, z: 0.0055344678}
 --- !u!1 &7052936957907018654
 GameObject:
   m_ObjectHideFlags: 0
