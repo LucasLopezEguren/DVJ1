@@ -56,11 +56,13 @@ public class GameManager : MonoBehaviour
                 comboText.text = "hits";
             } else if ( comboCount < 8 ) {
                 comboText.text = "Deorbital\r\nhits";
-            } else if ( comboCount < 13) {
+            } else if ( comboCount < 13 ) {
+                comboText.text = "Cosmical\r\nhits";
+            } else if ( comboCount < 21) {
                 comboText.text = "Black holish\r\nhits";
-            } else if (comboCount < 21) {
+            } else if (comboCount < 34) {
                 comboText.text = "Astronomical\r\nhits";
-            } else if (comboCount >= 21) {
+            } else if (comboCount >= 34) {
                 comboText.text = "SuperNova\r\nhits";
             }
             transparencyNumber.a = transparency;
