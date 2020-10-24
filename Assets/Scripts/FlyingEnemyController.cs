@@ -52,7 +52,7 @@ public class FlyingEnemyController : MonoBehaviour
         }
         else
         {
-            gameManager.addComboHit();
+            gameManager.AddComboHit();
         }
         healthBarUI.SetActive(true);
         if (health <= 0)
