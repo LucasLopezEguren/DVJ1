@@ -290,6 +290,7 @@ GameObject:
   - component: {fileID: 3266432339600333839}
   - component: {fileID: -9098742632880835360}
   - component: {fileID: -5355295536511475722}
+  - component: {fileID: 4947263987141187449}
   m_Layer: 10
   m_Name: FlyingEnemy
   m_TagString: Enemy
@@ -424,6 +425,24 @@ CapsuleCollider:
   m_Height: 0.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4947263987141187449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6471279456125529665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26fc991986d3c41c790e39ae89b52bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarUI: {fileID: 7939081122650914941}
+  slider: {fileID: 6634510885678832801}
+  gameManager: {fileID: 0}
+  bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
+  maxHealth: 15
+  health: 0
 --- !u!1 &7460040129216055798
 GameObject:
   m_ObjectHideFlags: 0

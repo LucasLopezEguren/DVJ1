@@ -3,50 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyController : MonoBehaviour
-{
+public class EnemyController : MonoBehaviour {
     private Transform targetPlayer;
-
     public float movementSpeed = 5.0f;
-
     public float distance = 1.0f;
-
     public int health;
-
     public int maxHealth = 15;
-
     //public float damage = 10.0f;
-
     private bool isFacingRight = false;
-
     private bool isWalking;
-
     private bool isChasing = false;
-
     private bool isAttacking = false;
-
     public float rangeForChasing = 5.0f;
-
     private Rigidbody rb;
-
     public Animator anim;
-
     public GameObject healthBarUI;
-
     public Slider slider;
-
     public GameManager gameManager;
-
     public CheckEdge checkEdge;
-
     public GameObject bloodSplash;
+    private DamageController damageController;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
+        damageController = this.GetComponent<DamageController>();
         rb = GetComponent<Rigidbody>();
-        health = maxHealth;
-        slider.maxValue = maxHealth;
+        health = damageController.maxHealth;
+        slider.maxValue = damageController.maxHealth;
         slider.value = CalculateHealth();
         StopSlashParticles();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -129,25 +112,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        Instantiate(bloodSplash, transform.position, Quaternion.identity);
-        if (gameManager == null)
-        {
-            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        }
-        else
-        {
-            gameManager.AddComboHit();
-        }
-        healthBarUI.SetActive(true);
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
     private void Die()
     {
         //play a die animation
@@ -162,7 +126,7 @@ public class EnemyController : MonoBehaviour
 
     float CalculateHealth()
     {
-        return health;
+        return damageController.health;
     }
 
     public void StartSlashParticles()

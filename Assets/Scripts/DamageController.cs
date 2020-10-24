@@ -3,47 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FlyingEnemyController : MonoBehaviour
-{
-    public float movementSpeed = 5.0f;
-
+public class DamageController : MonoBehaviour {
+    public GameObject healthBarUI;
+    public Slider slider;
+    public GameManager gameManager;
+    public GameObject bloodSplash;
+    private Rigidbody rb;
+    public int maxHealth = 15;
     public int health;
 
-    public int maxHealth = 100;
-
-    private Rigidbody rb;
-
-    public GameManager gameManager;
-
-    public GameObject healthBarUI;
-
-    public Slider slider;
-
-    public GameObject bullet;
-
-    public GameObject bloodSplash;
-
-    // Start is called before the first frame update
-    void Start()
-    {
+    
+    void Start() {
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(-movementSpeed, 0, 0, ForceMode.Impulse);
         health = maxHealth;
         slider.maxValue = maxHealth;
         slider.value = CalculateHealth();
+        StopSlashParticles();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        InvokeRepeating(nameof(ShootBullet), 0f, 2f);
     }
 
-    // Update is called once per frame
-    void Update()
+    float CalculateHealth()
     {
-        slider.value = CalculateHealth();
+        return health;
     }
 
-    public void TakeDamage(int damage)
-    {
-        Debug.Log("DAMAGE");
+    public void TakeDamage(int damage) { 
         health -= damage;
         Instantiate(bloodSplash, transform.position, Quaternion.identity);
         if (gameManager == null)
@@ -64,19 +48,20 @@ public class FlyingEnemyController : MonoBehaviour
     private void Die()
     {
         //play a die animation
-        Debug.Log("Die");
         Destroy(gameObject);
     }
 
-    public void ShootBullet()
+    public void StartSlashParticles()
     {
-        GameObject b = Instantiate(bullet);
-        b.transform.position = transform.position;
-
+        GetComponentInChildren<ParticleSystem>().Play();
+        ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
+        em.enabled = true;
     }
 
-    float CalculateHealth()
+    public void StopSlashParticles()
     {
-        return health;
+        GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
+        em.enabled = false;
     }
 }

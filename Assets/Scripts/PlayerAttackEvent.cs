@@ -17,12 +17,12 @@ public class PlayerAttackEvent : MonoBehaviour
             Debug.Log(hitEnemy);
             try
             {
-                hitEnemy.GetComponent<EnemyController>().TakeDamage(damage);
+                hitEnemy.GetComponent<DamageController>().TakeDamage(damage);
                 
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-                hitEnemy.GetComponent<FlyingEnemyController>().TakeDamage(damage);
+                Debug.Log(e.Message);
             }
             
         }

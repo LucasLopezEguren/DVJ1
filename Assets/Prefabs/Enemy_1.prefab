@@ -7653,6 +7653,7 @@ GameObject:
   - component: {fileID: 4874737682469985083}
   - component: {fileID: 4874737682469985086}
   - component: {fileID: 4874737682469985073}
+  - component: {fileID: 8872794074504488488}
   m_Layer: 10
   m_Name: Enemy_1
   m_TagString: Enemy
@@ -7793,6 +7794,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &8872794074504488488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4874737682469985080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26fc991986d3c41c790e39ae89b52bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarUI: {fileID: 8298847903654598775}
+  slider: {fileID: 7542343964402340313}
+  gameManager: {fileID: 0}
+  bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
+  maxHealth: 15
+  health: 0
 --- !u!1 &4937904096065655436
 GameObject:
   m_ObjectHideFlags: 0
