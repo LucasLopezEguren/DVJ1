@@ -44,16 +44,27 @@ public class GameManager : MonoBehaviour
     private int comboCount = 0;
     // Update is called once per frame
     private float transparency;
-    void Update()
-    {
-        if (comboCount > 3 && comboCurrentTime > comboCountLifeTime) {
+    void Update() {
+        if (comboCount >= 3 && comboCurrentTime > comboCountLifeTime) {
             comboCount = 0;
             comboCurrentTime = 0f;
         }
-        if (comboCount > 3) {
+        if (comboCount >= 3) {
             transparency = (comboCountLifeTime - comboCurrentTime)/comboCountLifeTime;
             comboNumber.text = comboCount.ToString();
-            comboText.text = "hits";
+            if (comboCount < 5) {
+                comboText.text = "hits";
+            } else if ( comboCount < 8 ) {
+                comboText.text = "Deorbital\r\nhits";
+            } else if ( comboCount < 13 ) {
+                comboText.text = "Cosmical\r\nhits";
+            } else if ( comboCount < 21) {
+                comboText.text = "Black holish\r\nhits";
+            } else if (comboCount < 34) {
+                comboText.text = "Astronomical\r\nhits";
+            } else if (comboCount >= 34) {
+                comboText.text = "SuperNova\r\nhits";
+            }
             transparencyNumber.a = transparency;
             transparencyText.a = transparency;
             comboNumber.color = transparencyNumber;
@@ -62,10 +73,21 @@ public class GameManager : MonoBehaviour
         if (comboCount > 0) {
             comboCurrentTime = comboCurrentTime + Time.deltaTime;
         }
+        if (comboCount < 3) {
+            transparency = 0;
+            transparencyNumber.a = transparency;
+            transparencyText.a = transparency;
+            comboNumber.color = transparencyNumber;
+            comboText.color = transparencyText;
+        }
     }
 
-    public void addComboHit () {
+    public void AddComboHit () {
         comboCount++;
         comboCurrentTime = 0f;
+    }
+
+    public void ComboInterrupt() {
+        comboCount = 0;
     }
 }

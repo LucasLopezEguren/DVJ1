@@ -85,14 +85,13 @@ public class EnemyController : MonoBehaviour
             isAttacking = false;
             isChasing = true;
         }
-        
+
     }
 
     private bool IsNearEdge()
     {
         return checkEdge.isNearEdge;
     }
-
 
     private void Flip()
     {
@@ -140,7 +139,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            gameManager.addComboHit();
+            gameManager.AddComboHit();
         }
         healthBarUI.SetActive(true);
         if (health <= 0)
@@ -158,7 +157,7 @@ public class EnemyController : MonoBehaviour
     private void UpdateAnimations()
     {
         //anim.SetBool("isWalking", isWalking);
-        anim.SetBool("isAttacking", isAttacking);        
+        anim.SetBool("isAttacking", isAttacking);
     }
 
     float CalculateHealth()

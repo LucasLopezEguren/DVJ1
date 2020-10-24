@@ -230,10 +230,10 @@ RectTransform:
   m_Father: {fileID: 2009703358}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187, y: -123}
-  m_SizeDelta: {x: 157.21555, y: 58.536606}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -64.8, y: -75}
+  m_SizeDelta: {x: 129.64563, y: 69.57445}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &191931607
 MonoBehaviour:
@@ -2174,10 +2174,10 @@ RectTransform:
   m_Father: {fileID: 2009703358}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 46.808, y: -123.5}
-  m_SizeDelta: {x: 93.726166, y: 45.56099}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -203.8, y: -75}
+  m_SizeDelta: {x: 113.59433, y: 69.57485}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1148885604
 MonoBehaviour:
@@ -2395,6 +2395,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 1024
+  damage: 5
 --- !u!1 &2009703354
 GameObject:
   m_ObjectHideFlags: 0
