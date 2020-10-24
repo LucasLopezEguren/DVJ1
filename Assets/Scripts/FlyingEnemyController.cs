@@ -13,8 +13,6 @@ public class FlyingEnemyController : MonoBehaviour
 
     private Rigidbody rb;
 
-    public GameManager gameManager;
-
     public GameObject healthBarUI;
 
     public Slider slider;
@@ -31,7 +29,6 @@ public class FlyingEnemyController : MonoBehaviour
         health = maxHealth;
         slider.maxValue = maxHealth;
         slider.value = CalculateHealth();
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         InvokeRepeating(nameof(ShootBullet), 0f, 2f);
     }
 
@@ -39,33 +36,6 @@ public class FlyingEnemyController : MonoBehaviour
     void Update()
     {
         slider.value = CalculateHealth();
-    }
-
-    public void TakeDamage(int damage)
-    {
-        Debug.Log("DAMAGE");
-        health -= damage;
-        Instantiate(bloodSplash, transform.position, Quaternion.identity);
-        if (gameManager == null)
-        {
-            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        }
-        else
-        {
-            gameManager.AddComboHit();
-        }
-        healthBarUI.SetActive(true);
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        //play a die animation
-        Debug.Log("Die");
-        Destroy(gameObject);
     }
 
     public void ShootBullet()
