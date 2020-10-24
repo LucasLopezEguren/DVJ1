@@ -7770,12 +7770,11 @@ MonoBehaviour:
   movementSpeed: 2
   distance: 0.8
   health: 0
-  maxHealth: 15
+  maxHealth: 700
   rangeForChasing: 5
   anim: {fileID: 2618390594361260405}
   healthBarUI: {fileID: 8298847903654598775}
   slider: {fileID: 7542343964402340313}
-  gameManager: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
   checkEdge: {fileID: 992625368442067046}
   bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
 --- !u!54 &4874737682469985073
@@ -7812,6 +7811,8 @@ MonoBehaviour:
   bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
   maxHealth: 15
   health: 0
+  anim: {fileID: 2618390594361260405}
+  isStunned: 0
 --- !u!1 &4937904096065655436
 GameObject:
   m_ObjectHideFlags: 0

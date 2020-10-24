@@ -36,8 +36,10 @@ public class EnemyController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        CheckMovement();
+        slider.value = CalculateHealth();
         UpdateAnimations();
+        if ( damageController.isStunned ) return;
+        CheckMovement();
         CheckDirection(transform.position.x, targetPlayer.position.x);
         CheckStartChasing();
         if (!IsNearEdge())
@@ -55,7 +57,6 @@ public class EnemyController : MonoBehaviour {
                 }
             }
         }
-        slider.value = CalculateHealth();
     }
 
     private void CheckStartChasing()
@@ -109,10 +110,23 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
+    private int stunAnim;
     private void UpdateAnimations()
     {
+        if (damageController.isStunned) {
+            stunAnim++;
+        } else {
+            stunAnim = 0;
+        }
         //anim.SetBool("isWalking", isWalking);
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun_1") && damageController.isStunned) {
+            damageController.isStunned = false;
+        } else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun_2") && damageController.isStillStunned) {
+            damageController.isStillStunned = false;
+        }
+        anim.SetBool("isStunned", damageController.isStunned || damageController.isStillStunned);
         anim.SetBool("isAttacking", isAttacking);
+        anim.SetInteger("stunType", stunAnim % 2);
     }
 
     float CalculateHealth()

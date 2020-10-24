@@ -11,7 +11,9 @@ public class DamageController : MonoBehaviour {
     private Rigidbody rb;
     public int maxHealth = 15;
     public int health;
+    public Animator anim;
 
+    public bool isStunned = false;
     
     void Start() {
         rb = GetComponent<Rigidbody>();
@@ -27,7 +29,15 @@ public class DamageController : MonoBehaviour {
         return health;
     }
 
+    public bool isStillStunned = false;
     public void TakeDamage(int damage) { 
+        if (isStunned) {
+            isStillStunned = true;
+            isStunned = false;
+        }
+        isStunned = true;
+        
+
         health -= damage;
         Instantiate(bloodSplash, transform.position, Quaternion.identity);
         try {
@@ -62,7 +72,7 @@ public class DamageController : MonoBehaviour {
             ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
             em.enabled = false;
         } catch (System.Exception e) {
-            
+
         }
     }
 }
