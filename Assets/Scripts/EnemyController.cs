@@ -48,6 +48,7 @@ public class EnemyController : MonoBehaviour
         health = maxHealth;
         slider.maxValue = maxHealth;
         slider.value = CalculateHealth();
+        StopSlashParticles();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
@@ -59,13 +60,11 @@ public class EnemyController : MonoBehaviour
         UpdateAnimations();
         CheckDirection(transform.position.x, targetPlayer.position.x);
         CheckStartChasing();
-        //CheckAttacking();
         if (!IsNearEdge())
         {
             if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distance && !anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_1_attack"))
             {
                 transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, movementSpeed * Time.deltaTime);
-                //isAttacking = false;
             }
             else
             {
@@ -94,11 +93,6 @@ public class EnemyController : MonoBehaviour
         return checkEdge.isNearEdge;
     }
 
-    //private void CheckAttacking()
-    //{
-    //    if (!isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distance) isAttacking = true;
-    //    else isAttacking = false;
-    //}
 
     private void Flip()
     {
@@ -164,11 +158,25 @@ public class EnemyController : MonoBehaviour
     private void UpdateAnimations()
     {
         //anim.SetBool("isWalking", isWalking);
-        anim.SetBool("isAttacking", isAttacking);
+        anim.SetBool("isAttacking", isAttacking);        
     }
 
     float CalculateHealth()
     {
         return health;
+    }
+
+    public void StartSlashParticles()
+    {
+        GetComponentInChildren<ParticleSystem>().Play();
+        ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
+        em.enabled = true;
+    }
+
+    public void StopSlashParticles()
+    {
+        GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
+        em.enabled = false;
     }
 }
