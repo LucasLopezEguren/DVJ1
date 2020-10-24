@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject[] levelChunks;
+    public GameObject[] FinishingChunks;
     public int amountChunks;
     public Text comboNumber;
     public Text comboText;
@@ -22,8 +23,14 @@ public class GameManager : MonoBehaviour
                 nextPosition = ((toInitiatie.GetComponent<Transform>().localScale.x) / 2) - 4;
             }
             Instantiate(toInitiatie, new Vector3(nextPosition, 0, 0), Quaternion.identity);
-            nextPosition = nextPosition + toInitiatie.GetComponent<Transform>().localScale.x;
+            if ( i == amountChunks) {
+                nextPosition = nextPosition + (toInitiatie.GetComponent<Transform>().localScale.x)/2;
+            } else {
+                nextPosition = nextPosition + toInitiatie.GetComponent<Transform>().localScale.x;
+            }
         }
+        GameObject finishingChunk = FinishingChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(FinishingChunks.Length)))];
+        Instantiate(finishingChunk, new Vector3(nextPosition + ((finishingChunk.GetComponent<Transform>().localScale.x) / 4) , 0, 0), Quaternion.identity);
         comboNumber.text = "";
         comboText.text = "";
         transparencyNumber = comboNumber.color;
@@ -45,9 +52,6 @@ public class GameManager : MonoBehaviour
         }
         if (comboCount > 3) {
             transparency = (comboCountLifeTime - comboCurrentTime)/comboCountLifeTime;
-            Debug.Log("comboCurrentTime: " + comboCurrentTime);
-            Debug.Log("transparency: " + transparency);  
-            Debug.Log("combo: " + comboCount);  
             comboNumber.text = comboCount.ToString();
             comboText.text = "hits";
             transparencyNumber.a = transparency;
@@ -61,7 +65,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void addComboHit () {
-        Debug.Log("comboCount: " + comboCount);
         comboCount++;
         comboCurrentTime = 0f;
     }

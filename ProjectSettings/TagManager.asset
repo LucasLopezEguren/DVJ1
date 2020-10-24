@@ -9,7 +9,7 @@ TagManager:
   - Enemy
   - Weapon
   - GameManager
-  - FlyingEnemy
+  - Ground
   layers:
   - Default
   - TransparentFX
