@@ -9,7 +9,6 @@ public class EnemyController : MonoBehaviour {
     public float distance = 1.0f;
     public int health;
     public int maxHealth = 15;
-    //public float damage = 10.0f;
     private bool isFacingRight = false;
     private bool isWalking;
     private bool isChasing = false;
@@ -19,7 +18,6 @@ public class EnemyController : MonoBehaviour {
     public Animator anim;
     public GameObject healthBarUI;
     public Slider slider;
-    public GameManager gameManager;
     public CheckEdge checkEdge;
     public GameObject bloodSplash;
     private DamageController damageController;
@@ -33,7 +31,6 @@ public class EnemyController : MonoBehaviour {
         slider.value = CalculateHealth();
         StopSlashParticles();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -110,12 +107,6 @@ public class EnemyController : MonoBehaviour {
                 Flip();
             }
         }
-    }
-
-    private void Die()
-    {
-        //play a die animation
-        Destroy(gameObject);
     }
 
     private void UpdateAnimations()

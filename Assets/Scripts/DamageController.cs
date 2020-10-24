@@ -30,13 +30,10 @@ public class DamageController : MonoBehaviour {
     public void TakeDamage(int damage) { 
         health -= damage;
         Instantiate(bloodSplash, transform.position, Quaternion.identity);
-        if (gameManager == null)
-        {
-            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        }
-        else
-        {
+        try {
             gameManager.AddComboHit();
+        } catch (System.Exception e) {
+            Debug.Log(e.Message);
         }
         healthBarUI.SetActive(true);
         if (health <= 0)
@@ -60,8 +57,12 @@ public class DamageController : MonoBehaviour {
 
     public void StopSlashParticles()
     {
-        GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
-        em.enabled = false;
+        try {
+            GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
+            em.enabled = false;
+        } catch (System.Exception e) {
+            
+        }
     }
 }
