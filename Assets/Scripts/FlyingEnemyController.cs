@@ -11,8 +11,6 @@ public class FlyingEnemyController : MonoBehaviour
 
     public int maxHealth = 100;
 
-    public bool isWalking;
-
     private Rigidbody rb;
 
     public GameManager gameManager;
@@ -23,12 +21,15 @@ public class FlyingEnemyController : MonoBehaviour
 
     public GameObject bullet;
 
+    public GameObject bloodSplash;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.AddForce(-movementSpeed, 0, 0, ForceMode.Impulse);
         health = maxHealth;
+        slider.maxValue = maxHealth;
         slider.value = CalculateHealth();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         InvokeRepeating(nameof(ShootBullet), 0f, 2f);
@@ -37,29 +38,16 @@ public class FlyingEnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckMovement();
         slider.value = CalculateHealth();
-    }
-
-    private void CheckMovement()
-    {
-        if (rb.velocity.x != 0)
-        {
-            isWalking = true;
-        }
-        else
-        {
-            isWalking = false;
-        }
     }
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("DAMAGE");
         health -= damage;
-        Debug.Log("gameManager" + gameManager);
+        Instantiate(bloodSplash, transform.position, Quaternion.identity);
         if (gameManager == null)
         {
-            Debug.Log("not null");
             gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         }
         else

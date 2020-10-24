@@ -147,7 +147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -177.54, y: -206.53}
+  m_AnchoredPosition: {x: 0, y: 0.84}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6634510885678832801
@@ -289,6 +289,7 @@ GameObject:
   - component: {fileID: 7916638258658098479}
   - component: {fileID: 3266432339600333839}
   - component: {fileID: -9098742632880835360}
+  - component: {fileID: -5355295536511475722}
   m_Layer: 10
   m_Name: FlyingEnemy
   m_TagString: Enemy
@@ -304,7 +305,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6471279456125529665}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.962984, y: 0.8167288, z: -0.25453153}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6082332352175712806}
@@ -368,10 +369,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6471279456125529665}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3266432339600333839
 MonoBehaviour:
@@ -387,12 +388,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   health: 0
-  maxHealth: 100
-  isWalking: 0
+  maxHealth: 10
   gameManager: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
   healthBarUI: {fileID: 7939081122650914941}
   slider: {fileID: 6634510885678832801}
   bullet: {fileID: 3264330867361009311, guid: 23f91fd481904994c8cc42c1143c9650, type: 3}
+  bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
 --- !u!54 &-9098742632880835360
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -409,6 +410,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &-5355295536511475722
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6471279456125529665}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 0.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7460040129216055798
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +495,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 186.46298, y: 207.68327}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 361, y: 417}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &9017395886191756281

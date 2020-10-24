@@ -14,7 +14,17 @@ public class PlayerAttackEvent : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider hitEnemy in hitColliders)
         {
-            hitEnemy.GetComponent<EnemyController>().TakeDamage(damage);
+            Debug.Log(hitEnemy);
+            try
+            {
+                hitEnemy.GetComponent<EnemyController>().TakeDamage(damage);
+                
+            }
+            catch (System.Exception)
+            {
+                hitEnemy.GetComponent<FlyingEnemyController>().TakeDamage(damage);
+            }
+            
         }
     }
 }
