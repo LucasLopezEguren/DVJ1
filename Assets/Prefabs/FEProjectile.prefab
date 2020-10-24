@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3264330867361009311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.962984, y: 0.8167288, z: -0.25453153}
+  m_LocalPosition: {x: -5.962984, y: 0.8167288, z: -0.2524}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,7 +97,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.0008992851, z: 0.02913326}
 --- !u!54 &-561692739224878085
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -127,3 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombSpeed: 10
+  explosionRadius: 1
+  hasExploded: 0
+  explosionEffect: {fileID: 309094709680483209, guid: 1b1f39cee2e0c5741adbce08640a88a5, type: 3}
