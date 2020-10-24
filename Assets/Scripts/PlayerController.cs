@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,35 +14,37 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     public Transform pivot;
     public float RotateSpeed;
-
     public int maxHealth = 200;
     public int currentHealth;
 
     public GameObject weapon;
     public HealthBar healthBar;
-
     public bool isFacingRight = true;
     private int attackPhase = 0;
+    private GameManager gameManager;
     
 
-    void Start()
-    {
+    void Start() {
         _collider = GetComponent<Collider>();
         currentHealth = maxHealth;
         if (healthBar != null) healthBar.SetMaxHealth(maxHealth);
+        try {
+            if (SceneManager.GetActiveScene().name != "hub") {
+                gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            }
+        } catch (System.Exception e) {
+            //Debug.Log(e.Message);
+        }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            currentHealth -= 25;
-            healthBar.SetHealth(currentHealth);
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.T)) {
+            takeDamage(25);
         }
-        if(Input.GetKey("d")){
+        if(Input.GetKey("d")) {
             rigidbody.AddForce(moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
-        if(Input.GetKey("a")){
+        if(Input.GetKey("a")) {
             rigidbody.AddForce(-moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
         moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, 0f);
@@ -49,15 +52,13 @@ public class PlayerController : MonoBehaviour
         if (isGrounded() && Input.GetButtonDown("Jump")) {
                 moveDirection.y = jumpForce;
         }
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
+        if (Input.GetKeyDown(KeyCode.Z)) {
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle") && !anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack")) {
                 ComboAttack();
                 anim.SetInteger("attacking", attackPhase);
             }
         }
-        if (!isGrounded())
-        {
+        if (!isGrounded()) {
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         }
         rigidbody.velocity = moveDirection;
@@ -69,13 +70,12 @@ public class PlayerController : MonoBehaviour
     private void CheckAttackAnimation() {
         if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
             || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle"))
-            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
-        {  //If normalizedTime is 0 to 1 means animation is playing, if greater than 1 means finished
+            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) {  
+            //If normalizedTime is 0 to 1 means animation is playing, if greater than 1 means finished
             //Debug.Log("not playing");
             attackPhase = 0;
             anim.SetInteger("attacking", attackPhase);
-        }
-        else {
+        } else {
             //Debug.Log("playing");
         }
     }
@@ -89,6 +89,14 @@ public class PlayerController : MonoBehaviour
             attackPhase = 0;
         } else {
             attackPhase = 1;
+        }
+    }
+
+    public void takeDamage(int damage) {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+        if (gameManager != null) {
+            gameManager.ComboInterrupt();
         }
     }
 
@@ -117,11 +125,9 @@ public class PlayerController : MonoBehaviour
         return raycastHit.Length > 0 && raycastHit[0].collider != null;
     }
 
-    private void Flip()
-    {
+    private void Flip() {
         isFacingRight = !isFacingRight;
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
-
     
 }
