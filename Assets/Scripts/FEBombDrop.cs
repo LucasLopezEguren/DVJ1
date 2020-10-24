@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FEShooting : MonoBehaviour
+public class FEBombDrop : MonoBehaviour
 {
-    public float bulletSpeed = 5f;
+    public float bombSpeed = 5f;
 
     private Rigidbody rb;
 
@@ -12,7 +12,7 @@ public class FEShooting : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(-bulletSpeed, 0, 0);
+        rb.velocity = new Vector3(-bombSpeed, 0, 0);
     }
 
     // Update is called once per frame
