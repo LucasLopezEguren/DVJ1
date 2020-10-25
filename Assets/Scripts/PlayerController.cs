@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.T)) {
-            takeDamage(25);
+            TakeDamage(25);
         }
         if(Input.GetKey("d")) {
             rigidbody.AddForce(moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void takeDamage(int damage) {
+    public void TakeDamage(int damage) {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         if (gameManager != null) {

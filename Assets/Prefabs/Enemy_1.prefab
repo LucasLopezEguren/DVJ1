@@ -7770,11 +7770,8 @@ MonoBehaviour:
   playerController: {fileID: 5807258557600647952, guid: b49168c2ec1964451a9bb78efc46aad7, type: 3}
   movementSpeed: 2
   distance: 0.8
-  health: 0
-  maxHealth: 15
   rangeForChasing: 5
   anim: {fileID: 2618390594361260405}
-  healthBarUI: {fileID: 8298847903654598775}
   slider: {fileID: 7542343964402340313}
   checkEdge: {fileID: 992625368442067046}
   bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
@@ -8909,6 +8906,7 @@ GameObject:
   - component: {fileID: 810982614594167381}
   - component: {fileID: 3796116284703161263}
   - component: {fileID: 5838370535691626079}
+  - component: {fileID: 417755291278874048}
   m_Layer: 0
   m_Name: ENEMY_1_SWORD
   m_TagString: Untagged
@@ -8993,6 +8991,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0010988604, y: 0.0016093544, z: 0.011066745}
   m_Center: {x: 0.00000026557527, y: -0.00022448291, z: 0.0055344678}
+--- !u!114 &417755291278874048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7050697645494553185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bda5203ece684e50978ac442220a47b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToPlayer: 5
+  isAttacking: 0
 --- !u!1 &7052936957907018654
 GameObject:
   m_ObjectHideFlags: 0

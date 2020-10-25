@@ -5,16 +5,25 @@ using UnityEngine.UI;
 
 public class DamageController : MonoBehaviour
 {
-    public GameObject healthBarUI;
-    public Slider slider;
-    public GameManager gameManager;
-    public GameObject bloodSplash;
     private Rigidbody rb;
+
+    public GameObject healthBarUI;
+
+    public Slider slider;
+
+    public GameManager gameManager;
+
+    public GameObject bloodSplash;
+    
     public int maxHealth;
+
     public int health;
+
     public Animator anim;
 
     public bool isStunned = false;
+
+    public bool isStillStunned = false;
 
     void Start()
     {
@@ -30,8 +39,7 @@ public class DamageController : MonoBehaviour
     {
         return health;
     }
-
-    public bool isStillStunned = false;
+    
     public void TakeDamage(int damage)
     {
         if (isStunned)

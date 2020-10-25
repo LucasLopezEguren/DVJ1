@@ -6,6 +6,30 @@ using UnityEngine.UI;
 public class EnemyController : MonoBehaviour
 {
 
+    public PlayerController playerController;
+
+    public float movementSpeed = 5.0f;
+
+    public float distance = 1.0f;
+
+    //public int health;
+
+    //public int maxHealth;
+
+    public int damageToPlayer = 5;
+
+    public float rangeForChasing = 5.0f;
+
+    public Animator anim;
+
+    //public GameObject healthBarUI;
+
+    public Slider slider;
+
+    public CheckEdge checkEdge;
+
+    public GameObject bloodSplash;
+
     private Transform targetPlayer;
 
     private bool isFacingRight = false;
@@ -20,30 +44,6 @@ public class EnemyController : MonoBehaviour
 
     private Rigidbody rb;
 
-    public PlayerController playerController;
-
-    public float movementSpeed = 5.0f;
-
-    public float distance = 1.0f;
-
-    public int health;
-
-    public int maxHealth;
-
-    //public float damage = 10.0f;
-
-    public float rangeForChasing = 5.0f;
-
-    public Animator anim;
-
-    public GameObject healthBarUI;
-
-    public Slider slider;
-
-    public CheckEdge checkEdge;
-
-    public GameObject bloodSplash;
-
     private DamageController damageController;
 
     // Start is called before the first frame update
@@ -51,7 +51,7 @@ public class EnemyController : MonoBehaviour
     {
         damageController = this.GetComponent<DamageController>();
         rb = GetComponent<Rigidbody>();
-        health = damageController.maxHealth;
+        //health = damageController.maxHealth;
         slider.maxValue = damageController.maxHealth;
         slider.value = CalculateHealth();
         StopSlashParticles();
@@ -82,6 +82,11 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool IsAttacking()
+    {
+        return isAttacking;
     }
 
     private void CheckStartChasing()

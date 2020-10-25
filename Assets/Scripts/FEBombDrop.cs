@@ -46,7 +46,7 @@ public class FEBombDrop : MonoBehaviour
         {
             if(nearbyObject.gameObject.tag == "Player")
             {
-                nearbyObject.GetComponent<PlayerController>().takeDamage(10);
+                nearbyObject.GetComponent<PlayerController>().TakeDamage(10);
             }
         }
         Destroy(gameObject);
