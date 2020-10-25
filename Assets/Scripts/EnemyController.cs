@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class EnemyController : MonoBehaviour
 {
 
-    public PlayerController playerController;
-
     public float movementSpeed = 5.0f;
 
     public float distance = 1.0f;
@@ -46,6 +44,8 @@ public class EnemyController : MonoBehaviour
 
     private DamageController damageController;
 
+    private PlayerController playerController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +56,7 @@ public class EnemyController : MonoBehaviour
         slider.value = CalculateHealth();
         StopSlashParticles();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -67,7 +68,7 @@ public class EnemyController : MonoBehaviour
         CheckMovement();
         CheckDirection(transform.position.x, targetPlayer.position.x);
         CheckStartChasing();
-        if (!IsNearEdge())
+        if (!IsNearEdge() && IsAlive())
         {
             if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distance && !anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_1_attack"))
             {
@@ -124,18 +125,21 @@ public class EnemyController : MonoBehaviour
 
     private void CheckDirection(float positionX, float targetPositionX)
     {
-        if (positionX < targetPositionX)
+        if (IsAlive())
         {
-            if (!isFacingRight)
+            if (positionX < targetPositionX)
             {
-                Flip();
+                if (!isFacingRight)
+                {
+                    Flip();
+                }
             }
-        }
-        else
-        {
-            if (isFacingRight)
+            else
             {
-                Flip();
+                if (isFacingRight)
+                {
+                    Flip();
+                }
             }
         }
     }
@@ -162,9 +166,20 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("isStunned", damageController.isStunned || damageController.isStillStunned);
         anim.SetBool("isAttacking", isAttacking);
         anim.SetInteger("stunType", stunAnim % 2);
+        if (CalculateHealth() <= 0)
+        {
+            StopSlashParticles();
+            anim.SetBool("isDying", true);
+            Destroy(gameObject, 5);
+        }
     }
 
-    float CalculateHealth()
+    private bool IsAlive()
+    {
+        return CalculateHealth() > 0;
+    }
+
+    private float CalculateHealth()
     {
         return damageController.health;
     }

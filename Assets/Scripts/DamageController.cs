@@ -42,33 +42,37 @@ public class DamageController : MonoBehaviour
     
     public void TakeDamage(int damage)
     {
-        if (isStunned)
+        if(CalculateHealth() > 0)
         {
-            isStillStunned = true;
-            isStunned = false;
-        }
-        isStunned = true;
-        health -= damage;
-        Instantiate(bloodSplash, transform.position, Quaternion.identity);
-        try
-        {
-            gameManager.AddComboHit();
-        }
-        catch (System.Exception e)
-        {
-            Debug.Log(e.Message);
-        }
-        healthBarUI.SetActive(true);
-        if (health <= 0)
-        {
-            Die();
-        }
+            if (isStunned)
+            {
+                isStillStunned = true;
+                isStunned = false;
+            }
+            isStunned = true;
+            health -= damage;
+            Instantiate(bloodSplash, transform.position, Quaternion.identity);
+            try
+            {
+                gameManager.AddComboHit();
+            }
+            catch (System.Exception e)
+            {
+                Debug.Log(e.Message);
+            }
+            healthBarUI.SetActive(true);
+            if (health <= 0)
+            {
+                healthBarUI.SetActive(false);
+                //Die();
+            }
+        }        
     }
 
     private void Die()
     {
         //play a die animation
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     public void StartSlashParticles()

@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 5807258557600647967}
   - component: {fileID: 5807258557600647964}
   - component: {fileID: 5807258557600647952}
-  - component: {fileID: 5807258557600647965}
   - component: {fileID: 5807258557600647954}
   - component: {fileID: 5807258557600647955}
   - component: {fileID: 5878538962860269881}
@@ -139,24 +138,6 @@ MonoBehaviour:
   weapon: {fileID: 2293900875780129957}
   healthBar: {fileID: 0}
   isFacingRight: 1
---- !u!143 &5807258557600647965
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5807258557600647962}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &5807258557600647954
 CapsuleCollider:
   m_ObjectHideFlags: 0
