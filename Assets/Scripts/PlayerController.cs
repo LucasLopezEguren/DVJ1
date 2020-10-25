@@ -111,7 +111,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private bool isGrounded() {
         float extraHeightText = 0.01f;
         RaycastHit[] raycastHit = Physics.RaycastAll(_collider.bounds.center, Vector2.down, _collider.bounds.extents.y);

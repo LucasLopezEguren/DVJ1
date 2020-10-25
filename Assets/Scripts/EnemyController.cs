@@ -7,7 +7,19 @@ public class EnemyController : MonoBehaviour
 {
     private Transform targetPlayer;
 
+    private bool isFacingRight = false;
+
+    private bool isWalking = false;
+
+    private bool isChasing = false;
+
+    private bool isAttacking = false;
+
+    public PlayerController playerController;
+
     public float movementSpeed = 5.0f;
+
+    private Rigidbody rb;
 
     public float distance = 1.0f;
 
@@ -16,18 +28,8 @@ public class EnemyController : MonoBehaviour
     public int maxHealth = 15;
 
     //public float damage = 10.0f;
-
-    private bool isFacingRight = false;
-
-    private bool isWalking;
-
-    private bool isChasing = false;
-
-    private bool isAttacking = false;
-
-    public float rangeForChasing = 5.0f;
-
-    private Rigidbody rb;
+  
+    public float rangeForChasing = 5.0f;    
 
     public Animator anim;
 
@@ -108,7 +110,7 @@ public class EnemyController : MonoBehaviour
         else
         {
             isWalking = false;
-        }
+        }     
     }
 
     private void CheckDirection(float positionX, float targetPositionX)
@@ -156,7 +158,7 @@ public class EnemyController : MonoBehaviour
 
     private void UpdateAnimations()
     {
-        //anim.SetBool("isWalking", isWalking);
+        anim.SetBool("isWalking", (isWalking || isChasing) && !IsNearEdge());
         anim.SetBool("isAttacking", isAttacking);
     }
 

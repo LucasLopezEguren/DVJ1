@@ -7766,6 +7766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a8e59d0013f4300892dfd160e7c844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 5807258557600647952, guid: b49168c2ec1964451a9bb78efc46aad7, type: 3}
   movementSpeed: 2
   distance: 0.8
   health: 0
