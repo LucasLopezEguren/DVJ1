@@ -12,9 +12,12 @@ public class PlayerAttackEvent : MonoBehaviour
     public void PlayerAttack()
     {
         Collider[] hitColliders = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-        foreach (Collider hitEnemy in hitColliders)
-        {
-            hitEnemy.GetComponent<EnemyController>().TakeDamage(damage);
+        foreach (Collider hitEnemy in hitColliders) {
+            try {
+                hitEnemy.GetComponent<DamageController>().TakeDamage(damage);
+            } catch (System.Exception e) {
+                Debug.Log(e.Message);
+            }
         }
     }
 }

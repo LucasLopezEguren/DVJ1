@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
+
     private Transform targetPlayer;
 
     private bool isFacingRight = false;
@@ -15,21 +16,23 @@ public class EnemyController : MonoBehaviour
 
     private bool isAttacking = false;
 
+    private int stunAnim;
+
+    private Rigidbody rb;
+
     public PlayerController playerController;
 
     public float movementSpeed = 5.0f;
-
-    private Rigidbody rb;
 
     public float distance = 1.0f;
 
     public int health;
 
-    public int maxHealth = 15;
+    public int maxHealth;
 
     //public float damage = 10.0f;
-  
-    public float rangeForChasing = 5.0f;    
+
+    public float rangeForChasing = 5.0f;
 
     public Animator anim;
 
@@ -37,29 +40,31 @@ public class EnemyController : MonoBehaviour
 
     public Slider slider;
 
-    public GameManager gameManager;
-
     public CheckEdge checkEdge;
 
     public GameObject bloodSplash;
 
+    private DamageController damageController;
+
     // Start is called before the first frame update
     void Start()
     {
+        damageController = this.GetComponent<DamageController>();
         rb = GetComponent<Rigidbody>();
-        health = maxHealth;
-        slider.maxValue = maxHealth;
+        health = damageController.maxHealth;
+        slider.maxValue = damageController.maxHealth;
         slider.value = CalculateHealth();
         StopSlashParticles();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckMovement();
+        slider.value = CalculateHealth();
         UpdateAnimations();
+        if (damageController.isStunned) return;
+        CheckMovement();
         CheckDirection(transform.position.x, targetPlayer.position.x);
         CheckStartChasing();
         if (!IsNearEdge())
@@ -77,7 +82,6 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
-        slider.value = CalculateHealth();
     }
 
     private void CheckStartChasing()
@@ -110,7 +114,7 @@ public class EnemyController : MonoBehaviour
         else
         {
             isWalking = false;
-        }     
+        }
     }
 
     private void CheckDirection(float positionX, float targetPositionX)
@@ -131,40 +135,33 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        Instantiate(bloodSplash, transform.position, Quaternion.identity);
-        if (gameManager == null)
-        {
-            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        }
-        else
-        {
-            gameManager.AddComboHit();
-        }
-        healthBarUI.SetActive(true);
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        //play a die animation
-        Destroy(gameObject);
-    }
-
     private void UpdateAnimations()
     {
         anim.SetBool("isWalking", (isWalking || isChasing) && !IsNearEdge());
+        if (damageController.isStunned)
+        {
+            stunAnim++;
+        }
+        else
+        {
+            stunAnim = 0;
+        }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun_1") && damageController.isStunned)
+        {
+            damageController.isStunned = false;
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun_2") && damageController.isStillStunned)
+        {
+            damageController.isStillStunned = false;
+        }
+        anim.SetBool("isStunned", damageController.isStunned || damageController.isStillStunned);
         anim.SetBool("isAttacking", isAttacking);
+        anim.SetInteger("stunType", stunAnim % 2);
     }
 
     float CalculateHealth()
     {
-        return health;
+        return damageController.health;
     }
 
     public void StartSlashParticles()

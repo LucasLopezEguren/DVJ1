@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     public float RotateSpeed;
     public int maxHealth = 200;
     public int currentHealth;
-
     public GameObject weapon;
     public HealthBar healthBar;
     public bool isFacingRight = true;
