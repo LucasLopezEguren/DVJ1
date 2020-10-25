@@ -23,8 +23,10 @@ public class AttachPlayer : MonoBehaviour{
         if (rigidbodies.Count > 0) {
             for ( int i = 0; i < rigidbodies.Count; i++ ){
                 Rigidbody rb = rigidbodies[i];
-                Vector3 velocity = (_transform.position - lastPosition);
-                rb.transform.Translate(velocity, _transform);
+                if (rb != null){
+                    Vector3 velocity = (_transform.position - lastPosition);
+                    rb.transform.Translate(velocity, _transform);
+                }
             }
         }
         lastPosition = _transform.position;
