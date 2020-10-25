@@ -7089,7 +7089,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3277105197871838012, guid: 186069ff8c1aa4dd1be440e230f92cf6, type: 3}
+  - {fileID: 2100000, guid: d8fb6028577774769bfb3ecd7c3f12d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7767,9 +7767,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a8e59d0013f4300892dfd160e7c844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 5807258557600647952, guid: b49168c2ec1964451a9bb78efc46aad7, type: 3}
   movementSpeed: 2
   distance: 0.8
+  damageToPlayer: 5
   rangeForChasing: 5
   anim: {fileID: 2618390594361260405}
   slider: {fileID: 7542343964402340313}
@@ -9003,8 +9003,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bda5203ece684e50978ac442220a47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToPlayer: 5
-  isAttacking: 0
 --- !u!1 &7052936957907018654
 GameObject:
   m_ObjectHideFlags: 0
