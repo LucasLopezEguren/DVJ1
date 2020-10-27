@@ -165,9 +165,9 @@ public class EnemyController : MonoBehaviour
         {
             damageController.isStillStunned = false;
         }
-        anim.SetBool("isStunned", damageController.isStunned || damageController.isStillStunned);
+        anim.SetBool("isStunned", (damageController.isStunned || damageController.isStillStunned) && CalculateHealth() > 0);
         anim.SetBool("isAttacking", isAttacking);
-        anim.SetInteger("stunType", stunAnim % 2);
+        if (CalculateHealth() > 0) anim.SetInteger("stunType", stunAnim % 2);
         if (CalculateHealth() <= 0)
         {
             StopSlashParticles();
