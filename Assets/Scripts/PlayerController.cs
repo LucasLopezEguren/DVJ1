@@ -21,43 +21,56 @@ public class PlayerController : MonoBehaviour
     public bool isFacingRight = true;
     private int attackPhase = 0;
     private GameManager gameManager;
-    
 
-    void Start() {
+
+    void Start()
+    {
         _collider = GetComponent<Collider>();
         currentHealth = maxHealth;
         if (healthBar != null) healthBar.SetMaxHealth(maxHealth);
-        try {
-            if (SceneManager.GetActiveScene().name != "hub") {
+        try
+        {
+            if (SceneManager.GetActiveScene().name != "hub")
+            {
                 gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
             }
-        } catch (System.Exception e) {
+        }
+        catch (System.Exception e)
+        {
             //Debug.Log(e.Message);
         }
     }
 
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.T)) {
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
             TakeDamage(25);
         }
-        if(Input.GetKey("d")) {
+        if (Input.GetKey("d"))
+        {
             rigidbody.AddForce(moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
-        if(Input.GetKey("a")) {
+        if (Input.GetKey("a"))
+        {
             rigidbody.AddForce(-moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
         moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, 0f);
-        
-        if (isGrounded() && Input.GetButtonDown("Jump")) {
-                moveDirection.y = jumpForce;
+
+        if (isGrounded() && Input.GetButtonDown("Jump"))
+        {
+            moveDirection.y = jumpForce;
         }
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle") && !anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack")) {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle") && !anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack"))
+            {
                 ComboAttack();
                 anim.SetInteger("attacking", attackPhase);
             }
         }
-        if (!isGrounded()) {
+        if (!isGrounded())
+        {
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         }
         rigidbody.velocity = moveDirection;
@@ -66,40 +79,55 @@ public class PlayerController : MonoBehaviour
         CheckAttackAnimation();
     }
 
-    private void CheckAttackAnimation() {
+    private void CheckAttackAnimation()
+    {
         if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
             || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle"))
-            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) {  
+            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        {
             //If normalizedTime is 0 to 1 means animation is playing, if greater than 1 means finished
             //Debug.Log("not playing");
             attackPhase = 0;
             anim.SetInteger("attacking", attackPhase);
-        } else {
+        }
+        else
+        {
             //Debug.Log("playing");
         }
     }
 
-    private void ComboAttack() {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack")) {
+    private void ComboAttack()
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack"))
+        {
             attackPhase = 2;
-        } else if (anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")) {
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack"))
+        {
             attackPhase = 3;
-        } else if (anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle")) {
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle"))
+        {
             attackPhase = 0;
-        } else {
+        }
+        else
+        {
             attackPhase = 1;
         }
     }
 
-    public void TakeDamage(int damage) {
+    public void TakeDamage(int damage)
+    {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
-        if (gameManager != null) {
+        if (gameManager != null)
+        {
             gameManager.ComboInterrupt();
         }
     }
 
-    private void CheckMovementDirection() {
+    private void CheckMovementDirection()
+    {
         if (isFacingRight && moveDirection.x < 0)
         {
             Flip();
@@ -110,22 +138,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool isGrounded() {
+    private bool isGrounded()
+    {
         float extraHeightText = 0.01f;
         RaycastHit[] raycastHit = Physics.RaycastAll(_collider.bounds.center, Vector2.down, _collider.bounds.extents.y);
         Color rayColor;
         Debug.DrawLine(_collider.bounds.center, Vector2.down * (_collider.bounds.extents.y));
-        if (raycastHit.Length > 0 && raycastHit[0].collider != null){
+        if (raycastHit.Length > 0 && raycastHit[0].collider != null)
+        {
             rayColor = Color.green;
-        } else {
+        }
+        else
+        {
             rayColor = Color.red;
         }
         return raycastHit.Length > 0 && raycastHit[0].collider != null;
     }
 
-    private void Flip() {
+    private void Flip()
+    {
         isFacingRight = !isFacingRight;
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
-    
+
 }

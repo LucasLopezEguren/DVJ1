@@ -28,6 +28,8 @@ public class EnemyController : MonoBehaviour
 
     public GameObject bloodSplash;
 
+    private bool canHit = false;
+
     private Transform targetPlayer;
 
     private bool isFacingRight = false;
@@ -163,9 +165,9 @@ public class EnemyController : MonoBehaviour
         {
             damageController.isStillStunned = false;
         }
-        anim.SetBool("isStunned", damageController.isStunned || damageController.isStillStunned);
+        anim.SetBool("isStunned", (damageController.isStunned || damageController.isStillStunned) && CalculateHealth() > 0);
         anim.SetBool("isAttacking", isAttacking);
-        anim.SetInteger("stunType", stunAnim % 2);
+        if (CalculateHealth() > 0) anim.SetInteger("stunType", stunAnim % 2);
         if (CalculateHealth() <= 0)
         {
             StopSlashParticles();
@@ -196,5 +198,20 @@ public class EnemyController : MonoBehaviour
         GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
         em.enabled = false;
+    }
+
+    public bool CanHit()
+    {
+        return canHit;
+    }
+
+    public void StartHit()
+    {
+        canHit = true;
+    }
+
+    public void StopHit()
+    {
+        canHit = false;
     }
 }

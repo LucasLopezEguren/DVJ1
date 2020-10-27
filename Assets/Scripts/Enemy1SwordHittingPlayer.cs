@@ -5,7 +5,9 @@ using UnityEngine;
 public class Enemy1SwordHittingPlayer : MonoBehaviour
 {
     private int damageToPlayer;
-    private bool isAttacking = false;
+
+    private bool canHit = false;
+
     private EnemyController enemyController;
 
     // Start is called before the first frame update
@@ -18,12 +20,12 @@ public class Enemy1SwordHittingPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isAttacking = enemyController.IsAttacking();
+        canHit = enemyController.CanHit();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && isAttacking)
+        if (other.tag == "Player" && canHit)
         {
             other.GetComponent<PlayerController>().TakeDamage(damageToPlayer);
         }
