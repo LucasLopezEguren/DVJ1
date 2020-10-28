@@ -166,6 +166,7 @@ public class EnemyController : MonoBehaviour
             damageController.isStillStunned = false;
         }
         anim.SetBool("isStunned", (damageController.isStunned || damageController.isStillStunned) && CalculateHealth() > 0);
+        if (damageController.isStunned || damageController.isStillStunned) StopSlashParticles();
         anim.SetBool("isAttacking", isAttacking);
         if (CalculateHealth() > 0) anim.SetInteger("stunType", stunAnim % 2);
         if (CalculateHealth() <= 0)
