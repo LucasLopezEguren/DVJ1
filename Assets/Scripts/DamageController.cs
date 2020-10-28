@@ -5,14 +5,12 @@ using UnityEngine.UI;
 
 public class DamageController : MonoBehaviour
 {
-    private Rigidbody rb;
+    
 
     public GameObject healthBarUI;
 
     public Slider slider;
-
-    public GameManager gameManager;
-
+       
     public GameObject bloodSplash;
     
     public int maxHealth;
@@ -24,6 +22,10 @@ public class DamageController : MonoBehaviour
     public bool isStunned = false;
 
     public bool isStillStunned = false;
+
+    private GameManager gameManager;
+
+    private Rigidbody rb;
 
     void Start()
     {
