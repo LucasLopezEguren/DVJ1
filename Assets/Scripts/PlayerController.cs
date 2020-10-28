@@ -124,6 +124,15 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.ComboInterrupt();
         }
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        SceneManager.LoadScene("hub");
     }
 
     private void CheckMovementDirection()
