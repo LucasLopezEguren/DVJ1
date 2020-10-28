@@ -7,7 +7,10 @@ public class Destructible : MonoBehaviour {
     public GameObject destroyedVersion;
     public GameObject powerUpInside;
 
-    
+    void Update() {
+        transform.localScale = transform.localScale;
+    }
+
     public void desroyObject () {
         Instantiate(destroyedVersion, transform.position, transform.rotation);
         Instantiate(powerUpInside, transform.position, transform.rotation);

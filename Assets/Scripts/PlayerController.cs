@@ -6,25 +6,42 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
+
     public float jumpForce;
-    private Collider _collider;
-    private Vector3 moveDirection;
+
     public float gravityScale;
+
     public Rigidbody rigidbody;
+
     public Animator anim;
+
     public Transform pivot;
+
     public float RotateSpeed;
+
     public int maxHealth = 200;
+
     public int currentHealth;
+
     public GameObject weapon;
+
     public HealthBar healthBar;
+
     public bool isFacingRight = true;
+
     private int attackPhase = 0;
+
     private GameManager gameManager;
 
+    private Collider _collider;
+
+    private Vector3 moveDirection;
+
+    private List<int> hasBeenHitted;
 
     void Start()
     {
+        hasBeenHitted = new List<int>();
         _collider = GetComponent<Collider>();
         currentHealth = maxHealth;
         if (healthBar != null) healthBar.SetMaxHealth(maxHealth);
@@ -168,6 +185,21 @@ public class PlayerController : MonoBehaviour
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0.0f, 180.0f, 0.0f);
+    }      
+
+    public List<int> HasBeenHitted()
+    {
+        return hasBeenHitted;
+    }
+
+    public void ResetHitted()
+    {
+        hasBeenHitted.Clear();
+    }   
+
+    public void AddHitted(int hitted)
+    {        
+        hasBeenHitted.Add(hitted);
     }
 
 }
