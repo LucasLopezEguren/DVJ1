@@ -5,14 +5,12 @@ using UnityEngine.UI;
 
 public class DamageController : MonoBehaviour
 {
-    private Rigidbody rb;
+    
 
     public GameObject healthBarUI;
 
     public Slider slider;
-
-    public GameManager gameManager;
-
+       
     public GameObject bloodSplash;
     
     public int maxHealth;
@@ -25,13 +23,17 @@ public class DamageController : MonoBehaviour
 
     public bool isStillStunned = false;
 
+    private GameManager gameManager;
+
+    private Rigidbody rb;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         health = maxHealth;
         slider.maxValue = maxHealth;
         slider.value = CalculateHealth();
-        StopSlashParticles();
+        //StopSlashParticles();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
@@ -64,35 +66,28 @@ public class DamageController : MonoBehaviour
             if (health <= 0)
             {
                 healthBarUI.SetActive(false);
-                //Die();
             }
         }        
     }
 
-    private void Die()
-    {
-        //play a die animation
-        //Destroy(gameObject);
-    }
+    //public void StartSlashParticles()
+    //{
+    //    GetComponentInChildren<ParticleSystem>().Play();
+    //    ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
+    //    em.enabled = true;
+    //}
 
-    public void StartSlashParticles()
-    {
-        GetComponentInChildren<ParticleSystem>().Play();
-        ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
-        em.enabled = true;
-    }
+    //public void StopSlashParticles()
+    //{
+    //    try
+    //    {
+    //        GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+    //        ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
+    //        em.enabled = false;
+    //    }
+    //    catch (System.Exception e)
+    //    {
 
-    public void StopSlashParticles()
-    {
-        try
-        {
-            GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
-            em.enabled = false;
-        }
-        catch (System.Exception e)
-        {
-
-        }
-    }
+    //    }
+    //}
 }

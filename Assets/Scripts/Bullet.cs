@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     public float speed = 20f;
     public Rigidbody rb;
     public int damage = 5;
+    public float TimeLeft = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -14,15 +15,22 @@ public class Bullet : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
+    void Update()
+    {
+        TimeLeft -= Time.deltaTime;
+        if(TimeLeft < 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void OnTriggerEnter (Collider hitEnemy)
     {
-        hitEnemy.GetComponent<DamageController>().TakeDamage(damage);
-        /*Enemy enemy = other.GetComponent<Enemy>();
-        if(enemy != null)
+        if(hitEnemy != null )
         {
-            enemy.TakeDamage(damage);
-        }*/
-        Destroy(gameObject);
+            hitEnemy.GetComponent<DamageController>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
     }
 
 }
