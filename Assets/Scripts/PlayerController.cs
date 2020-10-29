@@ -1,49 +1,161 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
-    public float jumpForce;
-    public CharacterController controller;
 
-    private Vector3 moveDirection;
+    public float jumpForce;
+
     public float gravityScale;
 
+    public Rigidbody rigidbody;
+
     public Animator anim;
+
     public Transform pivot;
+
     public float RotateSpeed;
+
+    public int maxHealth = 200;
+
+    public int currentHealth;
 
     public GameObject weapon;
 
+    public HealthBar healthBar;
+
     public bool isFacingRight = true;
+
+    private int attackPhase = 0;
+
+    private GameManager gameManager;
+
+    private Collider _collider;
+
+    private Vector3 moveDirection;
+
+    private List<int> hasBeenHitted;
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        hasBeenHitted = new List<int>();
+        _collider = GetComponent<Collider>();
+        currentHealth = maxHealth;
+        if (healthBar != null) healthBar.SetMaxHealth(maxHealth);
+        try
+        {
+            if (SceneManager.GetActiveScene().name != "hub")
+            {
+                gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            }
+        }
+        catch (System.Exception e)
+        {
+            //Debug.Log(e.Message);
+        }
     }
 
     void Update()
     {
+        //luego colocar en otro lado
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+        //hasta acá
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            TakeDamage(25);
+        }
+        if (Input.GetKey("d"))
+        {
+            rigidbody.AddForce(moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
+        if (Input.GetKey("a"))
+        {
+            rigidbody.AddForce(-moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }
         moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, 0f);
 
-        if (controller.isGrounded)
+        if (isGrounded() && Input.GetButtonDown("Jump"))
         {
-            if (Input.GetButtonDown("Jump"))
+            moveDirection.y = jumpForce;
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle") && !anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack"))
             {
-                moveDirection.y = jumpForce;
+                ComboAttack();
+                anim.SetInteger("attacking", attackPhase);
             }
         }
-        if(Input.GetKeyDown(KeyCode.Z))
+        if (!isGrounded())
         {
-            weapon.GetComponent<WeaponController>().Attack();
+            moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         }
-        moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
-        controller.Move(moveDirection * Time.deltaTime);
-        anim.SetBool("isGrounded", controller.isGrounded);
+        rigidbody.velocity = moveDirection;
         anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Horizontal"))));
         CheckMovementDirection();
+        CheckAttackAnimation();
+    }
+
+    private void CheckAttackAnimation()
+    {
+        if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle"))
+            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        {
+            //If normalizedTime is 0 to 1 means animation is playing, if greater than 1 means finished
+            //Debug.Log("not playing");
+            attackPhase = 0;
+            anim.SetInteger("attacking", attackPhase);
+        }
+        else
+        {
+            //Debug.Log("playing");
+        }
+    }
+
+    private void ComboAttack()
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack"))
+        {
+            attackPhase = 2;
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack"))
+        {
+            attackPhase = 3;
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle"))
+        {
+            attackPhase = 0;
+        }
+        else
+        {
+            attackPhase = 1;
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+        if (gameManager != null)
+        {
+            gameManager.ComboInterrupt();
+        }
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        SceneManager.LoadScene("hub");
     }
 
     private void CheckMovementDirection()
@@ -58,23 +170,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private bool isGrounded()
+    {
+        float extraHeightText = 0.01f;
+        RaycastHit[] raycastHit = Physics.RaycastAll(_collider.bounds.center, Vector2.down, _collider.bounds.extents.y);
+        Color rayColor;
+        Debug.DrawLine(_collider.bounds.center, Vector2.down * (_collider.bounds.extents.y));
+        if (raycastHit.Length > 0 && raycastHit[0].collider != null)
+        {
+            rayColor = Color.green;
+        }
+        else
+        {
+            rayColor = Color.red;
+        }
+        return raycastHit.Length > 0 && raycastHit[0].collider != null;
+    }
+
     private void Flip()
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0.0f, 180.0f, 0.0f);
-    }
+    }      
 
-    void OnTriggerEnter(Collider other)
+    public List<int> HasBeenHitted()
     {
-        if (other.tag == "Enemy")     
-        {
-            Debug.Log("Trigger");
-            other.GetComponent<EnemyController>().TakeDamage(10);
-        }
+        return hasBeenHitted;
     }
 
-    void OnTriggerExit(Collider other)
+    public void ResetHitted()
     {
+        hasBeenHitted.Clear();
+    }   
 
+    public void AddHitted(int hitted)
+    {        
+        hasBeenHitted.Add(hitted);
     }
+
 }

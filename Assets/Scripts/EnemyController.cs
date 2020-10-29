@@ -1,66 +1,111 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
-    private Transform targetPlayer;
 
     public float movementSpeed = 5.0f;
 
     public float distance = 1.0f;
 
-    public int health;
+    //public int health;
 
-    public int maxHealth = 100;
+    //public int maxHealth;
 
-    public float damage = 10.0f;
-
-    public bool isFacingRight = false;
-
-    public bool isWalking;
-
-    private bool isChasing = false;
+    public int damageToPlayer = 5;
 
     public float rangeForChasing = 5.0f;
 
+    public Animator anim;
+
+    //public GameObject healthBarUI;
+
+    public Slider slider;
+
+    public CheckEdge checkEdge;
+
+    public GameObject bloodSplash;
+
+    private bool canHit = false;
+
+    private Transform targetPlayer;
+
+    private bool isFacingRight = false;
+
+    private bool isWalking = false;
+
+    private bool isChasing = false;
+
+    private bool isAttacking = false;
+
+    private int stunAnim;
+
     private Rigidbody rb;
 
-    //private Animator anim;
+    private DamageController damageController;
+
+    private PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
     {
+        damageController = this.GetComponent<DamageController>();
         rb = GetComponent<Rigidbody>();
-        //anim = GetComponent<Animator>();
-        health = maxHealth;
+        anim.SetBool("isDying", false);
+        //health = damageController.maxHealth;
+        slider.maxValue = damageController.maxHealth;
+        slider.value = CalculateHealth();
+        StopSlashParticles();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckMovement();
+        slider.value = CalculateHealth();
         UpdateAnimations();
+        if (damageController.isStunned) return;
+        CheckMovement();
         CheckDirection(transform.position.x, targetPlayer.position.x);
         CheckStartChasing();
-        if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distance)
+        if (!IsNearEdge() && IsAlive())
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, movementSpeed * Time.deltaTime);
-        }
-        else
-        {
-            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distance)
+            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distance && !anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_1_attack"))
             {
-                isChasing = false;
-                Debug.Log("Attacking");
+                transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, movementSpeed * Time.deltaTime);
+            }
+            else
+            {
+                if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distance)
+                {
+                    isChasing = false;
+                    isAttacking = true;
+                }
             }
         }
     }
 
+    public bool IsAttacking()
+    {
+        return isAttacking;
+    }
+
     private void CheckStartChasing()
     {
-        if (Vector3.Distance(transform.position, targetPlayer.position) <= rangeForChasing) isChasing = true;
+        if (Vector3.Distance(transform.position, targetPlayer.position) <= rangeForChasing)
+        {
+            isAttacking = false;
+            isChasing = true;
+        }
+
+    }
+
+    private bool IsNearEdge()
+    {
+        return checkEdge.isNearEdge;
     }
 
     private void Flip()
@@ -83,40 +128,92 @@ public class EnemyController : MonoBehaviour
 
     private void CheckDirection(float positionX, float targetPositionX)
     {
-        if (positionX < targetPositionX)
+        if (IsAlive())
         {
-            if (!isFacingRight)
+            if (positionX < targetPositionX)
             {
-                Flip();
+                if (!isFacingRight)
+                {
+                    Flip();
+                }
+            }
+            else
+            {
+                if (isFacingRight)
+                {
+                    Flip();
+                }
             }
         }
-        else
-        {
-            if (isFacingRight)
-            {
-                Flip();
-            }
-        }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        //play a die animation
-        Debug.Log("Die");
-
     }
 
     private void UpdateAnimations()
     {
-        //anim.SetBool("isWalking", isWalking);
+        anim.SetBool("isWalking", (isWalking || isChasing) && !IsNearEdge());
+        if (damageController.isStunned)
+        {
+            stunAnim++;
+        }
+        else
+        {
+            stunAnim = 0;
+        }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun_1") && damageController.isStunned)
+        {
+            damageController.isStunned = false;
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun_2") && damageController.isStillStunned)
+        {
+            damageController.isStillStunned = false;
+        }
+        anim.SetBool("isStunned", (damageController.isStunned || damageController.isStillStunned) && CalculateHealth() > 0);
+        if (damageController.isStunned || damageController.isStillStunned) StopSlashParticles();
+        anim.SetBool("isAttacking", isAttacking);
+        if (CalculateHealth() > 0) anim.SetInteger("stunType", stunAnim % 2);
+        if (CalculateHealth() <= 0)
+        {
+            StopSlashParticles();
+            anim.SetBool("isDying", true);
+            Destroy(gameObject, 5);
+        }
+    }
+
+    private bool IsAlive()
+    {
+        return CalculateHealth() > 0;
+    }
+
+    private float CalculateHealth()
+    {
+        return damageController.health;
+    }
+
+    public void StartSlashParticles()
+    {
+        GetComponentInChildren<ParticleSystem>().Play();
+        ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
+        em.enabled = true;
+    }
+
+    public void StopSlashParticles()
+    {
+        GetComponentInChildren<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        ParticleSystem.EmissionModule em = GetComponentInChildren<ParticleSystem>().emission;
+        em.enabled = false;
+    }
+
+    public bool CanHit()
+    {
+        return canHit;
+    }
+
+    public void StartHit()
+    {
+        canHit = true;
+    }
+
+    public void StopHit()
+    {
+        canHit = false;
     }
 }
