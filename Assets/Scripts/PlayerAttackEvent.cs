@@ -65,13 +65,11 @@ public class PlayerAttackEvent : MonoBehaviour
     void KnockBack (Collider collider)
     {
         Rigidbody rb = collider.GetComponent<Rigidbody>();
-
         if(rb != null)
         {
             Vector3 direction = collider.transform.position - attackPoint.position;
             direction.y = 0;
             direction.z = 0;
-
             rb.AddForce(direction.normalized * knockbackStrength, ForceMode.Impulse);
         }
     }
