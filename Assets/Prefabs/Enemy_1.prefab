@@ -7805,10 +7805,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarUI: {fileID: 8298847903654598775}
   slider: {fileID: 7542343964402340313}
-  gameManager: {fileID: 0}
   bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
   maxHealth: 15
-  health: 0
+  health: 15
   anim: {fileID: 2618390594361260405}
   isStunned: 0
   isStillStunned: 0

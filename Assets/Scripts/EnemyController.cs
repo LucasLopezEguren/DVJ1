@@ -53,6 +53,7 @@ public class EnemyController : MonoBehaviour
     {
         damageController = this.GetComponent<DamageController>();
         rb = GetComponent<Rigidbody>();
+        anim.SetBool("isDying", false);
         //health = damageController.maxHealth;
         slider.maxValue = damageController.maxHealth;
         slider.value = CalculateHealth();
