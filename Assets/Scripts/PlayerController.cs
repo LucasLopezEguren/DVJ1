@@ -103,6 +103,14 @@ public class PlayerController : MonoBehaviour
                 anim.SetInteger("shooting", shootPhase);
             }
         }
+        if(Input.GetKeyDown(KeyCode.X))
+        {   
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
+            {
+                ComboShoot();
+                anim.SetInteger("shooting", shootPhase);
+            }
+        }
         if (!isGrounded())
         {
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
@@ -205,6 +213,25 @@ public class PlayerController : MonoBehaviour
     }
 
     private void ComboShoot()
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("first_shoot"))
+        {
+            shootPhase = 2;
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("second_shoot"))
+        {
+            shootPhase = 3;
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
+        {
+            shootPhase = 0;
+        }
+        else
+        {
+            shootPhase = 1;
+        }
+    }
+    public void TakeDamage(int damage)
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("first_shoot"))
         {
