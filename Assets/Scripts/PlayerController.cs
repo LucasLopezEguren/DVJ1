@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
 
     private int attackPhase = 0;
 
+    private int shootPhase = 0;
+
     private GameManager gameManager;
 
     private Collider _collider;
@@ -92,6 +94,14 @@ public class PlayerController : MonoBehaviour
                 anim.SetInteger("attacking", attackPhase);
             }
         }
+        if(Input.GetKeyDown(KeyCode.X))
+        {   
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
+            {
+                ComboShoot();
+                anim.SetInteger("shooting", shootPhase);
+            }
+        }
         if (!isGrounded())
         {
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
@@ -100,6 +110,7 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Horizontal"))));
         CheckMovementDirection();
         CheckAttackAnimation();
+        CheckShootAnimation();
     }
 
     private void CheckAttackAnimation()
@@ -116,6 +127,17 @@ public class PlayerController : MonoBehaviour
         else
         {
             //Debug.Log("playing");
+        }
+    }
+
+    private void CheckShootAnimation()
+    {
+        if ((anim.GetCurrentAnimatorStateInfo(0).IsName("first_shoot") || anim.GetCurrentAnimatorStateInfo(0).IsName("second_shoot")
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
+            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        {
+            shootPhase = 0;
+            anim.SetInteger("shooting", shootPhase);
         }
     }
 
@@ -139,6 +161,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void ComboShoot()
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("first_shoot"))
+        {
+            shootPhase = 2;
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("second_shoot"))
+        {
+            shootPhase = 3;
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
+        {
+            shootPhase = 0;
+        }
+        else
+        {
+            shootPhase = 1;
+        }
+    }
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
