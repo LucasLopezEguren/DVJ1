@@ -88,11 +88,16 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle") && !anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack"))
-            {
-                ComboAttack();
-                anim.SetInteger("attacking", attackPhase);
+            if(isGrounded()){
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle") && !anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack"))
+                {
+                    ComboAttack();
+                    anim.SetInteger("attacking", attackPhase);
+                }
+            }else{
+                anim.SetBool("airAttack", true);
             }
+            
         }
         if(Input.GetKeyDown(KeyCode.X))
         {   
@@ -108,21 +113,25 @@ public class PlayerController : MonoBehaviour
         }
         rigidbody.velocity = moveDirection;
         anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Horizontal"))));
+        anim.SetFloat("Y-Speed", moveDirection.y);
+        anim.SetBool("isGrounded", isGrounded());
         CheckMovementDirection();
         CheckAttackAnimation();
         CheckShootAnimation();
+        CheckJumpAnimation();
     }
 
     private void CheckAttackAnimation()
     {
         if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
-            || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle"))
-            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle")
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack")) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
             //If normalizedTime is 0 to 1 means animation is playing, if greater than 1 means finished
             //Debug.Log("not playing");
             attackPhase = 0;
             anim.SetInteger("attacking", attackPhase);
+            anim.SetBool("airAttack", false);
         }
         else
         {
@@ -138,6 +147,22 @@ public class PlayerController : MonoBehaviour
         {
             shootPhase = 0;
             anim.SetInteger("shooting", shootPhase);
+        }
+    }
+
+    private void CheckJumpAnimation()
+    {
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("jump"))
+        {
+            anim.speed = 3.4f;
+        }
+        else if(anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack"))
+        {
+            anim.speed = 2.5f;
+        }
+        else
+        {
+            anim.speed = 1;
         }
     }
 
