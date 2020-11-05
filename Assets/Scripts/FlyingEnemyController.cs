@@ -7,7 +7,17 @@ public class FlyingEnemyController : MonoBehaviour
 {
     public float movementSpeed = 5.0f;
 
-    public int health;
+    public float maxRange = 1000.0f;
+
+    public Vector3 initialPosition;
+
+    public Vector3 minPosition;
+
+    public Vector3 maxPosition;
+
+    public bool isFacingRight = false;
+
+    public bool isAttacking = false;
 
     public int maxHealth = 100;
 
@@ -19,23 +29,33 @@ public class FlyingEnemyController : MonoBehaviour
 
     public GameObject bullet;
 
+    private DamageController damageController;
+
     public GameObject bloodSplash;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(-movementSpeed, 0, 0, ForceMode.Impulse);
-        health = maxHealth;
-        slider.maxValue = maxHealth;
-        slider.value = CalculateHealth();
+        //rb.AddForce(-movementSpeed, 0, 0, ForceMode.Impulse);
+        //slider.maxValue = maxHealth;
+        //slider.value = CalculateHealth();
+        initialPosition = transform.position;
+        minPosition = new Vector3(initialPosition.x - maxRange, initialPosition.y, initialPosition.z);
+        maxPosition = new Vector3(initialPosition.x + maxRange, initialPosition.y, initialPosition.z);
+        damageController = this.GetComponent<DamageController>();
         InvokeRepeating(nameof(ShootBullet), 0f, 2f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        slider.value = CalculateHealth();
+        CheckDirection();
+        
+        if (!IsAlive())
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void ShootBullet()
@@ -45,8 +65,49 @@ public class FlyingEnemyController : MonoBehaviour
 
     }
 
-    float CalculateHealth()
+    private bool IsAlive()
     {
-        return health;
+        return CalculateHealth() > 0;
+    }
+
+    private void CheckDirection()
+    {
+        if (IsAlive())
+        {
+            if (!isFacingRight)
+            {
+                if (Vector3.Distance(transform.position, minPosition) > 0f)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, minPosition, movementSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    Flip();
+                }
+
+            }
+            else
+            {
+                if (Vector3.Distance(transform.position, maxPosition) > 0f)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, maxPosition, movementSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    Flip();
+                }
+            }
+        }
+    }
+
+    private float CalculateHealth()
+    {
+        return damageController.health;
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 }
