@@ -10,6 +10,7 @@ TagManager:
   - Weapon
   - GameManager
   - Ground
+  - AudioManager
   layers:
   - Default
   - TransparentFX

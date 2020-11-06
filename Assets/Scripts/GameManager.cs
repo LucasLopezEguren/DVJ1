@@ -17,20 +17,24 @@ public class GameManager : MonoBehaviour
     {
         int amountChunksTypes = levelChunks.Length;
         float nextPosition = 0f;
-        for (int i = 0; i <= amountChunks; i++) {
+        for (int i = 0; i < amountChunks; i++) {
+            Debug.Log(i + " i");
+            Debug.Log(nextPosition + " position");
             GameObject toInitiatie = levelChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(amountChunksTypes)))];
             if (nextPosition == 0f) {
-                nextPosition = ((toInitiatie.GetComponent<Transform>().localScale.x) / 2) - 4;
+                nextPosition = ((toInitiatie.GetComponent<BoxCollider>().size.x) / 2) - 4;
             }
             Instantiate(toInitiatie, new Vector3(nextPosition, 0, 0), Quaternion.identity);
-            if ( i == amountChunks) {
-                nextPosition = nextPosition + (toInitiatie.GetComponent<Transform>().localScale.x)/2;
+            if ( i == amountChunks - 1) {
+                nextPosition = nextPosition + (toInitiatie.GetComponent<BoxCollider>().size.x)/2;
             } else {
-                nextPosition = nextPosition + toInitiatie.GetComponent<Transform>().localScale.x;
+                nextPosition = nextPosition + toInitiatie.GetComponent<BoxCollider>().size.x;
             }
+            Debug.Log(i + " i");
+            Debug.Log(nextPosition + " position");
         }
         GameObject finishingChunk = FinishingChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(FinishingChunks.Length)))];
-        Instantiate(finishingChunk, new Vector3(nextPosition + ((finishingChunk.GetComponent<Transform>().localScale.x) / 4) , 0, 0), Quaternion.identity);
+        Instantiate(finishingChunk, new Vector3(nextPosition + ((finishingChunk.GetComponent<BoxCollider>().size.x) / 2) , 0, 0), Quaternion.identity);
         comboNumber.text = "";
         comboText.text = "";
         transparencyNumber = comboNumber.color;
@@ -44,10 +48,12 @@ public class GameManager : MonoBehaviour
     private int comboCount = 0;
     // Update is called once per frame
     private float transparency;
+    private bool superNova = false;
     void Update() {
         if (comboCount >= 3 && comboCurrentTime > comboCountLifeTime) {
             comboCount = 0;
             comboCurrentTime = 0f;
+            superNova = false;
         }
         if (comboCount >= 3) {
             transparency = (comboCountLifeTime - comboCurrentTime)/comboCountLifeTime;
@@ -64,6 +70,11 @@ public class GameManager : MonoBehaviour
                 comboText.text = "Astronomical\r\nhits";
             } else if (comboCount >= 34) {
                 comboText.text = "SuperNova\r\nhits";
+                if (!superNova) {
+                    superNova = true;
+                    FindObjectOfType<AudioManager>().Play("SuperNova");
+                }
+                
             }
             transparencyNumber.a = transparency;
             transparencyText.a = transparency;
