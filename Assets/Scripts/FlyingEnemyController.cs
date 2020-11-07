@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FlyingEnemyController : MonoBehaviour
 {
-    public float movementSpeed = 5.0f;
+    public float movementSpeed = 3.0f;
 
-    public float maxRange = 1000.0f;
+    public float maxMovementRange = 5f;
+
+    public float shootingRange = 5f;
 
     public Vector3 initialPosition;
 
@@ -33,25 +36,26 @@ public class FlyingEnemyController : MonoBehaviour
 
     public GameObject bloodSplash;
 
+    private Transform targetPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //rb.AddForce(-movementSpeed, 0, 0, ForceMode.Impulse);
-        //slider.maxValue = maxHealth;
-        //slider.value = CalculateHealth();
         initialPosition = transform.position;
-        minPosition = new Vector3(initialPosition.x - maxRange, initialPosition.y, initialPosition.z);
-        maxPosition = new Vector3(initialPosition.x + maxRange, initialPosition.y, initialPosition.z);
+        minPosition = new Vector3(initialPosition.x - maxMovementRange, initialPosition.y, initialPosition.z);
+        maxPosition = new Vector3(initialPosition.x + maxMovementRange, initialPosition.y, initialPosition.z);
         damageController = this.GetComponent<DamageController>();
-        InvokeRepeating(nameof(ShootBullet), 0f, 2f);
+        targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        InvokeRepeating(nameof(EnableAttack), 0f, 2f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckDirection();
-        
+        Movement();
+        CheckShootingRange();
+
         if (!IsAlive())
         {
             Destroy(gameObject);
@@ -70,7 +74,7 @@ public class FlyingEnemyController : MonoBehaviour
         return CalculateHealth() > 0;
     }
 
-    private void CheckDirection()
+    private void Movement()
     {
         if (IsAlive())
         {
@@ -96,6 +100,26 @@ public class FlyingEnemyController : MonoBehaviour
                 {
                     Flip();
                 }
+            }
+        }
+    }
+
+    private void EnableAttack()
+    {
+        if (!isAttacking)
+        {
+            isAttacking = true;
+        }
+    }
+
+    private void CheckShootingRange()
+    {
+        if(Vector3.Distance(transform.position, targetPlayer.position) <= shootingRange)
+        {
+            if (isAttacking)
+            {
+                ShootBullet();
+                isAttacking = false;
             }
         }
     }

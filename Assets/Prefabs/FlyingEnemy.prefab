@@ -388,9 +388,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92be771a6f680ab4c86d986944e6666d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  movementSpeed: 3
   maxRange: 5
   initialPosition: {x: 0, y: 0, z: 0}
+  minPosition: {x: 0, y: 0, z: 0}
+  maxPosition: {x: 0, y: 0, z: 0}
   isFacingRight: 0
   isAttacking: 0
   maxHealth: 10
