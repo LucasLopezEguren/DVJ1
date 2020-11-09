@@ -389,16 +389,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 3
-  maxRange: 5
+  maxMovementRange: 5
+  shootingRange: 5
   initialPosition: {x: 0, y: 0, z: 0}
   minPosition: {x: 0, y: 0, z: 0}
   maxPosition: {x: 0, y: 0, z: 0}
   isFacingRight: 0
   isAttacking: 0
+  isBomb: 1
   maxHealth: 10
   healthBarUI: {fileID: 7939081122650914941}
   slider: {fileID: 6634510885678832801}
-  bullet: {fileID: 3264330867361009311, guid: 23f91fd481904994c8cc42c1143c9650, type: 3}
+  bomb: {fileID: 3264330867361009311, guid: 23f91fd481904994c8cc42c1143c9650, type: 3}
+  laser: {fileID: 8048021591317080791, guid: 0e3a6301a6ff25b4ab6346ed5499f031, type: 3}
   bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
 --- !u!54 &-9098742632880835360
 Rigidbody:

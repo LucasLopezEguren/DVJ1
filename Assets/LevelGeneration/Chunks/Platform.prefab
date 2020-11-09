@@ -334,6 +334,10 @@ PrefabInstance:
       propertyPath: movementSpeed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3266432339600333839, guid: 48d287a74e4897444942f5f219b37d82, type: 3}
+      propertyPath: isBomb
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4728406434009515108, guid: 48d287a74e4897444942f5f219b37d82, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.02

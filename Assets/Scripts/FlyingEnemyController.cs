@@ -22,6 +22,8 @@ public class FlyingEnemyController : MonoBehaviour
 
     public bool isAttacking = false;
 
+    public bool isBomb = true;
+
     public int maxHealth = 100;
 
     private Rigidbody rb;
@@ -30,7 +32,9 @@ public class FlyingEnemyController : MonoBehaviour
 
     public Slider slider;
 
-    public GameObject bullet;
+    public GameObject bomb;
+
+    public GameObject laser;
 
     private DamageController damageController;
 
@@ -62,11 +66,18 @@ public class FlyingEnemyController : MonoBehaviour
         }
     }
 
-    public void ShootBullet()
+    public void Shoot()
     {
-        GameObject b = Instantiate(bullet);
-        b.transform.position = transform.position;
-
+        if (isBomb)
+        {
+            GameObject b = Instantiate(bomb);
+            b.transform.position = transform.position;
+        }
+        else
+        {
+            GameObject b = Instantiate(laser);
+            b.transform.position = transform.position;
+        }
     }
 
     private bool IsAlive()
@@ -118,7 +129,7 @@ public class FlyingEnemyController : MonoBehaviour
         {
             if (isAttacking)
             {
-                ShootBullet();
+                Shoot();
                 isAttacking = false;
             }
         }
