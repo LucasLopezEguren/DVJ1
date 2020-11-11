@@ -231,25 +231,7 @@ public class PlayerController : MonoBehaviour
             shootPhase = 1;
         }
     }
-    public void TakeDamage(int damage)
-    {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("first_shoot"))
-        {
-            shootPhase = 2;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("second_shoot"))
-        {
-            shootPhase = 3;
-        }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
-        {
-            shootPhase = 0;
-        }
-        else
-        {
-            shootPhase = 1;
-        }
-    }
+    
     public void TakeDamage(int damage)
     {
         if(!invincible)
