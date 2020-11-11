@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FEBombDrop : MonoBehaviour
+public class Laser : MonoBehaviour
 {
-    public float bombSpeed = 5f;
 
-    public float explosionRadius = 1f;
+    public float speed = 10f;
 
-    public int damage = 10;
+    public Rigidbody rb;
+
+    public int damage = 5;
 
     public bool hasExploded = false;
-
-    private Rigidbody rb;
-
-    public GameObject explosionEffect;
 
     private Transform targetPlayer;
 
@@ -23,21 +20,22 @@ public class FEBombDrop : MonoBehaviour
     {
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
-        if(transform.position.x < targetPlayer.position.x)
+        if (transform.position.x < targetPlayer.position.x)
         {
-            rb.velocity = new Vector3(bombSpeed, 0, 0);
+            rb.velocity = new Vector3(speed, -speed, 0);
+            transform.Rotate(0, 0, -45);
         }
         else
         {
-            rb.velocity = new Vector3(-bombSpeed, 0, 0);
+            rb.velocity = new Vector3(-speed, -speed, 0);
+            transform.Rotate(0, 0, 45);
         }
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        Destroy(gameObject, 3);
+        
     }
 
     void OnCollisionEnter(Collision collided)
@@ -51,13 +49,11 @@ public class FEBombDrop : MonoBehaviour
 
     void Explode()
     {
-        Instantiate(explosionEffect, transform.position, transform.rotation);
-
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
 
         foreach (Collider nearbyObject in colliders)
         {
-            if(nearbyObject.gameObject.tag == "Player")
+            if (nearbyObject.gameObject.CompareTag("Player"))
             {
                 nearbyObject.GetComponent<PlayerController>().TakeDamage(damage);
             }

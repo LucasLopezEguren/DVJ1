@@ -265,6 +265,7 @@ MonoBehaviour:
     m_Bits: 1024
   damage: 5
   playerController: {fileID: 5807258557600647952}
+  knockbackStrength: 0
 --- !u!1001 &5807258556559273393
 PrefabInstance:
   m_ObjectHideFlags: 0
