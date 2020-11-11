@@ -103,14 +103,6 @@ public class PlayerController : MonoBehaviour
                 anim.SetInteger("shooting", shootPhase);
             }
         }
-        if(Input.GetKeyDown(KeyCode.X))
-        {   
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
-            {
-                ComboShoot();
-                anim.SetInteger("shooting", shootPhase);
-            }
-        }
         if (!isGrounded())
         {
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
@@ -231,7 +223,6 @@ public class PlayerController : MonoBehaviour
             shootPhase = 1;
         }
     }
-    
     public void TakeDamage(int damage)
     {
         if(!invincible)
