@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
 
     private List<int> hasBeenHitted;
 
+    private bool invincible = false;
+
     void Start()
     {
         hasBeenHitted = new List<int>();
@@ -115,10 +117,12 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Horizontal"))));
         anim.SetFloat("Y-Speed", moveDirection.y);
         anim.SetBool("isGrounded", isGrounded());
+        anim.SetInteger("health", currentHealth);
         CheckMovementDirection();
         CheckAttackAnimation();
         CheckShootAnimation();
         CheckJumpAnimation();
+        CheckStunAnimation();
     }
 
     private void CheckAttackAnimation()
@@ -166,6 +170,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void CheckStunAnimation()
+    {
+        if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")) 
+        && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        {
+            invincible = true;
+        }
+        if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")) 
+        && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        {
+            invincible = false;
+            anim.SetInteger("dmgTaken", 0);
+        }
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("reincorp"))
+        {
+            anim.SetInteger("dmgTaken", 0);
+            invincible = false;
+        }
+    }
+
     private void ComboAttack()
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack"))
@@ -207,21 +231,29 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
-        if (gameManager != null)
+        if(!invincible)
         {
-            gameManager.ComboInterrupt();
-        }
-        if(currentHealth <= 0)
-        {
-            Die();
+            currentHealth -= damage;
+            healthBar.SetHealth(currentHealth);
+            anim.SetInteger("dmgTaken", damage);
+            anim.SetInteger("health", currentHealth);
+            if (gameManager != null)
+            {
+                gameManager.ComboInterrupt();
+            }
+            if(currentHealth <= 0)
+            {
+                Die();
+            }
         }
     }
 
     void Die()
     {
-        SceneManager.LoadScene("hub");
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("death") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        {
+            SceneManager.LoadScene("hub");
+        }
     }
 
     private void CheckMovementDirection()
