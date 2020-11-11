@@ -16,6 +16,10 @@ public class PlayerAttackEvent : MonoBehaviour
 
     public float knockbackStrength;
 
+    public Transform shootPoint;
+    public GameObject bulletPrefab;
+
+
     public void PlayerAttack()
     {
         Collider[] hitColliders = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
@@ -73,4 +77,9 @@ public class PlayerAttackEvent : MonoBehaviour
             rb.AddForce(direction.normalized * knockbackStrength, ForceMode.Impulse);
         }
     }
+
+    public void PlayerShoot ()
+    {
+        Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
+    } 
 }
