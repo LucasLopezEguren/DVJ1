@@ -5334,6 +5334,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenuUI: {fileID: 8606469759198709582}
+  ControlsMenuUI: {fileID: 8606469760512027801}
+  SettingsMenuUI: {fileID: 8606469759811624368}
+  CanvasUI: {fileID: 0}
 --- !u!1 &8606469760589737166
 GameObject:
   m_ObjectHideFlags: 0
