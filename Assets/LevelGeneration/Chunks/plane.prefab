@@ -141,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12392fda2ea81495ebb5d064a5e98c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundEnemies: []
+  flyingEnemies: []
 --- !u!1 &3802500268580067696
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,7 +791,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3266432339600333839, guid: 48d287a74e4897444942f5f219b37d82, type: 3}
       propertyPath: movementSpeed
-      value: 0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3266432339600333839, guid: 48d287a74e4897444942f5f219b37d82, type: 3}
+      propertyPath: maxMovementRange
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4728406434009515108, guid: 48d287a74e4897444942f5f219b37d82, type: 3}
       propertyPath: m_LocalPosition.x
@@ -986,6 +992,14 @@ PrefabInstance:
       propertyPath: isBomb
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3266432339600333839, guid: 48d287a74e4897444942f5f219b37d82, type: 3}
+      propertyPath: movementSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3266432339600333839, guid: 48d287a74e4897444942f5f219b37d82, type: 3}
+      propertyPath: maxMovementRange
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4728406434009515108, guid: 48d287a74e4897444942f5f219b37d82, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15
@@ -1050,7 +1064,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3266432339600333839, guid: 48d287a74e4897444942f5f219b37d82, type: 3}
       propertyPath: movementSpeed
-      value: 0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3266432339600333839, guid: 48d287a74e4897444942f5f219b37d82, type: 3}
+      propertyPath: maxMovementRange
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4728406434009515108, guid: 48d287a74e4897444942f5f219b37d82, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1173,6 +1191,14 @@ PrefabInstance:
     - target: {fileID: 4874737682469985087, guid: c7886403986f347fbbf5ff82236cf904, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8872794074504488488, guid: c7886403986f347fbbf5ff82236cf904, type: 3}
+      propertyPath: maxHealth
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8872794074504488488, guid: c7886403986f347fbbf5ff82236cf904, type: 3}
+      propertyPath: health
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7886403986f347fbbf5ff82236cf904, type: 3}
