@@ -60,12 +60,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //luego colocar en otro lado
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-        //hasta acá
         if (Input.GetKeyDown(KeyCode.T))
         {
             TakeDamage(25);
