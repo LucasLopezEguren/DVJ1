@@ -17,15 +17,15 @@ public class GameManager : MonoBehaviour
     {
         int amountChunksTypes = levelChunks.Length;
         float nextPosition = 0f;
-        for (int i = 0; i < amountChunks; i++) {
+        for (int i = 0; i <= amountChunks; i++) {
             Debug.Log(i + " i");
             Debug.Log(nextPosition + " position");
             GameObject toInitiatie = levelChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(amountChunksTypes)))];
             if (nextPosition == 0f) {
-                nextPosition = ((toInitiatie.GetComponent<BoxCollider>().size.x) / 2) - 4;
+                nextPosition = -((toInitiatie.GetComponent<BoxCollider>().size.x) / 2);
             }
             Instantiate(toInitiatie, new Vector3(nextPosition, 0, 0), Quaternion.identity);
-            if ( i == amountChunks - 1) {
+            if ( i == amountChunks) {
                 nextPosition = nextPosition + (toInitiatie.GetComponent<BoxCollider>().size.x)/2;
             } else {
                 nextPosition = nextPosition + toInitiatie.GetComponent<BoxCollider>().size.x;
