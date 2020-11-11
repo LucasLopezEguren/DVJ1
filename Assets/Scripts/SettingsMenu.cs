@@ -22,7 +22,7 @@ public class SettingsMenu : MonoBehaviour
         {
             string option = resolutions[i].width + "x" + resolutions[i].height;
             options.Add(option);
-            if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
             }
