@@ -16,6 +16,10 @@ public class PlayerAttackEvent : MonoBehaviour
 
     public float knockbackStrength;
 
+    public Transform shootPoint;
+    public GameObject bulletPrefab;
+
+
     public void PlayerAttack()
     {
         Collider[] hitColliders = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
@@ -65,14 +69,17 @@ public class PlayerAttackEvent : MonoBehaviour
     void KnockBack (Collider collider)
     {
         Rigidbody rb = collider.GetComponent<Rigidbody>();
-
         if(rb != null)
         {
             Vector3 direction = collider.transform.position - attackPoint.position;
             direction.y = 0;
             direction.z = 0;
-
             rb.AddForce(direction.normalized * knockbackStrength, ForceMode.Impulse);
         }
     }
+
+    public void PlayerShoot ()
+    {
+        Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
+    } 
 }

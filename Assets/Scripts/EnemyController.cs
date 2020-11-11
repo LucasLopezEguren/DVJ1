@@ -10,19 +10,11 @@ public class EnemyController : MonoBehaviour
 
     public float distance = 1.0f;
 
-    //public int health;
-
-    //public int maxHealth;
-
     public int damageToPlayer = 5;
 
     public float rangeForChasing = 5.0f;
 
     public Animator anim;
-
-    //public GameObject healthBarUI;
-
-    public Slider slider;
 
     public CheckEdge checkEdge;
 
@@ -53,9 +45,7 @@ public class EnemyController : MonoBehaviour
     {
         damageController = this.GetComponent<DamageController>();
         rb = GetComponent<Rigidbody>();
-        //health = damageController.maxHealth;
-        slider.maxValue = damageController.maxHealth;
-        slider.value = CalculateHealth();
+        anim.SetBool("isDying", false);
         StopSlashParticles();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -64,7 +54,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        slider.value = CalculateHealth();
         UpdateAnimations();
         if (damageController.isStunned) return;
         CheckMovement();
@@ -99,7 +88,6 @@ public class EnemyController : MonoBehaviour
             isAttacking = false;
             isChasing = true;
         }
-
     }
 
     private bool IsNearEdge()
