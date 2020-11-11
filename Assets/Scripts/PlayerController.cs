@@ -264,10 +264,8 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded()
     {
-        float extraHeightText = 0.01f;
         RaycastHit[] raycastHit = Physics.RaycastAll(_collider.bounds.center, Vector2.down, _collider.bounds.extents.y);
         Color rayColor;
-        Debug.DrawLine(_collider.bounds.center, Vector2.down * (_collider.bounds.extents.y));
         if (raycastHit.Length > 0 && raycastHit[0].collider != null)
         {
             rayColor = Color.green;
@@ -276,6 +274,7 @@ public class PlayerController : MonoBehaviour
         {
             rayColor = Color.red;
         }
+        Debug.DrawLine(_collider.bounds.center, Vector2.down * (_collider.bounds.extents.y), rayColor);
         return raycastHit.Length > 0 && raycastHit[0].collider != null;
     }
 
