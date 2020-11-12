@@ -12,11 +12,20 @@ public class AudioManager : MonoBehaviour {
             sound.source.clip = sound.clip;
             sound.source.volume = sound.volume;
             sound.source.pitch = sound.pitch;
+            sound.source.loop = sound.loop;
         }
+    }
+
+    void Start() {
+        Play("Overworld");
     }
 
     public void Play (string name) {
         Sound s = Array.Find(sounds, sounds => sounds.name == name);
+        if (s == null) {
+            Debug.LogWarning("Sound: " + name + " not found");
+            return;
+        }
         s.source.Play();
     }
 }
