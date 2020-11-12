@@ -7751,10 +7751,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.50211
+  m_Height: 1.6263576
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.0021100044, y: -0.18682122, z: 0}
 --- !u!114 &4874737682469985086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7772,7 +7772,6 @@ MonoBehaviour:
   damageToPlayer: 5
   rangeForChasing: 5
   anim: {fileID: 2618390594361260405}
-  slider: {fileID: 7542343964402340313}
   checkEdge: {fileID: 992625368442067046}
   bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
 --- !u!54 &4874737682469985073
@@ -7808,9 +7807,9 @@ MonoBehaviour:
   bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
   maxHealth: 15
   health: 15
-  anim: {fileID: 2618390594361260405}
   isStunned: 0
   isStillStunned: 0
+  bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
 --- !u!1 &4937904096065655436
 GameObject:
   m_ObjectHideFlags: 0

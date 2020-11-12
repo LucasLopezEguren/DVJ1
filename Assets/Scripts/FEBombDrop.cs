@@ -8,17 +8,30 @@ public class FEBombDrop : MonoBehaviour
 
     public float explosionRadius = 1f;
 
+    public int damage = 10;
+
     public bool hasExploded = false;
 
     private Rigidbody rb;
 
     public GameObject explosionEffect;
 
+    private Transform targetPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
+        targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(-bombSpeed, 0, 0);
+        if(transform.position.x < targetPlayer.position.x)
+        {
+            rb.velocity = new Vector3(bombSpeed, 0, 0);
+        }
+        else
+        {
+            rb.velocity = new Vector3(-bombSpeed, 0, 0);
+        }
+        
     }
 
     // Update is called once per frame
@@ -46,7 +59,7 @@ public class FEBombDrop : MonoBehaviour
         {
             if(nearbyObject.gameObject.tag == "Player")
             {
-                nearbyObject.GetComponent<PlayerController>().TakeDamage(10);
+                nearbyObject.GetComponent<PlayerController>().TakeDamage(damage);
             }
         }
         Destroy(gameObject);
