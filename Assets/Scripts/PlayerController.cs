@@ -264,18 +264,14 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded()
     {
-        RaycastHit[] raycastHit = Physics.RaycastAll(_collider.bounds.center, Vector2.down, _collider.bounds.extents.y);
-        Color rayColor;
-        if (raycastHit.Length > 0 && raycastHit[0].collider != null)
-        {
-            rayColor = Color.green;
+        bool raycastHit = Physics.Raycast(transform.position, Vector3.down, 1.7f);
+        Vector3 end = transform.position + (Vector3.down * 1.7f);
+        Color color = Color.magenta;
+        if (!raycastHit){
+            color = Color.yellow;
         }
-        else
-        {
-            rayColor = Color.red;
-        }
-        Debug.DrawLine(_collider.bounds.center, Vector2.down * (_collider.bounds.extents.y), rayColor);
-        return raycastHit.Length > 0 && raycastHit[0].collider != null;
+        Debug.DrawLine(transform.position, end, color);
+        return raycastHit;
     }
 
     private void Flip()
