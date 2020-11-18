@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
 
     private bool canFlip = true;
 
+    private bool canMove = true;
+
     void Start()
     {
         hasBeenHitted = new List<int>();
@@ -71,15 +73,22 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(25);
         }
-        if (Input.GetKey("d"))
+        /*if (Input.GetKey("d"))
         {
             rigidbody.AddForce(moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
         if (Input.GetKey("a"))
         {
             rigidbody.AddForce(-moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        }*/
+        //moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, 0f);
+        if(canMove)
+        {
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            Vector3 temp = new Vector3(horizontal, 0, 0);
+            temp = temp.normalized * moveSpeed * Time.deltaTime;
+            rigidbody.MovePosition(transform.position + temp);
         }
-        moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, 0f);
 
         if (isGrounded())
         {
@@ -146,6 +155,7 @@ public class PlayerController : MonoBehaviour
             //If normalizedTime is 0 to 1 means animation is playing, if greater than 1 means finished
             attackPhase = 0;
             anim.SetInteger("attacking", attackPhase);
+            canMove = true;
             canFlip = true;
         }
         else if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
@@ -153,6 +163,7 @@ public class PlayerController : MonoBehaviour
             || anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack")) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             rigidbody.velocity = Vector3.zero;
+            canMove = false;
             canFlip = false;
         }
 
@@ -161,6 +172,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("airAttack", false);
             if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8)
             {
+                canMove = true;
                 canFlip = true;
             }
         }
@@ -174,13 +186,15 @@ public class PlayerController : MonoBehaviour
         {
             shootPhase = 0;
             anim.SetInteger("shooting", shootPhase);
+            canMove = true;
             canFlip = true;
         }
         else if ((anim.GetCurrentAnimatorStateInfo(0).IsName("first_shoot") || anim.GetCurrentAnimatorStateInfo(0).IsName("second_shoot")
             || anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
             && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
-            rigidbody.velocity = Vector3.zero;
+            //rigidbody.velocity = Vector3.zero;
+            canMove = false;
             canFlip = false;
         }
     }
@@ -291,11 +305,11 @@ public class PlayerController : MonoBehaviour
     {
         if(canFlip)
         {
-            if (isFacingRight && moveDirection.x < 0)
+            if (isFacingRight && Input.GetAxis("Horizontal") < 0)
             {
                 Flip();
             }
-            else if (!isFacingRight && moveDirection.x > 0)
+            else if (!isFacingRight && Input.GetAxis("Horizontal") > 0)
             {
                 Flip();
             }
