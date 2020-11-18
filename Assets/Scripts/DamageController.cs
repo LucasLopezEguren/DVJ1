@@ -49,7 +49,11 @@ public class DamageController : MonoBehaviour
                 isStillStunned = true;
                 isStunned = false;
             }
-            isStunned = true;
+            else
+            {
+                isStillStunned = false;
+                isStunned = true;
+            }            
             health -= damage;
             Instantiate(bloodSplash, transform.position, Quaternion.identity);
             try
