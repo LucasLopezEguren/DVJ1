@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
 
     private bool invincible = false;
 
+    private bool canFlip = true;
+
     void Start()
     {
         hasBeenHitted = new List<int>();
@@ -78,9 +80,19 @@ public class PlayerController : MonoBehaviour
         }
         moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, 0f);
 
-        if (isGrounded() && Input.GetButtonDown("Jump"))
+        if (isGrounded())
         {
-            moveDirection.y = jumpForce;
+            if (Input.GetButtonDown("Jump"))
+            {
+                anim.SetBool("jump", true);
+                moveDirection.y = jumpForce;
+            }
+            anim.SetBool("touchFloor", true);
+        }
+        else
+        {
+            anim.SetBool("touchFloor", false);
+            anim.SetBool("jump", false);
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -107,6 +119,10 @@ public class PlayerController : MonoBehaviour
         {
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         }
+        if(rigidbody.velocity.y < -15)
+        {
+            moveDirection.y = -14;
+        }
         rigidbody.velocity = moveDirection;
         anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Horizontal"))));
         anim.SetFloat("Y-Speed", moveDirection.y);
@@ -119,21 +135,33 @@ public class PlayerController : MonoBehaviour
         CheckStunAnimation();
     }
 
+
     private void CheckAttackAnimation()
     {
         if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
-            || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle")
-            || anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack")) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle")) 
+            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
             //If normalizedTime is 0 to 1 means animation is playing, if greater than 1 means finished
-            //Debug.Log("not playing");
             attackPhase = 0;
             anim.SetInteger("attacking", attackPhase);
-            anim.SetBool("airAttack", false);
+            canFlip = true;
         }
-        else
+        else if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle")
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack")) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
-            //Debug.Log("playing");
+            rigidbody.velocity = Vector3.zero;
+            canFlip = false;
+        }
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack"))
+        {
+            anim.SetBool("airAttack", false);
+            if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8)
+            {
+                canFlip = true;
+            }
         }
     }
 
@@ -145,22 +173,30 @@ public class PlayerController : MonoBehaviour
         {
             shootPhase = 0;
             anim.SetInteger("shooting", shootPhase);
+            canFlip = true;
+        }
+        else if ((anim.GetCurrentAnimatorStateInfo(0).IsName("first_shoot") || anim.GetCurrentAnimatorStateInfo(0).IsName("second_shoot")
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
+            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        {
+            rigidbody.velocity = Vector3.zero;
+            canFlip = false;
         }
     }
 
     private void CheckJumpAnimation()
     {
-        if(anim.GetCurrentAnimatorStateInfo(0).IsName("jump"))
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("jump_up"))
         {
             anim.speed = 3.4f;
-        }
-        else if(anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack"))
-        {
-            anim.speed = 2.5f;
         }
         else
         {
             anim.speed = 1;
+        }
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("landing") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        {
+            rigidbody.velocity = Vector3.zero;
         }
     }
 
@@ -252,13 +288,16 @@ public class PlayerController : MonoBehaviour
 
     private void CheckMovementDirection()
     {
-        if (isFacingRight && moveDirection.x < 0)
+        if(canFlip)
         {
-            Flip();
-        }
-        else if (!isFacingRight && moveDirection.x > 0)
-        {
-            Flip();
+            if (isFacingRight && moveDirection.x < 0)
+            {
+                Flip();
+            }
+            else if (!isFacingRight && moveDirection.x > 0)
+            {
+                Flip();
+            }
         }
     }
 
