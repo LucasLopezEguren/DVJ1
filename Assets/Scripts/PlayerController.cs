@@ -37,7 +37,8 @@ public class PlayerController : MonoBehaviour
 
     private Collider _collider;
 
-    private Vector3 moveDirection;
+    [HideInInspector]
+    public Vector3 moveDirection;
 
     private List<int> hasBeenHitted;
 
@@ -317,13 +318,16 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded()
     {
-        bool raycastHit = Physics.Raycast(transform.position, Vector3.down, 1.7f);
-        Vector3 end = transform.position + (Vector3.down * 1.7f);
+        Vector3 start = transform.position;
+        float maxDistance = 0.5f;
+        start.y = start.y + (Vector3.down * 0.8f).y;
+        bool raycastHit = Physics.Raycast(start, Vector3.down, maxDistance);
+        Vector3 end = start + (Vector3.down * maxDistance);
         Color color = Color.magenta;
         if (!raycastHit){
             color = Color.yellow;
         }
-        Debug.DrawLine(transform.position, end, color);
+        Debug.DrawLine(start, end, color);
         return raycastHit;
     }
 

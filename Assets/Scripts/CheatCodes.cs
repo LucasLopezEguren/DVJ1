@@ -53,18 +53,20 @@ public class CheatCodes : MonoBehaviour
             cheatInputCount++;
             return;
         }
-        if ((Input.anyKeyDown || cheatInputCurrentTime >= cheatInputLifeTime) && cheatInputCount > 0 ) {
+        if (cheatInputCount == 8 && !femaleNarratorActivate) {
+            femaleNarratorActivate = true;
+            Debug.Log("Cheat enabled!");
+        }
+        if ((Input.anyKeyDown || cheatInputCurrentTime >= cheatInputLifeTime) && cheatInputCount > 0 && cheatInputCount < 8) {
             Debug.Log("fail in: " + cheatInputCount);
             cheatInputCount = 0;
             cheatInputCurrentTime = 0;
             return;
         }
-        if (cheatInputCount == 8) {
-            femaleNarratorActivate = true;
-            return;
-        }
+
         if (femaleNarratorActivate && !cheatEnabled) {
-            FindObjectOfType<AudioManager>().Play("FSuperNova");
+            AudioManager test = FindObjectOfType<AudioManager>();
+            test.Play("FSuperNova");
             cheatEnabled = true;
         }
     }

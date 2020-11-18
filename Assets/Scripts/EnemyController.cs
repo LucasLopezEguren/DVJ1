@@ -20,6 +20,9 @@ public class EnemyController : MonoBehaviour
 
     public GameObject bloodSplash;
 
+    [SerializeField]
+    private float timeToDissappearAfterDie;
+
     private bool canHit = false;
 
     private Transform targetPlayer;
@@ -137,7 +140,7 @@ public class EnemyController : MonoBehaviour
     private void UpdateAnimations()
     {
         anim.SetBool("isWalking", (isWalking || isChasing) && !IsNearEdge());
-        if (damageController.isStunned)
+        if (damageController.isStunned && !isWalking)
         {
             stunAnim++;
         }
@@ -148,20 +151,24 @@ public class EnemyController : MonoBehaviour
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun_1") && damageController.isStunned)
         {
             damageController.isStunned = false;
+            stunAnim = 0;
         }
         else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun_2") && damageController.isStillStunned)
         {
             damageController.isStillStunned = false;
+            stunAnim = 0;
         }
         anim.SetBool("isStunned", (damageController.isStunned || damageController.isStillStunned) && CalculateHealth() > 0);
         if (damageController.isStunned || damageController.isStillStunned) StopSlashParticles();
         anim.SetBool("isAttacking", isAttacking);
-        if (CalculateHealth() > 0) anim.SetInteger("stunType", stunAnim % 2);
+        //if (CalculateHealth() > 0) anim.SetInteger("stunType", stunAnim % 2);
+        if (CalculateHealth() > 0) stunAnim = stunAnim % 2;
         if (CalculateHealth() <= 0)
         {
             StopSlashParticles();
             anim.SetBool("isDying", true);
-            Destroy(gameObject, 5);
+            gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
+            Destroy(gameObject, timeToDissappearAfterDie);
         }
     }
 
