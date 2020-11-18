@@ -25,15 +25,13 @@ public class GameManager : MonoBehaviour
         float nextPosition = 0f;
         for (int i = 0; i <= amountChunks; i++) {
             GameObject toInitiatie = levelChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(amountChunksTypes)))];
-            if (nextPosition == 0f) {
+            if (i == 0) {
                 nextPosition = -((toInitiatie.GetComponent<BoxCollider>().size.x) / 2);
+            } else {
+                nextPosition = nextPosition + ((toInitiatie.GetComponent<BoxCollider>().size.x) / 2);
             }
             Instantiate(toInitiatie, new Vector3(nextPosition, 0, 0), Quaternion.identity);
-            if ( i == amountChunks) {
-                nextPosition = nextPosition + (toInitiatie.GetComponent<BoxCollider>().size.x)/2;
-            } else {
-                nextPosition = nextPosition + toInitiatie.GetComponent<BoxCollider>().size.x;
-            }
+            nextPosition = nextPosition + (toInitiatie.GetComponent<BoxCollider>().size.x)/2;
         }
         GameObject finishingChunk = FinishingChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(FinishingChunks.Length)))];
         Instantiate(finishingChunk, new Vector3(nextPosition + ((finishingChunk.GetComponent<BoxCollider>().size.x) / 2) , 0, 0), Quaternion.identity);
