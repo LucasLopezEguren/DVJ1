@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class SuperJump : MonoBehaviour
 {
+    private float enterX;
+    private int playerCurrentHp;
     void OnTriggerEnter(Collider other) {
-        Debug.Log("object: " + other.tag);
         if (other.gameObject.tag == "Player"){            
             PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
-            playerController.jumpForce = 30f;
-            playerController.moveSpeed = 20f;
+            playerCurrentHp = playerController.currentHealth;
+            enterX = other.transform.position.x;
+            playerController.jumpForce = 35f;
+            playerController.moveSpeed = 25f;
         }
     }
 
     void OnTriggerExit(Collider other) {
-        Debug.Log("out: " + other.tag);
         if (other.tag == "Player"){            
             PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
             playerController.jumpForce = 15f;
             playerController.moveSpeed = 10f;
+            if (playerController.currentHealth >= playerCurrentHp && enterX < other.transform.position.x) {
+                FindObjectOfType<AudioManager>().Play("SuperNova");
+            }
         }
     }
 }

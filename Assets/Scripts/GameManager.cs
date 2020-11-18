@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
         int amountChunksTypes = levelChunks.Length;
         float nextPosition = 0f;
         for (int i = 0; i <= amountChunks; i++) {
-            GameObject toInitiatie = levelChunks[(i+1)%2];
+            GameObject toInitiatie = levelChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(amountChunksTypes)))];
             if (i == 0) {
                 nextPosition = -((toInitiatie.GetComponent<BoxCollider>().size.x) / 2);
             } else {
