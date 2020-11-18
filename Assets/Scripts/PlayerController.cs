@@ -37,7 +37,8 @@ public class PlayerController : MonoBehaviour
 
     private Collider _collider;
 
-    private Vector3 moveDirection;
+    [HideInInspector]
+    public Vector3 moveDirection;
 
     private List<int> hasBeenHitted;
 
