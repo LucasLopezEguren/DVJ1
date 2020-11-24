@@ -2636,12 +2636,12 @@ GameObject:
   - component: {fileID: 965651553}
   - component: {fileID: 965651554}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: VolumeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &965651553
 RectTransform:
   m_ObjectHideFlags: 0
