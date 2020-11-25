@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public int amountChunks;
     public Text comboNumber;
     public Text comboText;
+    public Image hitCombo;
     private Color transparencyNumber;
     private Color transparencyText;
     private bool femaleNarratorActivate;
@@ -59,17 +60,17 @@ public class GameManager : MonoBehaviour
             transparency = (comboCountLifeTime - comboCurrentTime)/comboCountLifeTime;
             comboNumber.text = comboCount.ToString();
             if (comboCount < 5) {
-                comboText.text = "hits";
+                comboText.text = "";
             } else if ( comboCount < 8 ) {
-                comboText.text = "Deorbital\r\nhits";
+                comboText.text = "Deorbital";
             } else if ( comboCount < 13 ) {
-                comboText.text = "Cosmical\r\nhits";
+                comboText.text = "Cosmical";
             } else if ( comboCount < 21) {
-                comboText.text = "Black holish\r\nhits";
+                comboText.text = "Black holish";
             } else if (comboCount < 34) {
-                comboText.text = "Astronomical\r\nhits";
+                comboText.text = "Astronomical";
             } else if (comboCount >= 34) {
-                comboText.text = "SuperNova\r\nhits";
+                comboText.text = "SuperNova";
                 if (!superNova) {
                     superNova = true;
                     if (femaleNarratorActivate) {
