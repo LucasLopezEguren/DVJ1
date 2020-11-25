@@ -5,7 +5,9 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour {
     
     public Sound[] sounds;
+
     public static AudioManager instance;
+
     void Awake() {
 
         if (instance == null) {
@@ -23,6 +25,7 @@ public class AudioManager : MonoBehaviour {
             sound.source.volume = sound.volume;
             sound.source.pitch = sound.pitch;
             sound.source.loop = sound.loop;
+            sound.source.outputAudioMixerGroup = sound.outputAudioMixerGroup;
         }
     }
 

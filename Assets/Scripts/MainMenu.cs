@@ -7,9 +7,11 @@ public class MainMenu : MonoBehaviour
 {
     public PauseMenu PauseMenu;
 
+    public LevelLoader levelLoader;
+
     public void PlayGame()
     {
-        SceneManager.LoadScene("Hub");
+        levelLoader.LoadNextLevel("Hub");
     }
 
     public void ResumeGame()
