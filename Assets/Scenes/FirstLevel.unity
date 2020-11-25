@@ -2268,7 +2268,7 @@ PrefabInstance:
       objectReference: {fileID: 3736424406299464701, guid: 98f21d372957548e2b33f5ff90f8df7b, type: 3}
     - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
       propertyPath: amountChunks
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
       propertyPath: FinishingChunks.Array.data[1]
@@ -2456,7 +2456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881214289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.080693, y: -4.4188113, z: -4.0116754}
+  m_LocalPosition: {x: -8.769526, y: -4.4188113, z: -4.0116754}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 255887650}
@@ -2835,7 +2835,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086919262}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.080693, y: -4.4188113, z: -4.0116754}
+  m_LocalPosition: {x: -8.769526, y: -4.4188113, z: -4.0116754}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 778948707}
