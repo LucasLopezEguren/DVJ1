@@ -52,14 +52,14 @@ MonoBehaviour:
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 24300002, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Overworld
-    clip: {fileID: 8300000, guid: 8b86bd396f12d463c98daace1aa37fff, type: 3}
+    clip: {fileID: 8300000, guid: b8538198f65864c1ea5d7746c563d0a8, type: 3}
     volume: 0.4
     pitch: 1
     loop: 1
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 24300002, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: FSuperNova
-    clip: {fileID: 8300000, guid: 631026b1feb734590a51f2f378ae944c, type: 3}
+    clip: {fileID: 8300000, guid: 76b6f518b3e45404bb6083d48c1c477e, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
