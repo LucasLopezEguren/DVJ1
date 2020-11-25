@@ -19,6 +19,8 @@ public class PlayerAttackEvent : MonoBehaviour
     public Transform shootPoint;
     public GameObject bulletPrefab;
 
+    public GameObject playerrb;
+
 
     public void PlayerAttack()
     {
@@ -38,6 +40,8 @@ public class PlayerAttackEvent : MonoBehaviour
                 Debug.Log(e.Message);
             }
         }
+        Vector3 temp = new Vector3(25, 0, 0);
+        playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     }
 
     public void ResetHitted()
@@ -64,6 +68,8 @@ public class PlayerAttackEvent : MonoBehaviour
                 Debug.Log(e.Message);
             }
         }
+        Vector3 temp = new Vector3(30, 0, 0);
+        playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     }
 
     void KnockBack (Collider collider)
@@ -81,5 +87,7 @@ public class PlayerAttackEvent : MonoBehaviour
     public void PlayerShoot ()
     {
         Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
+        Vector3 temp = new Vector3(-15, 0, 0);
+        playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     } 
 }
