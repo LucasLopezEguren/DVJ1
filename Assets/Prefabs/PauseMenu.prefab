@@ -3397,6 +3397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   resolutionDropdown: {fileID: 8606469760158957204}
+  volumeSlider: {fileID: 8606469759371787243}
 --- !u!222 &1510053843
 CanvasRenderer:
   m_ObjectHideFlags: 0
