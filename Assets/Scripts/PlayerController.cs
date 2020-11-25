@@ -132,6 +132,11 @@ public class PlayerController : MonoBehaviour
                 anim.SetInteger("shooting", shootPhase);
             }
         }
+        if(Input.GetKeyDown(KeyCode.Y))
+        {
+            Vector3 tempi = new Vector3(1000, 0, 0);
+            rigidbody.AddForce(tempi);
+        }
         if (!isGrounded())
         {
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
@@ -150,6 +155,7 @@ public class PlayerController : MonoBehaviour
         CheckShootAnimation();
         CheckJumpAnimation();
         CheckStunAnimation();
+        CheckDieAnimation();
     }
 
 
@@ -257,6 +263,15 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetInteger("dmgTaken", 0);
             invincible = false;
+        }
+    }
+
+    private void CheckDieAnimation()
+    {
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("death") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9)
+        {
+            canMove = false;
+            canFlip = false;
         }
     }
 
