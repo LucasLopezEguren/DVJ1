@@ -6,13 +6,15 @@ using UnityEngine.SceneManagement;
 public class MoveScene : MonoBehaviour
 {
 
-    [SerializeField]private string loadLevel;
+    public LevelLoader levelLoader;
+
+    [SerializeField]private string levelToLoad;
 
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(loadLevel);
+            levelLoader.LoadNextLevel(levelToLoad);
         }
     }
 }
