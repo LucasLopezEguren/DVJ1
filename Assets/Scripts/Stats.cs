@@ -10,6 +10,22 @@ public class Stats : MonoBehaviour
 
     public int MaxCombo { get; set; } = 0;
 
+    public static Stats instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

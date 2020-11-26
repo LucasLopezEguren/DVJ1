@@ -7,6 +7,8 @@ public class FinishLevel : MonoBehaviour
 {
     private Stats stats;
 
+    public string SceneToLoad;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,7 @@ public class FinishLevel : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player") {
             if (stats) stats.PrintStats();
-            SceneManager.LoadScene("hub");
+            SceneManager.LoadScene(SceneToLoad);
         }
     }
 }

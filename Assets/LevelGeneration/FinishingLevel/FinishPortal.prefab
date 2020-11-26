@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c543a6b25e0b45669bc6d642d0c9fb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLoader: {fileID: 0}
+  SceneToLoad: ShowStats
 --- !u!65 &1376639935735328575
 BoxCollider:
   m_ObjectHideFlags: 0
