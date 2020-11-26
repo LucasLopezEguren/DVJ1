@@ -37,11 +37,22 @@ public class PlayerController : MonoBehaviour
 
     private Collider _collider;
 
-    private Vector3 moveDirection;
+    [HideInInspector]
+    public Vector3 moveDirection;
 
     private List<int> hasBeenHitted;
 
     private bool invincible = false;
+
+    public bool canFlip = true;
+
+    public bool canMove = true;
+
+    private bool canJump = true;
+
+    float timeToMove = 0.5f;
+
+    float timeStunned = 0;
 
     void Start()
     {
@@ -68,19 +79,37 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(25);
         }
-        if (Input.GetKey("d"))
+        if(!canMove)
         {
-            rigidbody.AddForce(moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            timeStunned += Time.deltaTime;
         }
-        if (Input.GetKey("a"))
+        if(timeStunned >= timeToMove)
         {
-            rigidbody.AddForce(-moveSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            canMove = true;
+            canFlip = true;
+            timeStunned = 0;
         }
-        moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, 0f);
+        if(canMove)
+        {
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            Vector3 temp = new Vector3(horizontal, 0, 0);
+            temp = temp.normalized * moveSpeed * Time.deltaTime;
+            rigidbody.MovePosition(transform.position + temp);
+        }
 
-        if (isGrounded() && Input.GetButtonDown("Jump"))
+        if (isGrounded() && canMove)
         {
-            moveDirection.y = jumpForce;
+            if (canJump && Input.GetButtonDown("Jump"))
+            {
+                anim.SetBool("jump", true);
+                moveDirection.y = jumpForce;
+            }
+            anim.SetBool("touchFloor", true);
+        }
+        else
+        {
+            anim.SetBool("touchFloor", false);
+            anim.SetBool("jump", false);
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -103,9 +132,18 @@ public class PlayerController : MonoBehaviour
                 anim.SetInteger("shooting", shootPhase);
             }
         }
+        if(Input.GetKeyDown(KeyCode.Y))
+        {
+            Vector3 tempi = new Vector3(1000, 0, 0);
+            rigidbody.AddForce(tempi);
+        }
         if (!isGrounded())
         {
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
+        }
+        if(rigidbody.velocity.y < -15)
+        {
+            moveDirection.y = -14;
         }
         rigidbody.velocity = moveDirection;
         anim.SetFloat("Speed", (Mathf.Abs(Input.GetAxis("Horizontal"))));
@@ -117,23 +155,40 @@ public class PlayerController : MonoBehaviour
         CheckShootAnimation();
         CheckJumpAnimation();
         CheckStunAnimation();
+        CheckDieAnimation();
     }
+
 
     private void CheckAttackAnimation()
     {
         if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
             || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle")
-            || anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack")) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack")) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        {
+            rigidbody.velocity = Vector3.zero;//for not falling while attacking
+            canMove = false;
+            canFlip = false;
+        }
+        else if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle")) 
+            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
             //If normalizedTime is 0 to 1 means animation is playing, if greater than 1 means finished
-            //Debug.Log("not playing");
             attackPhase = 0;
             anim.SetInteger("attacking", attackPhase);
-            anim.SetBool("airAttack", false);
+            canMove = true;
+            canFlip = true;
         }
-        else
+        
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack"))
         {
-            //Debug.Log("playing");
+            anim.SetBool("airAttack", false);
+            if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8)
+            {
+                canMove = true;
+                canFlip = true;
+            }
         }
     }
 
@@ -145,22 +200,49 @@ public class PlayerController : MonoBehaviour
         {
             shootPhase = 0;
             anim.SetInteger("shooting", shootPhase);
+            canMove = true;
+            canFlip = true;
+        }
+        else if ((anim.GetCurrentAnimatorStateInfo(0).IsName("first_shoot") || anim.GetCurrentAnimatorStateInfo(0).IsName("second_shoot")
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
+            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        {
+            //rigidbody.velocity = Vector3.zero;
+            canMove = false;
+            canFlip = false;
         }
     }
 
     private void CheckJumpAnimation()
     {
-        if(anim.GetCurrentAnimatorStateInfo(0).IsName("jump"))
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("jump_up"))
         {
             anim.speed = 3.4f;
-        }
-        else if(anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack"))
-        {
-            anim.speed = 2.5f;
+            canJump = false;
         }
         else
         {
             anim.speed = 1;
+        }
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("landing"))
+        {
+            if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            {
+                rigidbody.velocity = Vector3.zero;
+                canMove = false;
+                canFlip = false;
+                canJump = false;
+            }
+            else if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            {
+                canMove = true;
+                canFlip = true;
+                canJump = true;
+            }
+        }
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("falling"))
+        {
+            canJump = false;
         }
     }
 
@@ -181,6 +263,15 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetInteger("dmgTaken", 0);
             invincible = false;
+        }
+    }
+
+    private void CheckDieAnimation()
+    {
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("death") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9)
+        {
+            canMove = false;
+            canFlip = false;
         }
     }
 
@@ -235,7 +326,7 @@ public class PlayerController : MonoBehaviour
             {
                 gameManager.ComboInterrupt();
             }
-            if(currentHealth <= 0)
+            if(currentHealth < 1)
             {
                 Die();
             }
@@ -244,7 +335,7 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        if(anim.GetCurrentAnimatorStateInfo(0).IsName("death") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("death") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9)
         {
             SceneManager.LoadScene("hub");
         }
@@ -252,30 +343,32 @@ public class PlayerController : MonoBehaviour
 
     private void CheckMovementDirection()
     {
-        if (isFacingRight && moveDirection.x < 0)
+        if(canFlip)
         {
-            Flip();
-        }
-        else if (!isFacingRight && moveDirection.x > 0)
-        {
-            Flip();
+            if (isFacingRight && Input.GetAxis("Horizontal") < 0)
+            {
+                Flip();
+            }
+            else if (!isFacingRight && Input.GetAxis("Horizontal") > 0)
+            {
+                Flip();
+            }
         }
     }
 
     private bool isGrounded()
     {
-        RaycastHit[] raycastHit = Physics.RaycastAll(_collider.bounds.center, Vector2.down, _collider.bounds.extents.y);
-        Color rayColor;
-        if (raycastHit.Length > 0 && raycastHit[0].collider != null)
-        {
-            rayColor = Color.green;
+        Vector3 start = transform.position;
+        float maxDistance = 0.5f;
+        start.y = start.y + (Vector3.down * 0.8f).y;
+        bool raycastHit = Physics.Raycast(start, Vector3.down, maxDistance);
+        Vector3 end = start + (Vector3.down * maxDistance);
+        Color color = Color.magenta;
+        if (!raycastHit){
+            color = Color.yellow;
         }
-        else
-        {
-            rayColor = Color.red;
-        }
-        Debug.DrawLine(_collider.bounds.center, Vector2.down * (_collider.bounds.extents.y), rayColor);
-        return raycastHit.Length > 0 && raycastHit[0].collider != null;
+        Debug.DrawLine(start, end, color);
+        return raycastHit;
     }
 
     private void Flip()

@@ -8,12 +8,17 @@ public class SettingsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
 
-    Resolution[] resolutions;
-
     public Dropdown resolutionDropdown;
+
+    public Slider volumeSlider;
+
+    Resolution[] resolutions;    
 
     private void Start()
     {
+        float volumeValue;
+        audioMixer.GetFloat("volume", out volumeValue);
+        volumeSlider.value = volumeValue;
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();

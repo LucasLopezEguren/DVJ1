@@ -10,28 +10,29 @@ public class GameManager : MonoBehaviour
     public int amountChunks;
     public Text comboNumber;
     public Text comboText;
+    public Image hitCombo;
     private Color transparencyNumber;
     private Color transparencyText;
+    private bool femaleNarratorActivate;
     // Start is called before the first frame update
     void Start()
     {
+        try {
+            femaleNarratorActivate = FindObjectOfType<CheatCodes>().femaleNarratorActivate;
+        } catch {
+            Debug.Log("No CheatCodes found");
+        }
         int amountChunksTypes = levelChunks.Length;
         float nextPosition = 0f;
         for (int i = 0; i <= amountChunks; i++) {
-            Debug.Log(i + " i");
-            Debug.Log(nextPosition + " position");
             GameObject toInitiatie = levelChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(amountChunksTypes)))];
-            if (nextPosition == 0f) {
+            if (i == 0) {
                 nextPosition = -((toInitiatie.GetComponent<BoxCollider>().size.x) / 2);
+            } else {
+                nextPosition = nextPosition + ((toInitiatie.GetComponent<BoxCollider>().size.x) / 2);
             }
             Instantiate(toInitiatie, new Vector3(nextPosition, 0, 0), Quaternion.identity);
-            if ( i == amountChunks) {
-                nextPosition = nextPosition + (toInitiatie.GetComponent<BoxCollider>().size.x)/2;
-            } else {
-                nextPosition = nextPosition + toInitiatie.GetComponent<BoxCollider>().size.x;
-            }
-            Debug.Log(i + " i");
-            Debug.Log(nextPosition + " position");
+            nextPosition = nextPosition + (toInitiatie.GetComponent<BoxCollider>().size.x)/2;
         }
         GameObject finishingChunk = FinishingChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(FinishingChunks.Length)))];
         Instantiate(finishingChunk, new Vector3(nextPosition + ((finishingChunk.GetComponent<BoxCollider>().size.x) / 2) , 0, 0), Quaternion.identity);
@@ -59,20 +60,25 @@ public class GameManager : MonoBehaviour
             transparency = (comboCountLifeTime - comboCurrentTime)/comboCountLifeTime;
             comboNumber.text = comboCount.ToString();
             if (comboCount < 5) {
-                comboText.text = "hits";
+                comboText.text = "";
             } else if ( comboCount < 8 ) {
-                comboText.text = "Deorbital\r\nhits";
+                comboText.text = "Deorbital";
             } else if ( comboCount < 13 ) {
-                comboText.text = "Cosmical\r\nhits";
+                comboText.text = "Cosmical";
             } else if ( comboCount < 21) {
-                comboText.text = "Black holish\r\nhits";
+                comboText.text = "Black holish";
             } else if (comboCount < 34) {
-                comboText.text = "Astronomical\r\nhits";
+                comboText.text = "Astronomical";
             } else if (comboCount >= 34) {
-                comboText.text = "SuperNova\r\nhits";
+                comboText.text = "SuperNova";
                 if (!superNova) {
                     superNova = true;
-                    FindObjectOfType<AudioManager>().Play("SuperNova");
+                    if (femaleNarratorActivate) {
+                        FindObjectOfType<AudioManager>().Play("FSuperNova");
+                    } else {
+                        FindObjectOfType<AudioManager>().Play("SuperNova");
+                    }
+
                 }
                 
             }
