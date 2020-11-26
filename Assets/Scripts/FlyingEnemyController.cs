@@ -42,9 +42,14 @@ public class FlyingEnemyController : MonoBehaviour
 
     private Transform targetPlayer;
 
+    private Stats stats;
+
+    private bool killStatsAdded = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
         rb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
         minPosition = new Vector3(initialPosition.x - maxMovementRange, initialPosition.y, initialPosition.z);
@@ -59,11 +64,20 @@ public class FlyingEnemyController : MonoBehaviour
     {
         Movement();
         CheckShootingRange();
-
         if (!IsAlive())
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        if (stats && !killStatsAdded)
+        {
+            stats.EnemyKilled++;
+            killStatsAdded = true;
+        }
+        Destroy(gameObject);
     }
 
     public void Shoot()

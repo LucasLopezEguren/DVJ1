@@ -14,9 +14,11 @@ public class GameManager : MonoBehaviour
     private Color transparencyNumber;
     private Color transparencyText;
     private bool femaleNarratorActivate;
+    private Stats stats;
     // Start is called before the first frame update
     void Start()
     {
+        stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
         try {
             femaleNarratorActivate = FindObjectOfType<CheatCodes>().femaleNarratorActivate;
         } catch {
@@ -52,6 +54,10 @@ public class GameManager : MonoBehaviour
     private bool superNova = false;
     void Update() {
         if (comboCount >= 3 && comboCurrentTime > comboCountLifeTime) {
+            if (stats && stats.MaxCombo < comboCount)
+            {
+                stats.MaxCombo = comboCount;
+            }
             comboCount = 0;
             comboCurrentTime = 0f;
             superNova = false;
@@ -105,6 +111,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void ComboInterrupt() {
-        comboCount = 0;
+        if (stats && stats.MaxCombo < comboCount) {
+            stats.MaxCombo = comboCount;
+        } 
+        comboCount = 0;        
     }
 }
