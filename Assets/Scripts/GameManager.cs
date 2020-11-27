@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
+        stats.ResetStats();
         try {
             femaleNarratorActivate = FindObjectOfType<CheatCodes>().femaleNarratorActivate;
         } catch {

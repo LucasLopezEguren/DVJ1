@@ -12,6 +12,9 @@ public class Stats : MonoBehaviour
 
     public static Stats instance;
 
+    [HideInInspector]
+    public bool LevelComplete = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -35,7 +38,7 @@ public class Stats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TimeToCompleteLevel += Time.deltaTime;
+        if(!LevelComplete) TimeToCompleteLevel += Time.deltaTime;
     }
 
     public void PrintStats()
@@ -43,6 +46,13 @@ public class Stats : MonoBehaviour
         Debug.Log("Time:" + TimeToCompleteLevel);
         Debug.Log("EnemyKilled: " + EnemyKilled);
         Debug.Log("MaxCombo: " + MaxCombo);
+    }
+
+    public void ResetStats()
+    {
+        TimeToCompleteLevel = 0;
+        EnemyKilled = 0;
+        MaxCombo = 0;
     }
 
 }

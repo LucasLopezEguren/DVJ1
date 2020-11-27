@@ -16,9 +16,11 @@ public class FinishLevel : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag == "Player") {
-            if (stats) stats.PrintStats();
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            if (stats) stats.LevelComplete = true;
             SceneManager.LoadScene(SceneToLoad);
         }
     }
