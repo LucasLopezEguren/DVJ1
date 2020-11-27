@@ -25,9 +25,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject weapon;
 
-    public HealthBar healthBar;
-
-    public bool isFacingRight = true;
+    public HealthBar healthBar;       
 
     private int attackPhase = 0;
 
@@ -35,10 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private GameManager gameManager;
 
-    private Collider _collider;
-
-    [HideInInspector]
-    public Vector3 moveDirection;
+    private Collider _collider;    
 
     private List<int> hasBeenHitted;
 
@@ -47,6 +42,11 @@ public class PlayerController : MonoBehaviour
     public bool canFlip = true;
 
     public bool canMove = true;
+
+    public bool isFacingRight = true;
+
+    [HideInInspector]
+    public Vector3 moveDirection;
 
     private bool canJump = true;
 
