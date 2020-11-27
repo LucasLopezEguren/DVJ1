@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 3414631d5f5270d45b46785afcb19202, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: da6d0feeab031f74cb705ee36c1cce90, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -218,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76031675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.251537, y: -4.7557325, z: -5.1296835}
+  m_LocalPosition: {x: -16.3794, y: -4.7557325, z: -5.1296835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1776954176}
@@ -714,6 +714,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0eb07cbe26fdd304f80e5ba04575dfbc, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 5c7f124ee5b34d847af3287298769f88, type: 3}
+      propertyPath: m_StitchLightmapSeams
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5c7f124ee5b34d847af3287298769f88, type: 3}
       propertyPath: m_Name
       value: HUB_Mesas (3)
@@ -1021,6 +1025,14 @@ PrefabInstance:
       propertyPath: m_StitchLightmapSeams
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ed15a55cae6cc464ba419809c94dfe31, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e9bfe5917835d69459d813acc65ba519, type: 2}
+    - target: {fileID: -7511558181221131132, guid: ed15a55cae6cc464ba419809c94dfe31, type: 3}
+      propertyPath: m_LightmapParameters
+      value: 
+      objectReference: {fileID: 15200, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 919132149155446097, guid: ed15a55cae6cc464ba419809c94dfe31, type: 3}
       propertyPath: m_Name
       value: HUB_Main
@@ -1139,6 +1151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 871110738}
   - component: {fileID: 871110737}
+  - component: {fileID: 871110739}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1168,8 +1181,8 @@ Light:
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_Bias: 1
+    m_NormalBias: 1
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -1221,6 +1234,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 19, y: 0, z: 0}
+--- !u!114 &871110739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871110736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePipelineSettings: 1
 --- !u!1001 &908018655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1534,7 +1560,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1127373144}
-  - component: {fileID: 1127373145}
   m_Layer: 0
   m_Name: Cameras
   m_TagString: Untagged
@@ -1558,23 +1583,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1127373145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127373143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 674522d037e760444b49ce1e70d6993a, type: 2}
 --- !u!1001 &1146398564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1658,6 +1666,7 @@ GameObject:
   - component: {fileID: 1263383495}
   - component: {fileID: 1263383494}
   - component: {fileID: 1263383493}
+  - component: {fileID: 1263383497}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1673,7 +1682,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263383491}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.251537, y: -4.7557325, z: -5.1296835}
+  m_LocalPosition: {x: -16.3794, y: -4.7557325, z: -5.1296835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1127373144}
@@ -1795,6 +1804,23 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1263383497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263383491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 674522d037e760444b49ce1e70d6993a, type: 2}
 --- !u!1001 &1278037475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2782,7 +2808,7 @@ GameObject:
   - component: {fileID: 2109759787}
   m_Layer: 0
   m_Name: Global Volume
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2812,7 +2838,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109759786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.289593, y: -3.320942, z: 19.425709}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
