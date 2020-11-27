@@ -9,7 +9,8 @@ public class LevelLoader : MonoBehaviour
     public enum Transitions
     {
         Crossfade,
-        CircleWipe
+        CircleWipe,
+        DoubleRectangle
     }
 
     public Transitions transition;
@@ -30,6 +31,10 @@ public class LevelLoader : MonoBehaviour
             case Transitions.CircleWipe:
                 transform.Find("CircleWipe").gameObject.SetActive(true);
                 transitionAnim = transform.Find("CircleWipe").gameObject.GetComponent<Animator>();
+                break;
+            case Transitions.DoubleRectangle:
+                transform.Find("DoubleRectangle").gameObject.SetActive(true);
+                transitionAnim = transform.Find("DoubleRectangle").gameObject.GetComponent<Animator>();
                 break;
             default:
                 break;
