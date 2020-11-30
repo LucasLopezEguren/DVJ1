@@ -43,6 +43,10 @@ public class EnemyController : MonoBehaviour
 
     private PlayerController playerController;
 
+    private Stats stats;
+
+    private bool killStatsAdded = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +56,7 @@ public class EnemyController : MonoBehaviour
         StopSlashParticles();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
     }
 
     // Update is called once per frame
@@ -165,11 +170,21 @@ public class EnemyController : MonoBehaviour
         if (CalculateHealth() > 0) stunAnim = stunAnim % 2;
         if (CalculateHealth() <= 0)
         {
-            StopSlashParticles();
-            anim.SetBool("isDying", true);
-            gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
-            Destroy(gameObject, timeToDissappearAfterDie);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        StopSlashParticles();
+        anim.SetBool("isDying", true);
+        gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
+        if (stats && !killStatsAdded)
+        {
+            stats.EnemyKilled++;
+            killStatsAdded = true;
+        }
+        Destroy(gameObject, timeToDissappearAfterDie);
     }
 
     private bool IsAlive()

@@ -167,10 +167,10 @@ MonoBehaviour:
   currentHealth: 0
   weapon: {fileID: 2293900875780129957}
   healthBar: {fileID: 0}
-  isFacingRight: 1
-  moveDirection: {x: 0, y: 0, z: 0}
   canFlip: 1
   canMove: 1
+  isFacingRight: 1
+  moveDirection: {x: 0, y: 0, z: 0}
 --- !u!136 &5807258557600647954
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
     m_Bits: 1024
   damage: 5
   playerController: {fileID: 5807258557600647952}
-  knockbackStrength: 0
+  knockbackStrength: 2
   shootPoint: {fileID: 8652514495920891406}
   bulletPrefab: {fileID: 8048021591317080791, guid: c5b1414da9eb1af4682d06dc28ebc6d3, type: 3}
   playerrb: {fileID: 5807258557600647962}

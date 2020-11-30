@@ -9,14 +9,21 @@ public class SuperJump : MonoBehaviour
     private int playerCurrentHp;
     private float jumpForce;
     private float moveSpeed;
+    void Start() {
+            PlayerController playerController = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<PlayerController>();
+        if ( jumpForce != null) {
+                jumpForce = playerController.jumpForce;
+                moveSpeed = playerController.moveSpeed;
+            }
+    }
+
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player"){            
             PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
             playerCurrentHp = playerController.currentHealth;
             enterX = other.transform.position.x;
             enterY = other.transform.position.y;
-            jumpForce = playerController.jumpForce;
-            moveSpeed = playerController.moveSpeed;
+            
             playerController.jumpForce = 35f;
             playerController.moveSpeed = 25f;
         }
