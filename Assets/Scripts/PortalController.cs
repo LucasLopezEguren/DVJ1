@@ -32,6 +32,9 @@ public class PortalController : MonoBehaviour
             if (timeToSpawnEnemy < currentTime) {
                 GameObject toInitiatie = summoneablesEnemies[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(summoneablesEnemies.Length)))];
                 Vector3 spawnPosition = transform.position;
+                if (!toInitiatie.name.Contains("fly")) {
+                    spawnPosition.y = spawnPosition.y + 3f;
+                }
                 Instantiate(toInitiatie, spawnPosition, Quaternion.identity);
                 currentTime = 0f;
             }
