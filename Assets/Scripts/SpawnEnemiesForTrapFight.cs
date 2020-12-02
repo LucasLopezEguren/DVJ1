@@ -31,18 +31,24 @@ public class SpawnEnemiesForTrapFight : MonoBehaviour
 
     private bool hasBeenFirstSpawn = false;
 
+    public GameObject Enemy_1; //hay que ver para borrar
+
+    public GameObject FlyingEnemy;  //hay que ver para borrar
+
     // Start is called before the first frame update
     void Start()
     {
         switch (enemyType)
         {
             case EnemyType.Enemy_1:
-                enemyObject = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Enemy_1.prefab", typeof(GameObject));
-                enemyToInstatiate = (GameObject)enemyObject;
+                //enemyObject = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Enemy_1.prefab", typeof(GameObject));
+                //enemyToInstatiate = (GameObject)enemyObject;
+                enemyToInstatiate = Enemy_1;
                 break;
             case EnemyType.FlyingEnemy:
-                enemyObject = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/FlyingEnemy.prefab", typeof(GameObject));
-                enemyToInstatiate = (GameObject)enemyObject;
+                //enemyObject = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/FlyingEnemy.prefab", typeof(GameObject));
+                //nemyToInstatiate = (GameObject)enemyObject;
+                enemyToInstatiate = FlyingEnemy;
                 break;
             default:
                 break;
