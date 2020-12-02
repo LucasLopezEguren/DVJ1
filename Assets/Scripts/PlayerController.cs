@@ -52,7 +52,9 @@ public class PlayerController : MonoBehaviour
 
     float timeToMove = 0.5f;
 
-    float timeStunned = 0;
+    float timeStunned = 0f;
+
+    float timeNoJump = 0f;
 
     void Start()
     {
@@ -79,15 +81,23 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(25);
         }
-        if(!canMove)
+        if(!canMove && currentHealth > 0)
         {
             timeStunned += Time.deltaTime;
+        }
+        if(!canJump && currentHealth > 0)
+        {
+            timeNoJump += Time.deltaTime;
         }
         if(timeStunned >= timeToMove)
         {
             canMove = true;
             canFlip = true;
             timeStunned = 0;
+        }
+        if(timeNoJump >= timeToMove)
+        {
+            canJump = true;
         }
         if(canMove)
         {
@@ -252,11 +262,17 @@ public class PlayerController : MonoBehaviour
         && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             invincible = true;
+            canMove = false;
+            canFlip = false;
+            canJump = false;
         }
         if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")) 
         && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
             invincible = false;
+            canMove = true;
+            canFlip = true;
+            canJump = true;
             anim.SetInteger("dmgTaken", 0);
         }
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("reincorp"))
