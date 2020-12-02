@@ -7,6 +7,7 @@ public class ActivePortal : MonoBehaviour
     public GameObject Portal;
     public GameObject forceFieldBack;
     public GameObject forceFieldFront;
+    public GameObject UIChunk;
     public bool triggederd = false;
 
     void OnTriggerEnter(Collider other) {

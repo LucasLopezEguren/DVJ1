@@ -10,20 +10,38 @@ public class PortalController : MonoBehaviour
     public GameObject[] summoneablesEnemies;
     public GameObject forceFieldBack;
     public GameObject forceFieldFront;
+    public GameObject portalUI;
     public float timeToSpawnEnemy;
     public float currentTime;
-    
+    public float secondsToShowAttackUI = 10;
+    private float timer;
+    private float previousHealth;
+
     void Start()
     {
         damageController = this.GetComponent<DamageController>();
-
+        timer = secondsToShowAttackUI;
+        previousHealth = CalculateHealth();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(previousHealth == CalculateHealth())
+        {
+            timer -= Time.deltaTime;
+            if(timer <= 0)
+            {
+                portalUI.SetActive(true);
+            }
+        }
+        else
+        {
+            previousHealth = CalculateHealth();
+            timer = secondsToShowAttackUI;
+            portalUI.SetActive(false);
+        }
         if (CalculateHealth() <= 0) {
-
             gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
             forceFieldBack.SetActive(false);
             forceFieldFront.SetActive(false);

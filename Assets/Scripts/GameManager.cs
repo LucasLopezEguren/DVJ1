@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public int amountChunks;
     public Text comboNumber;
     public Text comboText;
-    public Image hitCombo;
+    public GameObject hitCombo;
     private Color transparencyNumber;
     private Color transparencyText;
     private bool maleNarratorActivate;
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         transparencyNumber.a = 0.0f;
         transparencyText = comboText.color;
         transparencyText.a = 0.0f;
-
+        hitCombo.SetActive(false);
     }
     private float comboCountLifeTime = 3;
     private float comboCurrentTime = 0;
@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
         }
         if (comboCount >= 3)
         {
+            hitCombo.SetActive(true);
             transparency = (comboCountLifeTime - comboCurrentTime) / comboCountLifeTime;
             comboNumber.text = comboCount.ToString();
             if (comboCount < 5)
@@ -158,6 +159,7 @@ public class GameManager : MonoBehaviour
         }
         if (comboCount < 3)
         {
+            hitCombo.SetActive(false);
             transparency = 0;
             transparencyNumber.a = transparency;
             transparencyText.a = transparency;
