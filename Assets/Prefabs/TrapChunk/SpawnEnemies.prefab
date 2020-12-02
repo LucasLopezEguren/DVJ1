@@ -43,8 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c09b58a87f2342e88c3f1b84d40fbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spotToSpawn: {fileID: 0}
+  enemyType: 0
+  secondsForFirstSpawn: 0
   timesToSpawn: 0
   numberOfEnemiesToSpawnEachTime: 0
   secondsBetweenSpawns: 0
-  enemy: {fileID: 0}
+  Enemy_1: {fileID: 4874737682469985080, guid: c7886403986f347fbbf5ff82236cf904, type: 3}
+  FlyingEnemy: {fileID: 6471279456125529665, guid: 48d287a74e4897444942f5f219b37d82, type: 3}

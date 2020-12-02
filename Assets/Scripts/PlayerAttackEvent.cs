@@ -21,6 +21,7 @@ public class PlayerAttackEvent : MonoBehaviour
 
     public GameObject playerrb;
 
+    bool right = true;
 
     public void PlayerAttack()
     {
@@ -86,7 +87,15 @@ public class PlayerAttackEvent : MonoBehaviour
 
     public void PlayerShoot ()
     {
-        Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
+        right = playerrb.GetComponent<PlayerController>().isFacingRight;
+        if(right)
+        {    
+            Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
+        }
+        else
+        {
+            Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+        }
         Vector3 temp = new Vector3(-15, 0, 0);
         playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     } 

@@ -50,18 +50,74 @@ MonoBehaviour:
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
-    outputAudioMixerGroup: {fileID: 24300002, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Overworld
     clip: {fileID: 8300000, guid: b8538198f65864c1ea5d7746c563d0a8, type: 3}
     volume: 0.4
     pitch: 1
     loop: 1
     source: {fileID: 0}
-    outputAudioMixerGroup: {fileID: 24300002, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+    outputAudioMixerGroup: {fileID: 2285026617345954010, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: FSuperNova
-    clip: {fileID: 8300000, guid: 76b6f518b3e45404bb6083d48c1c477e, type: 3}
+    clip: {fileID: 8300000, guid: e2c9a33210ea14789b7ce5d295e7ff65, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
-    outputAudioMixerGroup: {fileID: 24300002, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: FAstronomical
+    clip: {fileID: 8300000, guid: 1e1b88e511db7454fbbb02b04ff6f19d, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: FBlackHolish
+    clip: {fileID: 8300000, guid: 1f11b21ec55604f82a0cb7548ecea47c, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: FCosmic
+    clip: {fileID: 8300000, guid: d4d47c33ddc834094b0a772ff356032d, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: FDeorbital
+    clip: {fileID: 8300000, guid: 8412ffaf23a544f5aab61045860f16fa, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: BlackHolish
+    clip: {fileID: 8300000, guid: 9c235b897c7334d8b809f1613692ae2a, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: Cosmic
+    clip: {fileID: 8300000, guid: c914c5da760c74844a8d9f6444623957, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: Deorbital
+    clip: {fileID: 8300000, guid: a2e941160d6c543328c3e99acdf0c467, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: Astronomical
+    clip: {fileID: 8300000, guid: 302a525a7da424dafaa1c64c6e53cc7c, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}

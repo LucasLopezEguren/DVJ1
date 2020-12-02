@@ -111,7 +111,7 @@ public class EnemyController : MonoBehaviour
 
     private void CheckMovement()
     {
-        if (rb.velocity.x != 0)
+        if (rb.velocity.x != 0 && isChasing)
         {
             isWalking = true;
         }
