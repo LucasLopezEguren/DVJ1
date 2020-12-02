@@ -56,6 +56,8 @@ public class PlayerController : MonoBehaviour
 
     float timeNoJump = 0f;
 
+    //float distToGround;
+
     void Start()
     {
         hasBeenHitted = new List<int>();
@@ -72,6 +74,18 @@ public class PlayerController : MonoBehaviour
         catch (System.Exception e)
         {
             //Debug.Log(e.Message);
+        }
+        //distToGround = _collider.bounds.extents.y;
+    }
+
+    void FixedUpdate()
+    {
+        if(canMove && currentHealth > 0)
+        {
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            Vector3 temp = new Vector3(horizontal, 0, 0);
+            temp = temp.normalized * moveSpeed * Time.deltaTime;
+            rigidbody.MovePosition(transform.position + temp);
         }
     }
 
@@ -351,9 +365,6 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        canMove = false;
-        canFlip = false;
-        canJump = false;
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("death") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9)
         {
             SceneManager.LoadScene("hub");
@@ -388,6 +399,7 @@ public class PlayerController : MonoBehaviour
         }
         Debug.DrawLine(start, end, color);
         return raycastHit;
+        //return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
 
     private void Flip()

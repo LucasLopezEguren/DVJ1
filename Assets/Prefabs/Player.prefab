@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0738f45728c084ea79fa577aba705d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 13
+  moveSpeed: 8
   jumpForce: 13
   gravityScale: 5
   rigidbody: {fileID: 5878538962860269881}
@@ -164,7 +164,7 @@ MonoBehaviour:
   pivot: {fileID: 0}
   RotateSpeed: 0
   maxHealth: 200
-  currentHealth: 0
+  currentHealth: 200
   weapon: {fileID: 2293900875780129957}
   healthBar: {fileID: 0}
   canFlip: 1
