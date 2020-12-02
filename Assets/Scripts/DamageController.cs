@@ -25,14 +25,18 @@ public class DamageController : MonoBehaviour
     {
         //rb = GetComponent<Rigidbody>();
         health = maxHealth;
-        slider.maxValue = maxHealth;
-        slider.value = CalculateHealth();
+        if (slider != null) {
+            slider.maxValue = maxHealth;
+            slider.value = CalculateHealth();
+        }
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     private void Update()
     {
-        slider.value = CalculateHealth();
+        if (slider != null) {
+            slider.value = CalculateHealth();
+        }
     }
 
     public float CalculateHealth()
