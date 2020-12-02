@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
         {
             canJump = true;
         }
-        if(canMove)
+        if(canMove && currentHealth > 0)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             Vector3 temp = new Vector3(horizontal, 0, 0);
@@ -107,9 +107,9 @@ public class PlayerController : MonoBehaviour
             rigidbody.MovePosition(transform.position + temp);
         }
 
-        if (isGrounded() && canMove)
+        if (isGrounded() && canMove )
         {
-            if (canJump && Input.GetButtonDown("Jump"))
+            if (canJump && currentHealth > 0 && Input.GetButtonDown("Jump"))
             {
                 anim.SetBool("jump", true);
                 moveDirection.y = jumpForce;
@@ -351,6 +351,9 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
+        canMove = false;
+        canFlip = false;
+        canJump = false;
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("death") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9)
         {
             SceneManager.LoadScene("hub");
@@ -359,7 +362,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckMovementDirection()
     {
-        if(canFlip)
+        if(canFlip && currentHealth > 0)
         {
             if (isFacingRight && Input.GetAxis("Horizontal") < 0)
             {

@@ -86,7 +86,7 @@ public class PlayerAttackEvent : MonoBehaviour
 
     public void PlayerShoot ()
     {
-        Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
+        Instantiate(bulletPrefab, shootPoint.position, bulletPrefab.transform.rotation);
         Vector3 temp = new Vector3(-15, 0, 0);
         playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     } 
