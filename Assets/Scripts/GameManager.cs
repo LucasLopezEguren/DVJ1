@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public Image hitCombo;
     private Color transparencyNumber;
     private Color transparencyText;
-    private bool femaleNarratorActivate;
+    private bool maleNarratorActivate;
     private Stats stats;
     private Combo actualCombo = Combo.normal;
 
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         stats.ResetStats();
         try
         {
-            femaleNarratorActivate = FindObjectOfType<CheatCodes>().femaleNarratorActivate;
+            maleNarratorActivate = FindObjectOfType<CheatCodes>().maleNarratorActivate;
         }
         catch
         {
@@ -95,40 +95,40 @@ public class GameManager : MonoBehaviour
                 comboText.text = "Deorbital";
                 if (!deorbital) {
                     deorbital = true;
-                    if (femaleNarratorActivate) {
-                        FindObjectOfType<AudioManager>().Play("FDeorbital");
-                    } else {
+                    if (maleNarratorActivate) {
                         FindObjectOfType<AudioManager>().Play("Deorbital");
+                    } else {
+                        FindObjectOfType<AudioManager>().Play("FDeorbital");
                     }
                 }
             } else if ( comboCount < 13 ) {
                 comboText.text = "Cosmical";
                 if (!cosmic) {
                     cosmic = true;
-                    if (femaleNarratorActivate) {
-                        FindObjectOfType<AudioManager>().Play("FCosmic");
-                    } else {
+                    if (maleNarratorActivate) {
                         FindObjectOfType<AudioManager>().Play("Cosmic");
+                    } else {
+                        FindObjectOfType<AudioManager>().Play("FCosmic");
                     }
                 }
             } else if ( comboCount < 21) {
                 comboText.text = "Black holish";
                 if (!blackHolish) {
                     blackHolish = true;
-                    if (femaleNarratorActivate) {
-                        FindObjectOfType<AudioManager>().Play("FBlackHolish");
-                    } else {
+                    if (maleNarratorActivate) {
                         FindObjectOfType<AudioManager>().Play("BlackHolish");
+                    } else {
+                        FindObjectOfType<AudioManager>().Play("FBlackHolish");
                     }
                 }
             } else if (comboCount < 34) {
                 comboText.text = "Astronomical";
                 if (!astonomical) {
                     astonomical = true;
-                    if (femaleNarratorActivate) {
-                        FindObjectOfType<AudioManager>().Play("FAstronomical");
-                    } else {
+                    if (maleNarratorActivate) {
                         FindObjectOfType<AudioManager>().Play("Astronomical");
+                    } else {
+                        FindObjectOfType<AudioManager>().Play("FAstronomical");
                     }
                 }
             } else if (comboCount >= 34) {
@@ -137,13 +137,13 @@ public class GameManager : MonoBehaviour
                 if (!superNova)
                 {
                     superNova = true;
-                    if (femaleNarratorActivate)
+                    if (maleNarratorActivate)
                     {
-                        FindObjectOfType<AudioManager>().Play("FSuperNova");
+                        FindObjectOfType<AudioManager>().Play("SuperNova");
                     }
                     else
                     {
-                        FindObjectOfType<AudioManager>().Play("SuperNova");
+                        FindObjectOfType<AudioManager>().Play("FSuperNova");
                     }
                 }
             }
