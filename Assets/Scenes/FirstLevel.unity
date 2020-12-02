@@ -2587,6 +2587,10 @@ PrefabInstance:
       propertyPath: levelChunks.Array.data[20]
       value: 
       objectReference: {fileID: 3736424406299464701, guid: 826bbdae696ed434fbb694515a651dbe, type: 3}
+    - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
+      propertyPath: hitCombo
+      value: 
+      objectReference: {fileID: 1833792283}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
 --- !u!1 &1833792283
