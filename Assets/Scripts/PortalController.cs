@@ -6,7 +6,7 @@ public class PortalController : MonoBehaviour
 {
     
     private DamageController damageController;
-    public Animator anim;
+
     public GameObject[] summoneablesEnemies;
     public GameObject forceFieldBack;
     public GameObject forceFieldFront;
@@ -16,14 +16,14 @@ public class PortalController : MonoBehaviour
     void Start()
     {
         damageController = this.GetComponent<DamageController>();
-        anim.Play("PoratlAppeaer");
+
     }
 
     // Update is called once per frame
     void Update()
     {
         if (CalculateHealth() <= 0) {
-            anim.SetTrigger("DyingTrigger");
+
             gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
             forceFieldBack.SetActive(false);
             forceFieldFront.SetActive(false);

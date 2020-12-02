@@ -71,14 +71,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private float transparency;
     private bool superNova = false;
-    void Update()
-    {
-        if (comboCount >= 3 && comboCurrentTime > comboCountLifeTime)
-        {
-            if (stats && stats.MaxCombo < comboCount)
-            {
-                stats.MaxCombo = comboCount;
-            }
+    private bool astonomical = false;
+    private bool blackHolish = false;
+    private bool cosmic = false;
+    private bool deorbital = false;
+    void Update() {
+        if (comboCount >= 3 && comboCurrentTime > comboCountLifeTime) {
             comboCount = 0;
             actualCombo = Combo.normal;
             comboCurrentTime = 0f;
@@ -95,25 +93,45 @@ public class GameManager : MonoBehaviour
             else if (comboCount < 8)
             {
                 comboText.text = "Deorbital";
-                actualCombo = Combo.deorbital;
-            }
-            else if (comboCount < 13)
-            {
+                if (!deorbital) {
+                    deorbital = true;
+                    if (femaleNarratorActivate) {
+                        FindObjectOfType<AudioManager>().Play("FDeorbital");
+                    } else {
+                        FindObjectOfType<AudioManager>().Play("Deorbital");
+                    }
+                }
+            } else if ( comboCount < 13 ) {
                 comboText.text = "Cosmical";
-                actualCombo = Combo.cosmical;
-            }
-            else if (comboCount < 21)
-            {
+                if (!cosmic) {
+                    cosmic = true;
+                    if (femaleNarratorActivate) {
+                        FindObjectOfType<AudioManager>().Play("FCosmic");
+                    } else {
+                        FindObjectOfType<AudioManager>().Play("Cosmic");
+                    }
+                }
+            } else if ( comboCount < 21) {
                 comboText.text = "Black holish";
-                actualCombo = Combo.blackOlish;
-            }
-            else if (comboCount < 34)
-            {
+                if (!blackHolish) {
+                    blackHolish = true;
+                    if (femaleNarratorActivate) {
+                        FindObjectOfType<AudioManager>().Play("FBlackHolish");
+                    } else {
+                        FindObjectOfType<AudioManager>().Play("BlackHolish");
+                    }
+                }
+            } else if (comboCount < 34) {
                 comboText.text = "Astronomical";
-                actualCombo = Combo.astronmical;
-            }
-            else if (comboCount >= 34)
-            {
+                if (!astonomical) {
+                    astonomical = true;
+                    if (femaleNarratorActivate) {
+                        FindObjectOfType<AudioManager>().Play("FAstronomical");
+                    } else {
+                        FindObjectOfType<AudioManager>().Play("Astronomical");
+                    }
+                }
+            } else if (comboCount >= 34) {
                 comboText.text = "SuperNova";
                 actualCombo = Combo.supernova;
                 if (!superNova)
@@ -145,6 +163,11 @@ public class GameManager : MonoBehaviour
             transparencyText.a = transparency;
             comboNumber.color = transparencyNumber;
             comboText.color = transparencyText;
+            superNova = false;
+            astonomical = false;
+            blackHolish = false;
+            cosmic = false;
+            deorbital = false;
         }
         if (stats && stats.LevelComplete && stats.MaxCombo < comboCount)
         {
