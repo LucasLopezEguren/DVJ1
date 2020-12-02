@@ -15,7 +15,6 @@ public class ActivePortal : MonoBehaviour
             Portal.SetActive(true);
             forceFieldBack.SetActive(true);
             forceFieldFront.SetActive(true);
-            UIChunk.SetActive(true);
             triggederd = true;
         }
     }
