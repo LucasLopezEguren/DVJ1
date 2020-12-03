@@ -56,7 +56,9 @@ public class PlayerController : MonoBehaviour
 
     float timeNoJump = 0f;
 
-    //float distToGround;
+    float distToGround;
+
+    public LayerMask Ground;
 
     void Start()
     {
@@ -75,7 +77,7 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log(e.Message);
         }
-        //distToGround = _collider.bounds.extents.y;
+        distToGround = _collider.bounds.extents.y;
     }
 
     void FixedUpdate()
@@ -388,7 +390,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded()
     {
-        Vector3 start = transform.position;
+        /*Vector3 start = transform.position;
         float maxDistance = 0.5f;
         start.y = start.y + (Vector3.down * 0.8f).y;
         bool raycastHit = Physics.Raycast(start, Vector3.down, maxDistance);
@@ -398,8 +400,8 @@ public class PlayerController : MonoBehaviour
             color = Color.yellow;
         }
         Debug.DrawLine(start, end, color);
-        return raycastHit;
-        //return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+        return raycastHit;*/
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f, Ground.value);
     }
 
     private void Flip()
