@@ -171,6 +171,9 @@ MonoBehaviour:
   canMove: 1
   isFacingRight: 1
   moveDirection: {x: 0, y: 0, z: 0}
+  Ground:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!136 &5807258557600647954
 CapsuleCollider:
   m_ObjectHideFlags: 0
