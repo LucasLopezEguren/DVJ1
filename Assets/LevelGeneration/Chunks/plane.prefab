@@ -2759,6 +2759,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUB_Mesas Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2709669483583809176, guid: a4f56021fb6f94d478f528bdb1d029f7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3373616844774243362, guid: a4f56021fb6f94d478f528bdb1d029f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.53
@@ -5288,6 +5292,10 @@ PrefabInstance:
     - target: {fileID: 1598562626377364454, guid: 35cfdf805fdae485bbb5b60ad34129b1, type: 3}
       propertyPath: m_Name
       value: HUB_Rockola Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598562626377364454, guid: 35cfdf805fdae485bbb5b60ad34129b1, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2118077835015907676, guid: 35cfdf805fdae485bbb5b60ad34129b1, type: 3}
       propertyPath: m_LocalPosition.x
