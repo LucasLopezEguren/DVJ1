@@ -1728,6 +1728,10 @@ PrefabInstance:
       propertyPath: portalUI
       value: 
       objectReference: {fileID: 3755662254433857378}
+    - target: {fileID: 506028341434042680, guid: 39214f02efd354e37a9824f3ae128cb2, type: 3}
+      propertyPath: powerUp
+      value: 
+      objectReference: {fileID: 100004, guid: 6e04378273eb34904969fae65b67c8c2, type: 3}
     - target: {fileID: 2410287115289846536, guid: 39214f02efd354e37a9824f3ae128cb2, type: 3}
       propertyPath: m_Name
       value: Portal
@@ -1746,7 +1750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6707730958998138995, guid: 39214f02efd354e37a9824f3ae128cb2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.59
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6707730958998138995, guid: 39214f02efd354e37a9824f3ae128cb2, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1782,7 +1786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6707730958998138995, guid: 39214f02efd354e37a9824f3ae128cb2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3.3708959
+      value: 2.8882847
       objectReference: {fileID: 0}
     - target: {fileID: 6707730958998138995, guid: 39214f02efd354e37a9824f3ae128cb2, type: 3}
       propertyPath: m_LocalScale.x
