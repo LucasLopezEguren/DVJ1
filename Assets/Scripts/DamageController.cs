@@ -25,14 +25,18 @@ public class DamageController : MonoBehaviour
     {
         //rb = GetComponent<Rigidbody>();
         health = maxHealth;
-        slider.maxValue = maxHealth;
-        slider.value = CalculateHealth();
+        if (slider != null) {
+            slider.maxValue = maxHealth;
+            slider.value = CalculateHealth();
+        }
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     private void Update()
     {
-        slider.value = CalculateHealth();
+        if (slider != null) {
+            slider.value = CalculateHealth();
+        }
     }
 
     public float CalculateHealth()
@@ -55,7 +59,19 @@ public class DamageController : MonoBehaviour
                 isStunned = true;
             }            
             health -= damage;
-            Instantiate(bloodSplash, transform.position, Quaternion.identity);
+            if (gameObject.name == "Portal") {
+                Vector3 splashPositionLow = transform.position;
+                Vector3 splashPositionMid = transform.position;
+                Vector3 splashPositionHigh = transform.position;
+                splashPositionLow.y = 1f;
+                splashPositionMid.y = 4f;
+                splashPositionHigh.y = 8f;
+                Instantiate(bloodSplash, splashPositionLow, Quaternion.identity);
+                Instantiate(bloodSplash, splashPositionMid, Quaternion.identity);
+                Instantiate(bloodSplash, splashPositionHigh, Quaternion.identity);
+            } else {
+                Instantiate(bloodSplash, transform.position, Quaternion.identity);
+            }
             try
             {
                 gameManager.AddComboHit();

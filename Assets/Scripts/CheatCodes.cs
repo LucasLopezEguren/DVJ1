@@ -10,7 +10,7 @@ public class CheatCodes : MonoBehaviour
     private int cheatInputCount = 0;
 
     [HideInInspector]
-    public bool femaleNarratorActivate = false;
+    public bool maleNarratorActivate = false;
     public bool cheatEnabled = false;
     void Awake() {
         DontDestroyOnLoad(gameObject);   
@@ -53,8 +53,8 @@ public class CheatCodes : MonoBehaviour
             cheatInputCount++;
             return;
         }
-        if (cheatInputCount == 8 && !femaleNarratorActivate) {
-            femaleNarratorActivate = true;
+        if (cheatInputCount == 8 && !maleNarratorActivate) {
+            maleNarratorActivate = true;
             Debug.Log("Cheat enabled!");
         }
         if ((Input.anyKeyDown || cheatInputCurrentTime >= cheatInputLifeTime) && cheatInputCount > 0 && cheatInputCount < 8) {
@@ -64,7 +64,7 @@ public class CheatCodes : MonoBehaviour
             return;
         }
 
-        if (femaleNarratorActivate && !cheatEnabled) {
+        if (maleNarratorActivate && !cheatEnabled) {
             AudioManager test = FindObjectOfType<AudioManager>();
             test.Play("FSuperNova");
             cheatEnabled = true;

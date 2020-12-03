@@ -6,32 +6,57 @@ public class PortalController : MonoBehaviour
 {
     
     private DamageController damageController;
-    public Animator anim;
+
     public GameObject[] summoneablesEnemies;
+    public GameObject powerUp;
     public GameObject forceFieldBack;
     public GameObject forceFieldFront;
+    public GameObject portalUI;
     public float timeToSpawnEnemy;
     public float currentTime;
-    
+    public float secondsToShowAttackUI = 10;
+    private float timer;
+    private float previousHealth;
+
     void Start()
     {
         damageController = this.GetComponent<DamageController>();
-        anim.Play("PoratlAppeaer");
+        timer = secondsToShowAttackUI;
+        previousHealth = CalculateHealth();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(previousHealth == CalculateHealth())
+        {
+            timer -= Time.deltaTime;
+            if(timer <= 0)
+            {
+                portalUI.SetActive(true);
+            }
+        }
+        else
+        {
+            previousHealth = CalculateHealth();
+            timer = secondsToShowAttackUI;
+            portalUI.SetActive(false);
+        }
         if (CalculateHealth() <= 0) {
-            anim.SetTrigger("DyingTrigger");
             gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
             forceFieldBack.SetActive(false);
             forceFieldFront.SetActive(false);
-            Destroy(gameObject, 5f);
+            Vector3 powerUpPosition = transform.position;
+            powerUpPosition.y = 1.3f;
+            Instantiate(powerUp, powerUpPosition, Quaternion.identity);
+            Destroy(gameObject);
         } else {
             if (timeToSpawnEnemy < currentTime) {
                 GameObject toInitiatie = summoneablesEnemies[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(summoneablesEnemies.Length)))];
                 Vector3 spawnPosition = transform.position;
+                if (!toInitiatie.name.Contains("fly")) {
+                    spawnPosition.y = spawnPosition.y + 3f;
+                }
                 Instantiate(toInitiatie, spawnPosition, Quaternion.identity);
                 currentTime = 0f;
             }

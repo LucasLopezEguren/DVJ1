@@ -25,9 +25,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject weapon;
 
-    public HealthBar healthBar;
-
-    public bool isFacingRight = true;
+    public HealthBar healthBar;       
 
     private int attackPhase = 0;
 
@@ -35,10 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private GameManager gameManager;
 
-    private Collider _collider;
-
-    [HideInInspector]
-    public Vector3 moveDirection;
+    private Collider _collider;    
 
     private List<int> hasBeenHitted;
 
@@ -48,11 +43,22 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove = true;
 
+    public bool isFacingRight = true;
+
+    [HideInInspector]
+    public Vector3 moveDirection;
+
     private bool canJump = true;
 
     float timeToMove = 0.5f;
 
-    float timeStunned = 0;
+    float timeStunned = 0f;
+
+    float timeNoJump = 0f;
+
+    float distToGround;
+
+    public LayerMask Ground;
 
     void Start()
     {
@@ -71,6 +77,18 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log(e.Message);
         }
+        distToGround = _collider.bounds.extents.y;
+    }
+
+    void FixedUpdate()
+    {
+        if(canMove && currentHealth > 0)
+        {
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            Vector3 temp = new Vector3(horizontal, 0, 0);
+            temp = temp.normalized * moveSpeed * Time.deltaTime;
+            rigidbody.MovePosition(transform.position + temp);
+        }
     }
 
     void Update()
@@ -79,9 +97,13 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(25);
         }
-        if(!canMove)
+        if(!canMove && currentHealth > 0)
         {
             timeStunned += Time.deltaTime;
+        }
+        if(!canJump && currentHealth > 0)
+        {
+            timeNoJump += Time.deltaTime;
         }
         if(timeStunned >= timeToMove)
         {
@@ -89,7 +111,11 @@ public class PlayerController : MonoBehaviour
             canFlip = true;
             timeStunned = 0;
         }
-        if(canMove)
+        if(timeNoJump >= timeToMove)
+        {
+            canJump = true;
+        }
+        if(canMove && currentHealth > 0)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             Vector3 temp = new Vector3(horizontal, 0, 0);
@@ -97,9 +123,9 @@ public class PlayerController : MonoBehaviour
             rigidbody.MovePosition(transform.position + temp);
         }
 
-        if (isGrounded() && canMove)
+        if (isGrounded() && canMove )
         {
-            if (canJump && Input.GetButtonDown("Jump"))
+            if (canJump && currentHealth > 0 && Input.GetButtonDown("Jump"))
             {
                 anim.SetBool("jump", true);
                 moveDirection.y = jumpForce;
@@ -252,11 +278,17 @@ public class PlayerController : MonoBehaviour
         && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             invincible = true;
+            canMove = false;
+            canFlip = false;
+            canJump = false;
         }
         if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")) 
         && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
             invincible = false;
+            canMove = true;
+            canFlip = true;
+            canJump = true;
             anim.SetInteger("dmgTaken", 0);
         }
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("reincorp"))
@@ -343,7 +375,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckMovementDirection()
     {
-        if(canFlip)
+        if(canFlip && currentHealth > 0)
         {
             if (isFacingRight && Input.GetAxis("Horizontal") < 0)
             {
@@ -358,7 +390,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded()
     {
-        Vector3 start = transform.position;
+        /*Vector3 start = transform.position;
         float maxDistance = 0.5f;
         start.y = start.y + (Vector3.down * 0.8f).y;
         bool raycastHit = Physics.Raycast(start, Vector3.down, maxDistance);
@@ -368,7 +400,8 @@ public class PlayerController : MonoBehaviour
             color = Color.yellow;
         }
         Debug.DrawLine(start, end, color);
-        return raycastHit;
+        return raycastHit;*/
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f, Ground.value);
     }
 
     private void Flip()

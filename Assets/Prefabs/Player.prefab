@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0738f45728c084ea79fa577aba705d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 13
+  moveSpeed: 8
   jumpForce: 13
   gravityScale: 5
   rigidbody: {fileID: 5878538962860269881}
@@ -164,13 +164,16 @@ MonoBehaviour:
   pivot: {fileID: 0}
   RotateSpeed: 0
   maxHealth: 200
-  currentHealth: 0
+  currentHealth: 200
   weapon: {fileID: 2293900875780129957}
   healthBar: {fileID: 0}
-  isFacingRight: 1
-  moveDirection: {x: 0, y: 0, z: 0}
   canFlip: 1
   canMove: 1
+  isFacingRight: 1
+  moveDirection: {x: 0, y: 0, z: 0}
+  Ground:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!136 &5807258557600647954
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -252,7 +255,7 @@ MonoBehaviour:
     m_Bits: 1024
   damage: 5
   playerController: {fileID: 5807258557600647952}
-  knockbackStrength: 0
+  knockbackStrength: 2
   shootPoint: {fileID: 8652514495920891406}
   bulletPrefab: {fileID: 8048021591317080791, guid: c5b1414da9eb1af4682d06dc28ebc6d3, type: 3}
   playerrb: {fileID: 5807258557600647962}

@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoubleRectangle
+  m_Controller: {fileID: 9100000, guid: 65725eed27ff848c7a73594feaf7c56c, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 90190467dd81d4a0188d3da66e6abeb8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d12a89a577b7749c5ace09cefe3cec32, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 432d963020abc4e88807d764155498e9, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 311ccaed42a2e49f7ac5825c2ac900dd, type: 2}
