@@ -21,7 +21,16 @@ public class ShowStats : MonoBehaviour
         stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
         float minutes = Mathf.Floor(stats.TimeToCompleteLevel / 60);
         float seconds = stats.TimeToCompleteLevel % 60;
-        time.GetComponent<TMPro.TextMeshProUGUI>().text = minutes.ToString() + ":" + Mathf.RoundToInt(seconds).ToString();
+        string secondsToShow;
+        if(seconds < 10)
+        {
+            secondsToShow = "0" + Mathf.RoundToInt(seconds).ToString();
+        }
+        else
+        {
+            secondsToShow = Mathf.RoundToInt(seconds).ToString();
+        }
+        time.GetComponent<TMPro.TextMeshProUGUI>().text = minutes.ToString() + ":" + secondsToShow;
         enemyKilled.GetComponent<TMPro.TextMeshProUGUI>().text = stats.EnemyKilled.ToString();
         maxCombo.GetComponent<TMPro.TextMeshProUGUI>().text = stats.MaxCombo.ToString();
         score.GetComponent<TMPro.TextMeshProUGUI>().text = stats.Score.ToString();
