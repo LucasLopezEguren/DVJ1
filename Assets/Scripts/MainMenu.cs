@@ -19,14 +19,15 @@ public class MainMenu : MonoBehaviour
         PauseMenu.Resume();
     }
 
+    public void ChangeScene(string sceneName)
+    {
+        PauseMenu.Resume();
+        levelLoader.LoadNextLevel(sceneName);
+    }
+
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    public void Feedback()
-    {
-        Application.OpenURL("https://forms.gle/3o1fGK1hvSGvCsNL8");
     }
 
 }
