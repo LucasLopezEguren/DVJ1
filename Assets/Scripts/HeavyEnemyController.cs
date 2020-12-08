@@ -15,13 +15,18 @@ public class HeavyEnemyController : MonoBehaviour
 
     //public float attackRange = 1f;
 
+    [SerializeField]
+    private float timeToDissappearAfterDie = 5f;
+
     private bool isWalking = false;
 
     private bool isChasing = false;
 
     private bool isAttacking = false;
 
-    public bool isFacingRight = false;
+    private float attack = 0;
+
+    private bool isFacingRight = false;
 
     //public Vector3 initialPosition;
 
@@ -40,6 +45,10 @@ public class HeavyEnemyController : MonoBehaviour
     public GameObject bloodSplash;
 
     private Transform targetPlayer;
+
+    private Stats stats;
+
+    private bool killStatsAdded = false;
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +96,27 @@ public class HeavyEnemyController : MonoBehaviour
         //anim.SetBool("isChasing", isChasing && !IsNearEdge());       
         anim.SetBool("isWalking", (isWalking || isChasing) && !IsNearEdge());
         anim.SetBool("isAttacking", isAttacking);
+        if (isAttacking)
+        {
+            attack = Random.Range(0, 10);            
+            anim.SetFloat("attack", attack);
+        }
+        if (CalculateHealth() <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        anim.SetBool("isDying", true);
+        gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
+        if (stats && !killStatsAdded)
+        {
+            stats.EnemyKilled++;
+            killStatsAdded = true;
+        }
+        Destroy(gameObject, timeToDissappearAfterDie);
     }
 
     private float CalculateHealth()

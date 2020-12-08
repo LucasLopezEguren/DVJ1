@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour
     public GameObject bloodSplash;
 
     [SerializeField]
-    private float timeToDissappearAfterDie;
+    private float timeToDissappearAfterDie = 5f;
 
     private bool canHit = false;
 
