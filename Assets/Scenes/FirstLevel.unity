@@ -2501,7 +2501,7 @@ PrefabInstance:
       objectReference: {fileID: 3736424406299464701, guid: c80172dae17dd4ba7999928a125df6fa, type: 3}
     - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
       propertyPath: amountChunks
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
       propertyPath: FinishingChunks.Array.data[1]
