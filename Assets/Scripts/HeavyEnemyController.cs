@@ -5,13 +5,17 @@ public class HeavyEnemyController : MonoBehaviour
 {
     public float movementSpeed = 3.0f;
 
+    public float distanceToStand = 1.3f;
+
     public float chasingSpeed = 5.0f;
 
     public float rangeForChasing = 5f;
 
-    public float maxMovementRange = 5f;
+    //public float maxMovementRange = 5f;
 
-    public float attackRange = 1f;
+    //public float attackRange = 1f;
+
+    private bool isWalking = false;
 
     private bool isChasing = false;
 
@@ -19,17 +23,17 @@ public class HeavyEnemyController : MonoBehaviour
 
     public bool isFacingRight = false;
 
-    public Vector3 initialPosition;
+    //public Vector3 initialPosition;
 
-    public Vector3 minPosition;
+    //public Vector3 minPosition;
 
-    public Vector3 maxPosition;
+    //public Vector3 maxPosition;
 
     public Animator anim;
 
     public CheckEdge checkEdge;
 
-    private Rigidbody rb;
+    private Rigidbody rigidBody;
 
     private DamageController damageController;
 
@@ -40,10 +44,10 @@ public class HeavyEnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        initialPosition = transform.position;
-        minPosition = new Vector3(initialPosition.x - maxMovementRange, initialPosition.y, initialPosition.z);
-        maxPosition = new Vector3(initialPosition.x + maxMovementRange, initialPosition.y, initialPosition.z);
+        rigidBody = GetComponent<Rigidbody>();
+        //initialPosition = transform.position;
+        //minPosition = new Vector3(initialPosition.x - maxMovementRange, initialPosition.y, initialPosition.z);
+        //maxPosition = new Vector3(initialPosition.x + maxMovementRange, initialPosition.y, initialPosition.z);
         damageController = this.GetComponent<DamageController>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         anim.SetBool("isDying", false);
@@ -52,23 +56,25 @@ public class HeavyEnemyController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //UpdateAnimations();
-        Movement();
-        /*if (!IsNearEdge() && IsAlive())
+        UpdateAnimations();
+        CheckMovement();
+        CheckDirection(transform.position.x, targetPlayer.position.x);
+        CheckStartChasing();        
+        if (!IsNearEdge() && IsAlive())
         {
-            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= attackRange && !anim.GetCurrentAnimatorStateInfo(0).IsName("Ataque1"))
+            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distanceToStand && !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack_1"))
             {
-                transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, chasingSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, movementSpeed * Time.deltaTime);
             }
             else
             {
-                if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < attackRange)
+                if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distanceToStand)
                 {
                     isChasing = false;
                     isAttacking = true;
                 }
             }
-        }*/
+        }     
     }
 
     private bool IsNearEdge()
@@ -78,7 +84,9 @@ public class HeavyEnemyController : MonoBehaviour
 
     private void UpdateAnimations()
     {
-        anim.SetBool("isChasing", isChasing && !IsNearEdge());
+        //anim.SetBool("isChasing", isChasing && !IsNearEdge());       
+        anim.SetBool("isWalking", (isWalking || isChasing) && !IsNearEdge());
+        anim.SetBool("isAttacking", isAttacking);
     }
 
     private float CalculateHealth()
@@ -91,45 +99,42 @@ public class HeavyEnemyController : MonoBehaviour
         return CalculateHealth() > 0;
     }
 
-    private void Movement()
+    private void CheckMovement()
+    {
+        if (rigidBody.velocity.x != 0 && isChasing)
+        {
+            isWalking = true;
+        }
+        else
+        {
+            isWalking = false;
+        }
+    }
+
+    private void CheckDirection(float positionX, float targetPositionX)
     {
         if (IsAlive())
         {
-            //CheckStartChasing();
-            if (!isChasing)
+            if (positionX < targetPositionX)
             {
                 if (!isFacingRight)
                 {
-                    if (Vector3.Distance(transform.position, minPosition) > 0f)
-                    {
-                        transform.position = Vector3.MoveTowards(transform.position, minPosition, movementSpeed * Time.deltaTime);
-                    }
-                    else
-                    {
-                        Flip();
-                    }
-
-                }
-                else
-                {
-                    if (Vector3.Distance(transform.position, maxPosition) > 0f)
-                    {
-                        transform.position = Vector3.MoveTowards(transform.position, maxPosition, movementSpeed * Time.deltaTime);
-                    }
-                    else
-                    {
-                        Flip();
-                    }
+                    Flip();
                 }
             }
             else
             {
-                if (!isFacingRight)
+                if (isFacingRight)
                 {
-
+                    Flip();
                 }
             }
         }
+    }
+
+    public bool IsAttacking()
+    {
+        return isAttacking;
     }
 
     private void Flip()

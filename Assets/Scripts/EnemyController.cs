@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
 
     public float movementSpeed = 5.0f;
 
-    public float distance = 1.0f;
+    public float distanceToStand = 1.3f;
 
     public int damageToPlayer = 5;
 
@@ -69,13 +69,13 @@ public class EnemyController : MonoBehaviour
         CheckStartChasing();
         if (!IsNearEdge() && IsAlive())
         {
-            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distance && !anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_1_attack"))
+            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distanceToStand && !anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_1_attack"))
             {
                 transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, movementSpeed * Time.deltaTime);
             }
             else
             {
-                if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distance)
+                if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) < distanceToStand)
                 {
                     isChasing = false;
                     isAttacking = true;

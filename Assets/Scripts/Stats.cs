@@ -64,6 +64,7 @@ public class Stats : MonoBehaviour
 
     public void ResetStats()
     {
+        LevelComplete = false;
         TimeToCompleteLevel = 0;
         EnemyKilled = 0;
         MaxCombo = 0;

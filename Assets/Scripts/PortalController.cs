@@ -8,6 +8,7 @@ public class PortalController : MonoBehaviour
     private DamageController damageController;
 
     public GameObject[] summoneablesEnemies;
+    public GameObject powerUp;
     public GameObject forceFieldBack;
     public GameObject forceFieldFront;
     public GameObject portalUI;
@@ -45,7 +46,10 @@ public class PortalController : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
             forceFieldBack.SetActive(false);
             forceFieldFront.SetActive(false);
-            Destroy(gameObject, 5f);
+            Vector3 powerUpPosition = transform.position;
+            powerUpPosition.y = 1.3f;
+            Instantiate(powerUp, powerUpPosition, Quaternion.identity);
+            Destroy(gameObject);
         } else {
             if (timeToSpawnEnemy < currentTime) {
                 GameObject toInitiatie = summoneablesEnemies[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(summoneablesEnemies.Length)))];

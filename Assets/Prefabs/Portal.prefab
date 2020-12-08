@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731358728783303022}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.686, y: -0.111, z: 0.08}
-  m_LocalScale: {x: 0.33333334, y: 0.14814815, z: 0.2}
+  m_LocalPosition: {x: 0.722, y: -0.111, z: 0.08}
+  m_LocalScale: {x: 0.35306668, y: 0.14814815, z: 0.2177}
   m_Children:
   - {fileID: 2360597177182490667}
   - {fileID: 1233857979171082892}
@@ -128,8 +128,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 2.0000002, z: 1.0000004}
-  m_Center: {x: 0.000000031555828, y: 0.0000076293945, z: -0.00000010430814}
+  m_Size: {x: 0.8990738, y: 2.0000002, z: 1.0000004}
+  m_Center: {x: 0.004805789, y: 0.0000075886373, z: -0.00000009323823}
 --- !u!1 &929787665344557232
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +191,7 @@ RectTransform:
   m_GameObject: {fileID: 966734506431760590}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0061537502, y: 0.01, z: 0.1}
+  m_LocalScale: {x: 0.0061537502, y: 0.01325, z: 0.1}
   m_Children:
   - {fileID: 7766124272797238872}
   - {fileID: 8475917485873952483}
@@ -199,10 +199,10 @@ RectTransform:
   m_Father: {fileID: 6898139580829386739}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 96}
+  m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &101697762702707016
 MonoBehaviour:
@@ -367,7 +367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6898139580829386739
 RectTransform:
   m_ObjectHideFlags: 0
@@ -377,7 +377,7 @@ RectTransform:
   m_GameObject: {fileID: 1551965468168452148}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.62}
-  m_LocalScale: {x: 0.005149141, y: 1.1999999, z: 1.1999999}
+  m_LocalScale: {x: 0.005149141, y: 0.0022147507, z: 17.049267}
   m_Children:
   - {fileID: 1534028426164685993}
   m_Father: {fileID: 6707730958998138995}
@@ -385,7 +385,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.09}
   m_SizeDelta: {x: 361, y: 417}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5059406199575757835
@@ -553,7 +553,7 @@ MonoBehaviour:
   health: 100
   isStunned: 0
   isStillStunned: 0
-  bloodSplash: {fileID: 309094709680483209, guid: 1e75a536c455f44ab85ceb2fedb407d2, type: 3}
+  bloodSplash: {fileID: 309094709680483209, guid: 989060e755c194ad6b4923c509bc0b0e, type: 3}
 --- !u!114 &506028341434042680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,10 +567,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   summoneablesEnemies: []
+  powerUp: {fileID: 0}
   forceFieldBack: {fileID: 0}
   forceFieldFront: {fileID: 0}
+  portalUI: {fileID: 0}
   timeToSpawnEnemy: 0
   currentTime: 0
+  secondsToShowAttackUI: 10
 --- !u!95 &5750624992044104975
 Animator:
   serializedVersion: 3
@@ -601,8 +604,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 2.0000005, z: 1.0000002}
-  m_Center: {x: 0.00000005960465, y: 6.7762636e-21, z: -0.00000008940697}
+  m_Size: {x: 1.3500898, y: 2.1064606, z: 1.0000002}
+  m_Center: {x: -0.027638435, y: -0.0532299, z: -0.00000007947286}
 --- !u!1 &4890329953159405962
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,8 +699,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 2.0000002, z: 1.0000002}
-  m_Center: {x: -0.000000028994684, y: 0, z: -0.00000008940697}
+  m_Size: {x: 1.0945953, y: 2.0000002, z: 1.0000002}
+  m_Center: {x: 0.010680045, y: 0, z: -0.00000007880341}
 --- !u!1 &5524545032791554682
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,8 +830,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 2.0000002, z: 1.0000004}
-  m_Center: {x: 0.000000031555828, y: -0.0000076293945, z: -0.00000010430814}
+  m_Size: {x: 0.74527955, y: 2.0000002, z: 1.0000004}
+  m_Center: {x: 0.004806206, y: -0.0000075886373, z: -0.00000009837734}
 --- !u!1 &6268476611252192438
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,8 +1000,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 2.0000002, z: 1.0000004}
-  m_Center: {x: 0.000000031555828, y: 0, z: -0.00000010430814}
+  m_Size: {x: 0.8197738, y: 2.0000002, z: 1.0000004}
+  m_Center: {x: -0.0012013629, y: 0, z: -0.0000000953087}
 --- !u!1 &6824114200780295603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,7 +1035,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
