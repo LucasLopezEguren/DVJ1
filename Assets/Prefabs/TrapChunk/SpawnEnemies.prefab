@@ -50,3 +50,4 @@ MonoBehaviour:
   secondsBetweenSpawns: 0
   Enemy_1: {fileID: 4874737682469985080, guid: c7886403986f347fbbf5ff82236cf904, type: 3}
   FlyingEnemy: {fileID: 6471279456125529665, guid: 48d287a74e4897444942f5f219b37d82, type: 3}
+  HeavyEnemy: {fileID: 9178985976771006882, guid: 7cc633ecc39464c6fb2b6ab0d2674597, type: 3}

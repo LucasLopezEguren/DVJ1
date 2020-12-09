@@ -8,7 +8,8 @@ public class SpawnEnemiesForTrapFight : MonoBehaviour
     public enum EnemyType
     {
         Enemy_1,
-        FlyingEnemy
+        FlyingEnemy,
+        HeavyEnemy
     }
 
     public EnemyType enemyType;
@@ -31,9 +32,11 @@ public class SpawnEnemiesForTrapFight : MonoBehaviour
 
     private bool hasBeenFirstSpawn = false;
 
-    public GameObject Enemy_1; //hay que ver para borrar
+    public GameObject Enemy_1;
 
-    public GameObject FlyingEnemy;  //hay que ver para borrar
+    public GameObject FlyingEnemy;
+
+    public GameObject HeavyEnemy;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +52,11 @@ public class SpawnEnemiesForTrapFight : MonoBehaviour
                 //enemyObject = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/FlyingEnemy.prefab", typeof(GameObject));
                 //nemyToInstatiate = (GameObject)enemyObject;
                 enemyToInstatiate = FlyingEnemy;
+                break;
+            case EnemyType.HeavyEnemy:
+                //enemyObject = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Enemy_1.prefab", typeof(GameObject));
+                //enemyToInstatiate = (GameObject)enemyObject;
+                enemyToInstatiate = HeavyEnemy;
                 break;
             default:
                 break;
@@ -110,6 +118,9 @@ public class SpawnEnemiesForTrapFight : MonoBehaviour
                     break;
                 case EnemyType.FlyingEnemy:
                     newEnemy.GetComponent<FlyingEnemyController>().isBomb = false;
+                    break;
+                case EnemyType.HeavyEnemy:
+                    newEnemy.GetComponent<HeavyEnemyController>().rangeForChasing = 100;
                     break;
                 default:
                     break;
