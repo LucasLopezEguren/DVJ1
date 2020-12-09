@@ -217,7 +217,7 @@ public class EnemyController : MonoBehaviour
     }
 
     public void StartHit()
-    {
+    {    
         canHit = true;
     }
 

@@ -11,9 +11,7 @@ public class HeavyEnemyController : MonoBehaviour
 
     public float rangeForChasing = 5f;
 
-    //public float maxMovementRange = 5f;
-
-    //public float attackRange = 1f;
+    public int damageToPlayer = 15;
 
     [SerializeField]
     private float timeToDissappearAfterDie = 5f;
@@ -27,12 +25,6 @@ public class HeavyEnemyController : MonoBehaviour
     private float attack = 0;
 
     private bool isFacingRight = false;
-
-    //public Vector3 initialPosition;
-
-    //public Vector3 minPosition;
-
-    //public Vector3 maxPosition;
 
     public Animator anim;
 
@@ -50,13 +42,12 @@ public class HeavyEnemyController : MonoBehaviour
 
     private bool killStatsAdded = false;
 
+    private bool canHit = false;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        //initialPosition = transform.position;
-        //minPosition = new Vector3(initialPosition.x - maxMovementRange, initialPosition.y, initialPosition.z);
-        //maxPosition = new Vector3(initialPosition.x + maxMovementRange, initialPosition.y, initialPosition.z);
         damageController = this.GetComponent<DamageController>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         anim.SetBool("isDying", false);
@@ -71,7 +62,7 @@ public class HeavyEnemyController : MonoBehaviour
         CheckStartChasing();        
         if (!IsNearEdge() && IsAlive())
         {
-            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distanceToStand && !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack_1"))
+            if (isChasing && Vector3.Distance(transform.position, targetPlayer.position) >= distanceToStand && !isPlayingAttackAnimation())
             {
                 transform.position = Vector3.MoveTowards(transform.position, targetPlayer.position, movementSpeed * Time.deltaTime);
             }
@@ -84,6 +75,11 @@ public class HeavyEnemyController : MonoBehaviour
                 }
             }
         }     
+    }
+
+    private bool isPlayingAttackAnimation()
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).IsName("Attack_1") || anim.GetCurrentAnimatorStateInfo(0).IsName("Attack_2");
     }
 
     private bool IsNearEdge()
@@ -147,14 +143,14 @@ public class HeavyEnemyController : MonoBehaviour
         {
             if (positionX < targetPositionX)
             {
-                if (!isFacingRight)
+                if (!isFacingRight && !isPlayingAttackAnimation())
                 {
                     Flip();
                 }
             }
             else
             {
-                if (isFacingRight)
+                if (isFacingRight && !isPlayingAttackAnimation())
                 {
                     Flip();
                 }
@@ -180,5 +176,20 @@ public class HeavyEnemyController : MonoBehaviour
             isAttacking = false;
             isChasing = true;
         }
+    }
+
+    public bool CanHit()
+    {
+        return canHit;
+    }
+
+    public void StartHit()
+    {
+        canHit = true;
+    }
+
+    public void StopHit()
+    {
+        canHit = false;
     }
 }
