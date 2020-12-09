@@ -12,11 +12,11 @@ public class FlyingEnemyController : MonoBehaviour
 
     public float shootingRange = 5f;
 
-    public Vector3 initialPosition;
+    private Vector3 initialPosition;
 
-    public Vector3 minPosition;
+    private Vector3 minPosition;
 
-    public Vector3 maxPosition;
+    private Vector3 maxPosition;
 
     public bool isFacingRight = false;
 

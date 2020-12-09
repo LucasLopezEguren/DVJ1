@@ -33,6 +33,7 @@ public class AttachPlayer : MonoBehaviour{
     }
 
     void OnCollisionEnter(Collision collided) {
+        if (collided.gameObject.tag != "Player") return;
         if (useSensor) return;
         Rigidbody rb = collided.collider.GetComponent<Rigidbody>();
         if (rb != null ){
@@ -41,6 +42,7 @@ public class AttachPlayer : MonoBehaviour{
     }
     
     void OnCollisionExit(Collision collided) {
+        if (collided.gameObject.tag != "Player") return;
         if (useSensor) return;
         Rigidbody rb = collided.collider.GetComponent<Rigidbody>();
         if (rb != null ){
