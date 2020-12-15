@@ -56,7 +56,7 @@ public class FlyingEnemyController : MonoBehaviour
         maxPosition = new Vector3(initialPosition.x + maxMovementRange, initialPosition.y, initialPosition.z);
         damageController = this.GetComponent<DamageController>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        InvokeRepeating(nameof(EnableAttack), 0f, 2f);
+        InvokeRepeating(nameof(EnableAttack), 0f, 3f);
     }
 
     // Update is called once per frame
