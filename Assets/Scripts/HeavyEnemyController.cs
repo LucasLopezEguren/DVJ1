@@ -13,6 +13,8 @@ public class HeavyEnemyController : MonoBehaviour
 
     public int damageToPlayer = 15;
 
+    public int experienceWhenKill = 30;
+
     [SerializeField]
     private float timeToDissappearAfterDie = 5f;
 
@@ -42,6 +44,10 @@ public class HeavyEnemyController : MonoBehaviour
 
     private bool killStatsAdded = false;
 
+    private SkillTree skillTree;
+
+    private bool experienceAdded = false;
+
     private bool canHit = false;
 
     private bool canFlip = true;
@@ -53,6 +59,8 @@ public class HeavyEnemyController : MonoBehaviour
         damageController = this.GetComponent<DamageController>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         anim.SetBool("isDying", false);
+        stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
+        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
     }
 
     // Update is called once per frame
@@ -113,6 +121,11 @@ public class HeavyEnemyController : MonoBehaviour
         {
             stats.EnemyKilled++;
             killStatsAdded = true;
+        }
+        if (skillTree && !experienceAdded)
+        {
+            skillTree.AddExperience(experienceWhenKill);
+            experienceAdded = true;
         }
         Destroy(gameObject, timeToDissappearAfterDie);
     }

@@ -24,13 +24,16 @@ public class GameManager : MonoBehaviour
     private Color transparencyText;
     private bool maleNarratorActivate;
     private Stats stats;
+    private SkillTree skillTree;
     private Combo actualCombo = Combo.normal;
 
     // Start is called before the first frame update
     void Start()
     {
         stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
-        stats.ResetStats();
+        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
+        if(stats) stats.ResetStats();
+        if(skillTree) skillTree.RestExperiencedEarnedInLevel();
         try
         {
             maleNarratorActivate = FindObjectOfType<CheatCodes>().maleNarratorActivate;
