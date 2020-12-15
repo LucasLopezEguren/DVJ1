@@ -17,6 +17,8 @@ public class SkillTree : MonoBehaviour
 
     public static SkillTree instance;
 
+    public Skills skills;
+
     private void Awake()
     {
         if (instance == null)
@@ -34,7 +36,7 @@ public class SkillTree : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        skills = new Skills();
     }
 
     // Update is called once per frame

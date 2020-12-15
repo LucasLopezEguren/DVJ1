@@ -48,3 +48,11 @@ MonoBehaviour:
   totalExperienceEarned: 0
   experienceEarnedInLevel: 0
   experienceToLevel: 70
+  skills:
+    shield: 0
+    rage: 0
+    hittingDash: 0
+    doubleJump: 0
+    superBullets: 0
+    grenade: 0
+    laser: 0
