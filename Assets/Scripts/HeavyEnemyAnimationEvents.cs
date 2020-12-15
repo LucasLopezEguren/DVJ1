@@ -16,4 +16,14 @@ public class HeavyEnemyAnimationEvents : MonoBehaviour
         heavyEnemyController.StopHit();
     }
 
+    public void CanFlip()
+    {
+        heavyEnemyController.CanFlip();
+    }
+
+    public void CantFlip()
+    {
+        heavyEnemyController.CantFlip();
+    }
+
 }

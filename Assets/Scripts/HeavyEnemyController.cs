@@ -44,6 +44,8 @@ public class HeavyEnemyController : MonoBehaviour
 
     private bool canHit = false;
 
+    private bool canFlip = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -143,14 +145,14 @@ public class HeavyEnemyController : MonoBehaviour
         {
             if (positionX < targetPositionX)
             {
-                if (!isFacingRight && !isPlayingAttackAnimation())
+                if (!isFacingRight && canFlip)
                 {
                     Flip();
                 }
             }
             else
             {
-                if (isFacingRight && !isPlayingAttackAnimation())
+                if (isFacingRight && canFlip)
                 {
                     Flip();
                 }
@@ -191,5 +193,15 @@ public class HeavyEnemyController : MonoBehaviour
     public void StopHit()
     {
         canHit = false;
+    }
+
+    public void CanFlip()
+    {
+        canFlip = true;
+    }
+
+    public void CantFlip()
+    {
+        canFlip = false;
     }
 }
