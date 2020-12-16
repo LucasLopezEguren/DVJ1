@@ -17,7 +17,7 @@ public class NPC : MonoBehaviour
 
     private GameObject player;
 
-    private bool SkillTreeUIIsActive = false;
+    private bool skillTreeUIIsActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,13 +28,13 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((player.transform.position.x > x1.transform.position.x && player.transform.position.x < x2.transform.position.x) && !SkillTreeUIIsActive && !pauseMenu.GetComponent<PauseMenu>().GameIsPaused)
+        if ((player.transform.position.x > x1.transform.position.x && player.transform.position.x < x2.transform.position.x) && !skillTreeUIIsActive && !pauseMenu.GetComponent<PauseMenu>().GameIsPaused)
         {
             manageSkillsMessage.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 pauseMenu.SetActive(false);
-                SkillTreeUIIsActive = true;
+                skillTreeUIIsActive = true;
                 manageSkillsMessage.SetActive(false);
                 SkillTreeUI.SetActive(true);
                 Time.timeScale = 0f;
@@ -44,7 +44,7 @@ public class NPC : MonoBehaviour
         {
             manageSkillsMessage.SetActive(false);
         }
-        if (SkillTreeUIIsActive)
+        if (skillTreeUIIsActive)
         {
             if (Input.GetKeyDown(KeyCode.Escape)) BackFromSkilltree();
         }
@@ -53,7 +53,7 @@ public class NPC : MonoBehaviour
     public void BackFromSkilltree()
     {
         Time.timeScale = 1f;
-        SkillTreeUIIsActive = false;
+        skillTreeUIIsActive = false;
         SkillTreeUI.SetActive(false);
         pauseMenu.SetActive(true);
     }
