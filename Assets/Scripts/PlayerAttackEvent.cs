@@ -99,4 +99,19 @@ public class PlayerAttackEvent : MonoBehaviour
         Vector3 temp = new Vector3(-15, 0, 0);
         playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     } 
+
+    public void PlayerDash()
+    {
+        right = playerrb.GetComponent<PlayerController>().isFacingRight;
+        if(right)
+        {
+            Vector3 temp = new Vector3(150, 0, 0);
+            playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        }
+        else
+        {
+            Vector3 temp = new Vector3(-150, 0, 0);
+            playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        }
+    }
 }

@@ -89,6 +89,11 @@ public class PlayerController : MonoBehaviour
             temp = temp.normalized * moveSpeed * Time.deltaTime;
             rigidbody.MovePosition(transform.position + temp);
         }
+
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            Dash();
+        }
     }
 
     void Update()
@@ -182,8 +187,29 @@ public class PlayerController : MonoBehaviour
         CheckJumpAnimation();
         CheckStunAnimation();
         CheckDieAnimation();
+        CheckDashAnimation();
     }
 
+
+    private void Dash()
+    {
+        anim.SetTrigger("dash");
+    }
+
+    private void CheckDashAnimation()
+    {
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        {
+            anim.ResetTrigger("dash");
+        }
+        
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        {
+            rigidbody.velocity = Vector3.zero;
+            canMove = false;
+            canFlip = false;
+        }
+    }
 
     private void CheckAttackAnimation()
     {
