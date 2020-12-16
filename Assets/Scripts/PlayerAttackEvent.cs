@@ -99,4 +99,5 @@ public class PlayerAttackEvent : MonoBehaviour
         Vector3 temp = new Vector3(-15, 0, 0);
         playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     } 
+
 }

@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
 
+    public float normalSpeed;
+
     public float jumpForce;
 
     public float gravityScale;
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
             //Debug.Log(e.Message);
         }
         distToGround = _collider.bounds.extents.y;
+        normalSpeed = moveSpeed;
     }
 
     void FixedUpdate()
@@ -89,6 +92,13 @@ public class PlayerController : MonoBehaviour
             temp = temp.normalized * moveSpeed * Time.deltaTime;
             rigidbody.MovePosition(transform.position + temp);
         }
+
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            Dash();
+        }
+        
+        CheckDashAnimation();
     }
 
     void Update()
@@ -182,8 +192,33 @@ public class PlayerController : MonoBehaviour
         CheckJumpAnimation();
         CheckStunAnimation();
         CheckDieAnimation();
+        //CheckDashAnimation();
     }
 
+
+    private void Dash()
+    {
+        anim.SetTrigger("dash");
+        moveSpeed = moveSpeed * 3;
+    }
+
+    private void CheckDashAnimation()
+    {
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        {
+            anim.ResetTrigger("dash");
+            moveSpeed = normalSpeed;
+            invincible = false;
+        }
+        
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        {
+            rigidbody.velocity = Vector3.zero;
+            canMove = false;
+            canFlip = false;
+            invincible = true;
+        }
+    }
 
     private void CheckAttackAnimation()
     {
@@ -390,17 +425,6 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded()
     {
-        /*Vector3 start = transform.position;
-        float maxDistance = 0.5f;
-        start.y = start.y + (Vector3.down * 0.8f).y;
-        bool raycastHit = Physics.Raycast(start, Vector3.down, maxDistance);
-        Vector3 end = start + (Vector3.down * maxDistance);
-        Color color = Color.magenta;
-        if (!raycastHit){
-            color = Color.yellow;
-        }
-        Debug.DrawLine(start, end, color);
-        return raycastHit;*/
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f, Ground.value);
     }
 
@@ -425,4 +449,11 @@ public class PlayerController : MonoBehaviour
         hasBeenHitted.Add(hitted);
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if(moveSpeed > normalSpeed)
+        {
+            moveSpeed = normalSpeed;
+        }
+    }
 }

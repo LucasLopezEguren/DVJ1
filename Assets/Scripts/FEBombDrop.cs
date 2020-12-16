@@ -25,11 +25,11 @@ public class FEBombDrop : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if(transform.position.x < targetPlayer.position.x)
         {
-            rb.velocity = new Vector3(bombSpeed, 0, 0);
+            rb.velocity = new Vector3(bombSpeed, bombSpeed, 0);
         }
         else
         {
-            rb.velocity = new Vector3(-bombSpeed, 0, 0);
+            rb.velocity = new Vector3(-bombSpeed, bombSpeed, 0);
         }
         
     }
