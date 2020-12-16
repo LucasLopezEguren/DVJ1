@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
 
+    public float normalSpeed;
+
     public float jumpForce;
 
     public float gravityScale;
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
             //Debug.Log(e.Message);
         }
         distToGround = _collider.bounds.extents.y;
+        normalSpeed = moveSpeed;
     }
 
     void FixedUpdate()
@@ -94,6 +97,8 @@ public class PlayerController : MonoBehaviour
         {
             Dash();
         }
+        
+        CheckDashAnimation();
     }
 
     void Update()
@@ -187,13 +192,14 @@ public class PlayerController : MonoBehaviour
         CheckJumpAnimation();
         CheckStunAnimation();
         CheckDieAnimation();
-        CheckDashAnimation();
+        //CheckDashAnimation();
     }
 
 
     private void Dash()
     {
         anim.SetTrigger("dash");
+        moveSpeed = moveSpeed * 3;
     }
 
     private void CheckDashAnimation()
@@ -201,6 +207,7 @@ public class PlayerController : MonoBehaviour
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
             anim.ResetTrigger("dash");
+            moveSpeed = normalSpeed;
         }
         
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
