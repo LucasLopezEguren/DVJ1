@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove = true;
 
+    public bool canDash = true;
+
     public bool isFacingRight = true;
 
     [HideInInspector]
@@ -198,8 +200,12 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        anim.SetTrigger("dash");
-        moveSpeed = moveSpeed * 3;
+        if(canDash && Mathf.Abs(Input.GetAxis("Horizontal")) > 0)
+        {
+            anim.SetTrigger("dash");
+            moveSpeed = moveSpeed * 3;
+            canDash = false;
+        }
     }
 
     private void CheckDashAnimation()
@@ -209,6 +215,7 @@ public class PlayerController : MonoBehaviour
             anim.ResetTrigger("dash");
             moveSpeed = normalSpeed;
             invincible = false;
+            canDash = true;
         }
         
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
@@ -216,6 +223,7 @@ public class PlayerController : MonoBehaviour
             rigidbody.velocity = Vector3.zero;
             canMove = false;
             canFlip = false;
+            canDash = false;
             invincible = true;
         }
     }
