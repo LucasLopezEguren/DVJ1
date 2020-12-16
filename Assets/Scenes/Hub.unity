@@ -1694,6 +1694,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8606469760584636257, guid: 540e90818121e4bd59ddeb0fdc63d6be, type: 3}
+      propertyPath: CanvasUI
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8606469760584636260, guid: 540e90818121e4bd59ddeb0fdc63d6be, type: 3}
       propertyPath: m_Name
       value: PauseMenu
@@ -4896,6 +4900,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &1508967736 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8606469760584636260, guid: 540e90818121e4bd59ddeb0fdc63d6be, type: 3}
+  m_PrefabInstance: {fileID: 565725850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1577883775
 GameObject:
   m_ObjectHideFlags: 0
@@ -4947,6 +4956,7 @@ MonoBehaviour:
   x1: {fileID: 822161861}
   x2: {fileID: 1727490807}
   SkillTreeUI: {fileID: 5893762473433774533}
+  pauseMenu: {fileID: 1508967736}
 --- !u!1001 &1627860501
 PrefabInstance:
   m_ObjectHideFlags: 0

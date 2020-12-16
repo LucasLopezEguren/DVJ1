@@ -65,36 +65,65 @@ public class SkillTreeUI : MonoBehaviour
 
     public void GetShieldSkill()
     {
-        skillTree.skills.shield = true;
+        if (skillTree.skillsPointToSpend > 0)
+        {
+            skillTree.skills.shield = true;
+            skillTree.skillsPointToSpend--;
+        }
     }
 
     public void GetRageSkill()
     {
-        skillTree.skills.rage = true;
+        if (skillTree.skillsPointToSpend > 0)
+        {
+            skillTree.skills.rage = true;
+            skillTree.skillsPointToSpend--;
+
+        }
     }
 
     public void GetHittingDashSkill()
     {
-        skillTree.skills.hittingDash = true;
+        if (skillTree.skillsPointToSpend > 0)
+        {
+            skillTree.skills.hittingDash = true;
+            skillTree.skillsPointToSpend--;
+        }
     }
 
     public void GetDoubleJumpSkill()
     {
-        skillTree.skills.doubleJump = true;
+        if (skillTree.skillsPointToSpend > 0)
+        {
+            skillTree.skills.doubleJump = true;
+            skillTree.skillsPointToSpend--;
+        }
     }
 
     public void GetSuperBulletsSkill()
     {
-        skillTree.skills.superBullets = true;
+        if (skillTree.skillsPointToSpend > 0)
+        {
+            skillTree.skills.superBullets = true;
+            skillTree.skillsPointToSpend--;
+        }
     }
 
     public void GetGrenadeSkill()
     {
-        skillTree.skills.grenade = true;
+        if (skillTree.skillsPointToSpend > 0)
+        {
+            skillTree.skills.grenade = true;
+            skillTree.skillsPointToSpend--;
+        }
     }
 
     public void GetLaserSkill()
     {
-        skillTree.skills.laser = true;
+        if (skillTree.skillsPointToSpend > 0)
+        {
+            skillTree.skills.laser = true;
+            skillTree.skillsPointToSpend--;
+        }
     }
 }

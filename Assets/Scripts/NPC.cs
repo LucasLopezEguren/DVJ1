@@ -13,6 +13,8 @@ public class NPC : MonoBehaviour
 
     public GameObject SkillTreeUI;
 
+    public GameObject pauseMenu;
+
     private GameObject player;
 
     private bool SkillTreeUIIsActive = false;
@@ -26,11 +28,12 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((player.transform.position.x > x1.transform.position.x && player.transform.position.x < x2.transform.position.x) && !SkillTreeUIIsActive)
+        if ((player.transform.position.x > x1.transform.position.x && player.transform.position.x < x2.transform.position.x) && !SkillTreeUIIsActive && !pauseMenu.GetComponent<PauseMenu>().GameIsPaused)
         {
             manageSkillsMessage.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                pauseMenu.SetActive(false);
                 SkillTreeUIIsActive = true;
                 manageSkillsMessage.SetActive(false);
                 SkillTreeUI.SetActive(true);
@@ -41,6 +44,10 @@ public class NPC : MonoBehaviour
         {
             manageSkillsMessage.SetActive(false);
         }
+        if (SkillTreeUIIsActive)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape)) BackFromSkilltree();
+        }
     }
 
     public void BackFromSkilltree()
@@ -48,6 +55,7 @@ public class NPC : MonoBehaviour
         Time.timeScale = 1f;
         SkillTreeUIIsActive = false;
         SkillTreeUI.SetActive(false);
+        pauseMenu.SetActive(true);
     }
 
 }
