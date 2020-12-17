@@ -84,11 +84,8 @@ public class PlayerController : MonoBehaviour
             //Debug.Log(e.Message);
         }
         distToGround = _collider.bounds.extents.y;
-
-        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
-
         normalSpeed = moveSpeed;
-
+        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");      
     }
 
     void FixedUpdate()
