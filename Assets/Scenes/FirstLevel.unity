@@ -2486,7 +2486,7 @@ PrefabInstance:
     - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
       propertyPath: levelChunks.Array.data[1]
       value: 
-      objectReference: {fileID: 3736424406299464701, guid: c80172dae17dd4ba7999928a125df6fa, type: 3}
+      objectReference: {fileID: 3736424406299464701, guid: 826bbdae696ed434fbb694515a651dbe, type: 3}
     - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
       propertyPath: canvas
       value: 
@@ -2522,11 +2522,11 @@ PrefabInstance:
     - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
       propertyPath: levelChunks.Array.data[2]
       value: 
-      objectReference: {fileID: 2963161505059435243, guid: c70af1eadbdec4a2181bc53141b07707, type: 3}
+      objectReference: {fileID: 3736424406299464701, guid: c80172dae17dd4ba7999928a125df6fa, type: 3}
     - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
       propertyPath: levelChunks.Array.data[3]
       value: 
-      objectReference: {fileID: 3736424406299464701, guid: 826bbdae696ed434fbb694515a651dbe, type: 3}
+      objectReference: {fileID: 2963161505059435243, guid: c70af1eadbdec4a2181bc53141b07707, type: 3}
     - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
       propertyPath: levelChunks.Array.data[4]
       value: 

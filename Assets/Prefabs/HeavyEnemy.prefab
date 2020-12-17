@@ -335,6 +335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarUI: {fileID: 9178985978348533626}
+  hasDrop: 1
+  drop: {fileID: 100004, guid: 6e04378273eb34904969fae65b67c8c2, type: 3}
   slider: {fileID: 9178985977052812345}
   maxHealth: 50
   health: 50

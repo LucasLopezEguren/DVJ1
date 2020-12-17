@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class DamageController : MonoBehaviour
 {
     public GameObject healthBarUI;
-
+    public bool hasDrop;
+    public GameObject drop;
     public Slider slider;
 
     public int maxHealth;
@@ -84,6 +85,12 @@ public class DamageController : MonoBehaviour
             if (health <= 0)
             {
                 healthBarUI.SetActive(false);
+                if (hasDrop && drop != null){
+                    Vector3 powerUpPosition = transform.position;
+                    powerUpPosition.y = transform.position.y + 0.5f;
+                    powerUpPosition.z = transform.position.z + 0f;
+                    Instantiate(drop, powerUpPosition, transform.rotation);
+                }
             }
         }
     }

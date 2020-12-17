@@ -5,6 +5,10 @@ public class HeavyEnemyController : MonoBehaviour
 {
     public float movementSpeed = 3.0f;
 
+    public bool summonedUnit = false;
+    public SpawnController summoner;
+    public int summonValor = 2;
+
     public float distanceToStand = 1.3f;
 
     public float chasingSpeed = 5.0f;
@@ -61,11 +65,19 @@ public class HeavyEnemyController : MonoBehaviour
         anim.SetBool("isDying", false);
         stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
         skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
+        if (summonedUnit && summoner != null) {
+            summoner.enemiesAlive += summonValor;    
+        }
     }
 
+    private bool isDead = false;
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!IsAlive() && summonedUnit && !isDead) {
+            summoner.enemiesAlive -= summonValor; 
+            isDead = true;
+        }
         UpdateAnimations();
         CheckMovement();
         CheckDirection(transform.position.x, targetPlayer.position.x);

@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class FlyingEnemyController : MonoBehaviour
 {
     public float movementSpeed = 3.0f;
+    public bool summonedUnit = false;
+    public SpawnController summoner;
+    public int summonValor = 1;
 
     public float maxMovementRange = 5f;
 
@@ -64,11 +67,19 @@ public class FlyingEnemyController : MonoBehaviour
         damageController = this.GetComponent<DamageController>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         InvokeRepeating(nameof(EnableAttack), 0f, 3f);
+        if (summonedUnit && summoner != null) {
+            summoner.enemiesAlive += summonValor;    
+        }
     }
 
+    private bool isDead = false;
     // Update is called once per frame
     void Update()
     {
+        if (!IsAlive() && summonedUnit && !isDead) {
+            summoner.enemiesAlive -= summonValor; 
+            isDead = true;
+        }
         Movement();
         CheckShootingRange();
         if (!IsAlive())
