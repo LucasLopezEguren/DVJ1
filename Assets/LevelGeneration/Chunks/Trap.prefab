@@ -1409,7 +1409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesAlive: 0
-  maxEnemies: 5
+  maxEnemies: 2
 --- !u!1 &4613900588211497602
 GameObject:
   m_ObjectHideFlags: 0

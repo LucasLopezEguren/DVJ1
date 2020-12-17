@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        string actualSceneName = SceneManager.GetActiveScene().name;
         stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
         stats.ResetStats();
         try
@@ -41,7 +43,7 @@ public class GameManager : MonoBehaviour
         }
         int amountChunksTypes = levelChunks.Length;
         float nextPosition = 0f;
-        for (int i = 0; i <= amountChunks; i++)
+        for (int i = 0; i <= amountChunks && actualSceneName.Contains("Level") ; i++)
         {
             GameObject toInitiatie = levelChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(amountChunksTypes)))];
             if (i == 0)
@@ -55,8 +57,10 @@ public class GameManager : MonoBehaviour
             Instantiate(toInitiatie, new Vector3(nextPosition, 0, 0), Quaternion.identity);
             nextPosition = nextPosition + (toInitiatie.GetComponent<BoxCollider>().size.x) / 2;
         }
-        GameObject finishingChunk = FinishingChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(FinishingChunks.Length)))];
-        Instantiate(finishingChunk, new Vector3(nextPosition + ((finishingChunk.GetComponent<BoxCollider>().size.x) / 2), 0, 0), Quaternion.identity);
+        if (actualSceneName.Contains("Level")){
+            GameObject finishingChunk = FinishingChunks[Mathf.FloorToInt(UnityEngine.Random.Range(0f, Mathf.Round(FinishingChunks.Length)))];
+            Instantiate(finishingChunk, new Vector3(nextPosition + ((finishingChunk.GetComponent<BoxCollider>().size.x) / 2), 0, 0), Quaternion.identity);
+        }
         comboNumber.text = "";
         comboText.text = "";
         transparencyNumber = comboNumber.color;
