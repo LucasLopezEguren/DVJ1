@@ -32,7 +32,8 @@ public class PlayerAttackEvent : MonoBehaviour
             {
                 if (!playerController.HasBeenHitted().Contains(enemyHitted.GetInstanceID()))
                 {
-                    enemyHitted.GetComponent<DamageController>().TakeDamage(damage);
+                    if (!playerController.skillTree.skills.rageActive) enemyHitted.GetComponent<DamageController>().TakeDamage(damage);
+                    else enemyHitted.GetComponent<DamageController>().TakeDamage(damage * playerController.skillTree.skills.rageMultiplier);
                     playerController.AddHitted(enemyHitted.GetInstanceID());
                 }
             }
@@ -59,7 +60,8 @@ public class PlayerAttackEvent : MonoBehaviour
             {
                 if (!playerController.HasBeenHitted().Contains(enemyHitted.GetInstanceID()))
                 {
-                    enemyHitted.GetComponent<DamageController>().TakeDamage(damage);
+                    if (!playerController.skillTree.skills.rageActive) enemyHitted.GetComponent<DamageController>().TakeDamage(damage);
+                    else enemyHitted.GetComponent<DamageController>().TakeDamage(damage * playerController.skillTree.skills.rageMultiplier);
                     playerController.AddHitted(enemyHitted.GetInstanceID());
                     KnockBack(enemyHitted);
                 }
@@ -73,10 +75,10 @@ public class PlayerAttackEvent : MonoBehaviour
         playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     }
 
-    void KnockBack (Collider collider)
+    void KnockBack(Collider collider)
     {
         Rigidbody rb = collider.GetComponent<Rigidbody>();
-        if(rb != null)
+        if (rb != null)
         {
             Vector3 direction = collider.transform.position - attackPoint.position;
             direction.y = 0;
@@ -85,11 +87,11 @@ public class PlayerAttackEvent : MonoBehaviour
         }
     }
 
-    public void PlayerShoot ()
+    public void PlayerShoot()
     {
         right = playerrb.GetComponent<PlayerController>().isFacingRight;
-        if(right)
-        {    
+        if (right)
+        {
             Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
         }
         else
@@ -98,6 +100,6 @@ public class PlayerAttackEvent : MonoBehaviour
         }
         Vector3 temp = new Vector3(-15, 0, 0);
         playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
-    } 
+    }
 
 }

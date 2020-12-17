@@ -64,7 +64,10 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask Ground;
 
-    private SkillTree skillTree;
+    [HideInInspector]
+    public SkillTree skillTree;
+
+    private SkillsUI skillsUI;
 
     void Start()
     {
@@ -85,7 +88,8 @@ public class PlayerController : MonoBehaviour
         }
         distToGround = _collider.bounds.extents.y;
         normalSpeed = moveSpeed;
-        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");      
+        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
+        skillsUI = (SkillsUI)GameObject.Find("SkillsUI").GetComponent("SkillsUI");
     }
 
     void FixedUpdate()
@@ -463,34 +467,49 @@ public class PlayerController : MonoBehaviour
         hasBeenHitted.Add(hitted);
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (moveSpeed > normalSpeed)
+        {
+            moveSpeed = normalSpeed;
+        }
+    }
+
     private void CheckSkills()
     {
         if (skillTree.skills.shield)
         {
-            float timerShield = 0;
-            if (Input.GetKeyDown(KeyCode.Q) && !skillTree.skills.shieldActive)
+            if (skillsUI.selectedSkill.name == "Shield" && Input.GetKeyDown(KeyCode.LeftAlt) && !skillTree.skills.shieldActive)
             {
                 skillTree.skills.shieldActive = true;
-                timerShield = skillTree.skills.timeOfShield;
+                skillTree.skills.timerShield = skillTree.skills.timeOfShield;
                 invincible = true;
             }
             if (skillTree.skills.shieldActive)
             {
-                timerShield -= Time.deltaTime;
-                if (timerShield >= 0)
+                skillTree.skills.timerShield -= Time.deltaTime;
+                if (skillTree.skills.timerShield <= 0)
                 {
                     skillTree.skills.shieldActive = false;
                     invincible = false;
                 }
             }
         }
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (moveSpeed > normalSpeed)
+        if (skillTree.skills.rage)
         {
-            moveSpeed = normalSpeed;
+            if (skillsUI.selectedSkill.name == "Rage" && Input.GetKeyDown(KeyCode.LeftAlt) && !skillTree.skills.rageActive)
+            {
+                skillTree.skills.rageActive = true;
+                skillTree.skills.timerRage = skillTree.skills.timeOfRage;
+            }
+            if (skillTree.skills.rageActive)
+            {
+                skillTree.skills.timerRage -= Time.deltaTime;
+                if (skillTree.skills.timerRage <= 0)
+                {
+                    skillTree.skills.rageActive = false;
+                }
+            }
         }
     }
 }
