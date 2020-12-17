@@ -1337,6 +1337,20 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &8316362577438474513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7169640700863658316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1756618609e094b60ad2ebd17dfa7908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesAlive: 0
+  maxEnemies: 5
 --- !u!1 &7440270001755590500
 GameObject:
   m_ObjectHideFlags: 0
@@ -2085,14 +2099,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ff2d4e7b0cde469a9054265557605c2, type: 3}
---- !u!4 &2180261593764444075 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2ff2d4e7b0cde469a9054265557605c2, type: 3}
-  m_PrefabInstance: {fileID: 1858686075438682176}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1516034062982180113 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2ff2d4e7b0cde469a9054265557605c2, type: 3}
+  m_PrefabInstance: {fileID: 1858686075438682176}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2180261593764444075 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2ff2d4e7b0cde469a9054265557605c2, type: 3}
   m_PrefabInstance: {fileID: 1858686075438682176}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1997526994847081367
@@ -2436,10 +2450,10 @@ PrefabInstance:
     - target: {fileID: 506028341434042680, guid: 39214f02efd354e37a9824f3ae128cb2, type: 3}
       propertyPath: summoneablesEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 4874737682469985080, guid: c7886403986f347fbbf5ff82236cf904, type: 3}
+      objectReference: {fileID: 4874737682469985080, guid: 767d72e2a316746abbc5be79b0952bad, type: 3}
     - target: {fileID: 506028341434042680, guid: 39214f02efd354e37a9824f3ae128cb2, type: 3}
       propertyPath: timeToSpawnEnemy
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 506028341434042680, guid: 39214f02efd354e37a9824f3ae128cb2, type: 3}
       propertyPath: portalUI
@@ -2449,6 +2463,10 @@ PrefabInstance:
       propertyPath: powerUp
       value: 
       objectReference: {fileID: 100004, guid: 6e04378273eb34904969fae65b67c8c2, type: 3}
+    - target: {fileID: 506028341434042680, guid: 39214f02efd354e37a9824f3ae128cb2, type: 3}
+      propertyPath: spawnController
+      value: 
+      objectReference: {fileID: 8316362577438474513}
     - target: {fileID: 731358728783303022, guid: 39214f02efd354e37a9824f3ae128cb2, type: 3}
       propertyPath: m_Layer
       value: 8

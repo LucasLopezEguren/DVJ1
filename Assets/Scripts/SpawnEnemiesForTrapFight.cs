@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SpawnEnemiesForTrapFight : MonoBehaviour
 {
+    public SpawnController spawnController;
     public enum EnemyType
     {
         Enemy_1,
@@ -47,16 +48,21 @@ public class SpawnEnemiesForTrapFight : MonoBehaviour
                 //enemyObject = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Enemy_1.prefab", typeof(GameObject));
                 //enemyToInstatiate = (GameObject)enemyObject;
                 enemyToInstatiate = Enemy_1;
+                enemyToInstatiate.GetComponent<SummonedController>().summoner = spawnController;
                 break;
             case EnemyType.FlyingEnemy:
                 //enemyObject = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/FlyingEnemy.prefab", typeof(GameObject));
                 //nemyToInstatiate = (GameObject)enemyObject;
                 enemyToInstatiate = FlyingEnemy;
+                enemyToInstatiate.GetComponent<FlyingEnemyController>().summonedUnit = true;
+                enemyToInstatiate.GetComponent<FlyingEnemyController>().summoner = spawnController;
                 break;
             case EnemyType.HeavyEnemy:
                 //enemyObject = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Enemy_1.prefab", typeof(GameObject));
                 //enemyToInstatiate = (GameObject)enemyObject;
                 enemyToInstatiate = HeavyEnemy;
+                enemyToInstatiate.GetComponent<HeavyEnemyController>().summonedUnit = true;
+                enemyToInstatiate.GetComponent<HeavyEnemyController>().summoner = spawnController;
                 break;
             default:
                 break;

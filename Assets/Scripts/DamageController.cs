@@ -87,7 +87,8 @@ public class DamageController : MonoBehaviour
                 healthBarUI.SetActive(false);
                 if (hasDrop && drop != null){
                     Vector3 powerUpPosition = transform.position;
-                    powerUpPosition.y = transform.position.y + 1f;
+                    powerUpPosition.y = transform.position.y + 0.5f;
+                    powerUpPosition.z = transform.position.z + 0f;
                     Instantiate(drop, powerUpPosition, transform.rotation);
                 }
             }
