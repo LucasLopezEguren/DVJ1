@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class ShowStats : MonoBehaviour
 {
-    private Stats stats;
-
-    private SkillTree skillTree;
-
     public GameObject time;
 
     public GameObject enemyKilled;
@@ -22,6 +18,10 @@ public class ShowStats : MonoBehaviour
     public GameObject level;
 
     public GameObject skillPointsToSpend;
+
+    private Stats stats;
+
+    private SkillTree skillTree;
 
     // Start is called before the first frame update
     void Start()

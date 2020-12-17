@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     private List<int> hasBeenHitted;
 
-    private bool invincible = false;
+    public bool invincible = false;
 
     public bool canFlip = true;
 
@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask Ground;
 
+    private SkillTree skillTree;
+
     void Start()
     {
         hasBeenHitted = new List<int>();
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
             //Debug.Log(e.Message);
         }
         distToGround = _collider.bounds.extents.y;
+        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
     }
 
     void FixedUpdate()
@@ -188,8 +191,8 @@ public class PlayerController : MonoBehaviour
         CheckStunAnimation();
         CheckDieAnimation();
         CheckDashAnimation();
+        CheckSkills();
     }
-
 
     private void Dash()
     {
@@ -449,6 +452,29 @@ public class PlayerController : MonoBehaviour
     public void AddHitted(int hitted)
     {        
         hasBeenHitted.Add(hitted);
+    }
+
+    private void CheckSkills()
+    {
+        if (skillTree.skills.shield)
+        {
+            float timerShield = 0;
+            if (Input.GetKeyDown(KeyCode.Q) && !skillTree.skills.shieldActive)
+            {
+                skillTree.skills.shieldActive = true;
+                timerShield = skillTree.skills.timeOfShield;
+                invincible = true;
+            }
+            if (skillTree.skills.shieldActive)
+            {
+                timerShield -= Time.deltaTime;
+                if(timerShield >= 0)
+                {
+                    skillTree.skills.shieldActive = false;
+                    invincible = false;
+                }
+            }            
+        }
     }
 
 }

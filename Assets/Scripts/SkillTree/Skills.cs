@@ -7,15 +7,20 @@ public class Skills
 {
 
     public bool shield = false;
+
     public bool rage = false;
+
     public bool hittingDash = false;
+
     public bool doubleJump = false;
+
     public bool superBullets = false;
+
     public bool grenade = false;
+
     public bool laser = false;
 
-    public Skills()
-    {
-
-    }
+    [Header("Shield")]
+    public float timeOfShield = 10f;
+    public bool shieldActive = false;
 }
