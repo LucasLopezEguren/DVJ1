@@ -17,6 +17,7 @@ public class PlayerAttackEvent : MonoBehaviour
     public float knockbackStrength;
 
     public Transform shootPoint;
+
     public GameObject bulletPrefab;
 
     public GameObject playerrb;

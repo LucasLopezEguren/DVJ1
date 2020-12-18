@@ -38,6 +38,9 @@ public class Skills
     [HideInInspector]
     public float timerRage = 0;
 
+    [Header("Super bullets")]
+    public int superBulletsMultiplier = 2;
+
     public int SkilsActivated()
     {
         int toReturn = 0;
