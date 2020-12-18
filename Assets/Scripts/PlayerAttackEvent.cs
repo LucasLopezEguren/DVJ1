@@ -148,4 +148,14 @@ public class PlayerAttackEvent : MonoBehaviour
         }
     }
 
+    public void StartDashing()
+    {
+        playerController.isDashing = true;
+    }
+
+    public void StopDashing()
+    {
+        playerController.isDashing = false;
+    }
+
 }
