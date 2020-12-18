@@ -2566,7 +2566,7 @@ PrefabInstance:
       objectReference: {fileID: 3736424406299464701, guid: 98f21d372957548e2b33f5ff90f8df7b, type: 3}
     - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
       propertyPath: amountChunks
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5840408110335660071, guid: 3e03d7b218f374c9f9ab9b18ac66f411, type: 3}
       propertyPath: FinishingChunks.Array.data[1]
@@ -3433,6 +3433,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6074223542619233000, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
       propertyPath: skills.laser
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074223542619233000, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
+      propertyPath: skills.hittingDash
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074223542619233000, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
+      propertyPath: skills.doubleJump
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074223542619233000, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
+      propertyPath: skills.superBullets
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6074223542619233001, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
