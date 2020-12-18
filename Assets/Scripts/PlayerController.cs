@@ -72,7 +72,9 @@ public class PlayerController : MonoBehaviour
     public PlayerAttackEvent playerAttackEvent;
 
     [HideInInspector]
-    public bool isDashing = false;      
+    public bool isDashing = false;
+
+    private int jumps = 2;
 
     void Start()
     {
@@ -154,11 +156,19 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetBool("jump", true);
                 moveDirection.y = jumpForce;
+                jumps--;
             }
             anim.SetBool("touchFloor", true);
+            jumps = 2;
         }
         else
         {
+            if(skillTree.skills.doubleJump && jumps > 1 && currentHealth > 0 && Input.GetButtonDown("Jump"))
+            {
+                anim.SetBool("jump", true);
+                moveDirection.y = jumpForce;
+                jumps--;
+            }
             anim.SetBool("touchFloor", false);
             anim.SetBool("jump", false);
         }
@@ -544,6 +554,15 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        //if (skillTree.skills.doubleJump)
+        //{
+        //    if(doubleJump == 1 && Input.GetButtonDown("Jump"))
+        //    {
+        //        doubleJump--;
+        //        anim.SetBool("jump", true);
+        //        moveDirection.y = jumpForce;
+        //    }
+        //}
     }  
 
 }
