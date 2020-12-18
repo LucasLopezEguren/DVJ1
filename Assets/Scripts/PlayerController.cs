@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour
 
     private SkillsUI skillsUI;
 
+    public PlayerAttackEvent playerAttackEvent;
+
     void Start()
     {
         hasBeenHitted = new List<int>();
@@ -90,6 +92,7 @@ public class PlayerController : MonoBehaviour
         normalSpeed = moveSpeed;
         skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
         skillsUI = (SkillsUI)GameObject.Find("SkillsUI").GetComponent("SkillsUI");
+        playerAttackEvent.typeOfShoot = PlayerAttackEvent.TypeOfShoot.normal;
     }
 
     void FixedUpdate()
@@ -176,6 +179,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
             {
+                playerAttackEvent.typeOfShoot = PlayerAttackEvent.TypeOfShoot.normal;
                 ComboShoot();
                 anim.SetInteger("shooting", shootPhase);
             }
@@ -399,6 +403,7 @@ public class PlayerController : MonoBehaviour
             shootPhase = 1;
         }
     }
+
     public void TakeDamage(int damage)
     {
         if (!invincible)
@@ -508,6 +513,18 @@ public class PlayerController : MonoBehaviour
                 if (skillTree.skills.timerRage <= 0)
                 {
                     skillTree.skills.rageActive = false;
+                }
+            }
+        }
+        if (skillTree.skills.grenade)
+        {
+            if (skillsUI.selectedSkill.name == "Grenade" && Input.GetKeyDown(KeyCode.LeftAlt))
+            {
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
+                {
+                    playerAttackEvent.typeOfShoot = PlayerAttackEvent.TypeOfShoot.grenade;
+                    ComboShoot();
+                    anim.SetInteger("shooting", shootPhase);
                 }
             }
         }

@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerAttackEvent : MonoBehaviour
 {
+    public enum TypeOfShoot
+    {
+        normal,
+        grenade,
+        laser
+    }
+
     public Transform attackPoint;
 
     public float attackRange;
@@ -20,9 +27,14 @@ public class PlayerAttackEvent : MonoBehaviour
 
     public GameObject bulletPrefab;
 
-    public GameObject playerrb;
+    public GameObject grenadePrefab;
 
-    bool right = true;
+    public GameObject player;
+
+    [HideInInspector]
+    public TypeOfShoot typeOfShoot;
+
+    private bool right = true;
 
     public void PlayerAttack()
     {
@@ -44,7 +56,7 @@ public class PlayerAttackEvent : MonoBehaviour
             }
         }
         Vector3 temp = new Vector3(25, 0, 0);
-        playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     }
 
     public void ResetHitted()
@@ -73,7 +85,7 @@ public class PlayerAttackEvent : MonoBehaviour
             }
         }
         Vector3 temp = new Vector3(30, 0, 0);
-        playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     }
 
     void KnockBack(Collider collider)
@@ -90,17 +102,34 @@ public class PlayerAttackEvent : MonoBehaviour
 
     public void PlayerShoot()
     {
-        right = playerrb.GetComponent<PlayerController>().isFacingRight;
-        if (right)
+        if (typeOfShoot == TypeOfShoot.normal)
         {
-            Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
+            right = player.GetComponent<PlayerController>().isFacingRight;
+            if (right)
+            {
+                Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+            }
+            Vector3 temp = new Vector3(-15, 0, 0);
+            player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
         }
-        else
+        if(typeOfShoot == TypeOfShoot.grenade)
         {
-            Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+            right = player.GetComponent<PlayerController>().isFacingRight;
+            if (right)
+            {
+                Instantiate(grenadePrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                Instantiate(grenadePrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+            }
+            Vector3 temp = new Vector3(-15, 0, 0);
+            player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
         }
-        Vector3 temp = new Vector3(-15, 0, 0);
-        playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     }
 
 }
