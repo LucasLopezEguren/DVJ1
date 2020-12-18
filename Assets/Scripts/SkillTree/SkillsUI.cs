@@ -10,6 +10,8 @@ public class SkillsUI : MonoBehaviour
 
     public GameObject grenade;
 
+    public GameObject laser;
+
     [HideInInspector]
     public GameObject selectedSkill;
 
@@ -40,6 +42,11 @@ public class SkillsUI : MonoBehaviour
             if (skillTree.skills.grenade)
             {
                 skillsActivated[index] = grenade;
+                index++;
+            }
+            if (skillTree.skills.laser)
+            {
+                skillsActivated[index] = laser;
                 index++;
             }
             index = 0;

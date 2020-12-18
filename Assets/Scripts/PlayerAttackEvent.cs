@@ -29,6 +29,8 @@ public class PlayerAttackEvent : MonoBehaviour
 
     public GameObject grenadePrefab;
 
+    public GameObject laserPrefab;
+
     public GameObject player;
 
     [HideInInspector]
@@ -126,6 +128,20 @@ public class PlayerAttackEvent : MonoBehaviour
             else
             {
                 Instantiate(grenadePrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+            }
+            Vector3 temp = new Vector3(-15, 0, 0);
+            player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        }
+        if (typeOfShoot == TypeOfShoot.laser)
+        {
+            right = player.GetComponent<PlayerController>().isFacingRight;
+            if (right)
+            {
+                Instantiate(laserPrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                Instantiate(laserPrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
             }
             Vector3 temp = new Vector3(-15, 0, 0);
             player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);

@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
+  normalSpeed: 0
   jumpForce: 13
   gravityScale: 5
   rigidbody: {fileID: 5878538962860269881}
@@ -166,13 +167,17 @@ MonoBehaviour:
   currentHealth: 200
   weapon: {fileID: 2293900875780129957}
   healthBar: {fileID: 0}
+  invincible: 0
   canFlip: 1
   canMove: 1
+  canDash: 1
   isFacingRight: 1
   moveDirection: {x: 0, y: 0, z: 0}
   Ground:
     serializedVersion: 2
     m_Bits: 256
+  skillTree: {fileID: 0}
+  playerAttackEvent: {fileID: 5216738144614571759}
 --- !u!136 &5807258557600647954
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -244,7 +249,10 @@ MonoBehaviour:
   knockbackStrength: 2
   shootPoint: {fileID: 8652514495920891406}
   bulletPrefab: {fileID: 8048021591317080791, guid: c5b1414da9eb1af4682d06dc28ebc6d3, type: 3}
-  playerrb: {fileID: 5807258557600647962}
+  grenadePrefab: {fileID: 8048021591317080791, guid: 1594de83e7b2d42318840caaaa95c2e3, type: 3}
+  laserPrefab: {fileID: 8048021591317080791, guid: 163ad10118ca3483bb408fab938a2c8f, type: 3}
+  player: {fileID: 5807258557600647962}
+  typeOfShoot: 0
 --- !u!1001 &5807258556559273393
 PrefabInstance:
   m_ObjectHideFlags: 0

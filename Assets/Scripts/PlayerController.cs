@@ -528,5 +528,17 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        if (skillTree.skills.laser)
+        {
+            if (skillsUI.selectedSkill.name == "Laser" && Input.GetKeyDown(KeyCode.LeftAlt))
+            {
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
+                {
+                    playerAttackEvent.typeOfShoot = PlayerAttackEvent.TypeOfShoot.laser;
+                    ComboShoot();
+                    anim.SetInteger("shooting", shootPhase);
+                }
+            }
+        }
     }
 }
