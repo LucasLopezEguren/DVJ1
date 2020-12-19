@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2ff2d4e7b0cde469a9054265557605c2
+guid: 06c3e1d0356e792439f3eb3b046afe0c
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
@@ -7,18 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Concrete_Material
-    second: {fileID: 6631869656517990354, guid: a02ba20a2aab54ca7b8a14d335a15413, type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Metal_Material
-    second: {fileID: 2100000, guid: e9bfe5917835d69459d813acc65ba519, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Rock_Material
-    second: {fileID: 2100000, guid: b30d7f2dbee841a48a129021d2291feb, type: 2}
+      name: Buildings_Material
+    second: {fileID: 2100000, guid: 8d0649cd6d534e54dac7aa5bf37856fa, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -59,8 +49,8 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     fileIdsGeneration: 2
-    swapUVChannels: 1
-    generateSecondaryUV: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
