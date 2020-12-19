@@ -474,6 +474,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6074223542619233000, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
+      propertyPath: skills.shield
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074223542619233000, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
+      propertyPath: skills.rage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074223542619233000, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
+      propertyPath: skills.hittingDash
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074223542619233000, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
+      propertyPath: skills.doubleJump
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074223542619233000, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
+      propertyPath: skills.superBullets
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074223542619233000, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
+      propertyPath: skills.grenade
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074223542619233000, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
+      propertyPath: skills.laser
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6074223542619233001, guid: 238a3525f90bd455ca5c0cfb1ed75358, type: 3}
       propertyPath: m_Name
       value: SkillTree
