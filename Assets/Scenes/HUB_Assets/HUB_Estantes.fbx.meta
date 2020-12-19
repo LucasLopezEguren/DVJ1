@@ -3,7 +3,12 @@ guid: d9951b0281585e44a85abc45d2be2c65
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Estantes_HUB
+    second: {fileID: 2100000, guid: 4a2646547f63f47478b0b6e4db2befc7, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
