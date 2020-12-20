@@ -317,7 +317,8 @@ public class PlayerController : MonoBehaviour
 
     private void CheckStunAnimation()
     {
-        if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")) 
+        if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")
+        || anim.GetCurrentAnimatorStateInfo(0).IsName("reincorp")) 
         && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             invincible = true;
@@ -325,7 +326,8 @@ public class PlayerController : MonoBehaviour
             canFlip = false;
             canJump = false;
         }
-        if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")) 
+        if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")
+        || anim.GetCurrentAnimatorStateInfo(0).IsName("reincorp")) 
         && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
             invincible = false;
