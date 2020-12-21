@@ -38,6 +38,8 @@ public class PlayerAttackEvent : MonoBehaviour
 
     private bool right = true;
 
+    private AudioManager audioManager;
+
     public void PlayerAttack()
     {
         Collider[] hitColliders = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
@@ -59,6 +61,7 @@ public class PlayerAttackEvent : MonoBehaviour
         }
         Vector3 temp = new Vector3(25, 0, 0);
         player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        audioManager = (AudioManager)GameObject.Find("AudioManager").GetComponent("AudioManager");
     }
 
     public void ResetHitted()
@@ -156,6 +159,61 @@ public class PlayerAttackEvent : MonoBehaviour
     public void StopDashing()
     {
         playerController.isDashing = false;
+    }
+
+    public void PlayFirstAttackSound()
+    {
+        audioManager.Play("Player_Attack1");
+    }
+
+    public void PlaySecondAttackSound()
+    {
+        audioManager.Play("Player_Attack2");
+    }
+
+    public void PlayThirdAttackSound()
+    {
+        audioManager.Play("Player_Attack3");
+    }
+
+    public void PlayFall()
+    {
+        audioManager.Play("Player_Fall");
+    }
+
+    public void PlayDash()
+    {
+        audioManager.Play("Player_Dash");
+    }
+
+    public void PlayShoot()
+    {
+        audioManager.Play("Player_Shoot");
+    }
+
+    public void PlayHit1()
+    {
+        audioManager.Play("Player_Hit1");
+    }
+
+    public void PlayHit2()
+    {
+        audioManager.Play("Player_Hit2");
+    }
+
+    public void PlayHit3()
+    {
+        audioManager.Play("Player_Hit3");
+    }
+
+    public void PlayStep1()
+    {
+        audioManager.Play("Player_Step1");
+    }
+
+    public void PlayStep2()
+    {
+        audioManager.Play("Player_Step2");
     }
 
 }

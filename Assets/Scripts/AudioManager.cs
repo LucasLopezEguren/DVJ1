@@ -1,25 +1,32 @@
 ﻿using System;
 using UnityEngine.Audio;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class AudioManager : MonoBehaviour {
-    
+public class AudioManager : MonoBehaviour
+{
+
     public Sound[] sounds;
 
     public static AudioManager instance;
 
-    void Awake() {
+    public bool isPlayingHubMusic = false;
 
-        if (instance == null) {
+    void Awake()
+    {
+
+        if (instance == null)
+        {
             instance = this;
-        } else {
+        }
+        else
+        {
             Destroy(gameObject);
             return;
         }
-
         DontDestroyOnLoad(gameObject);
-
-        foreach (Sound sound in sounds) {
+        foreach (Sound sound in sounds)
+        {
             sound.source = gameObject.AddComponent<AudioSource>();
             sound.source.clip = sound.clip;
             sound.source.volume = sound.volume;
@@ -29,16 +36,45 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    void Start() {
-        Play("Overworld");
+    void Start()
+    {
+       
     }
 
-    public void Play (string name) {
+    private void Update()
+    {
+        CheckPlayHubScene();
+        
+    }
+
+    public void Play(string name)
+    {
         Sound s = Array.Find(sounds, sounds => sounds.name == name);
-        if (s == null) {
+        if (s == null)
+        {
             Debug.LogWarning("Sound: " + name + " not found");
             return;
         }
         s.source.Play();
+    }
+
+    //public void isPlaying(string name)
+    //{
+    //    Sound s = Array.Find(sounds, sounds => sounds.name == name);
+    //    if (s == null)
+    //    {
+    //        Debug.LogWarning("Sound: " + name + " not found");
+    //        return;
+    //    }
+        
+    //}
+
+    private void CheckPlayHubScene()
+    {
+        if (SceneManager.GetActiveScene().name == "Hub" && !isPlayingHubMusic)
+        {
+            isPlayingHubMusic = true;
+            Play("HubPartA");
+        }
     }
 }
