@@ -136,80 +136,79 @@ MonoBehaviour:
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2285026617345954010, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Attack1
-    clip: {fileID: 8300000, guid: 10a7a6800ca714cb4ade7a4ba3fc10a0, type: 3}
+    clip: {fileID: 8300000, guid: 31175159fab404fd5983e2db2ae9070e, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Attack2
-    clip: {fileID: 8300000, guid: 45cdc7583351d4b5ca850e2d39e339be, type: 3}
+    clip: {fileID: 8300000, guid: 6edbdd64f3d994be480357c0ab674865, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Attack3
-    clip: {fileID: 8300000, guid: 52147e926243e45ff89a1fe8db8c36ce, type: 3}
+    clip: {fileID: 8300000, guid: 569ab600d1792489885354b625133b7d, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Fall
-    clip: {fileID: 8300000, guid: 4e4060ec1344d4ec3aa4204772f9baa7, type: 3}
+    clip: {fileID: 8300000, guid: e65c0d98a001c4398b457ee921057f09, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Dash
-    clip: {fileID: 8300000, guid: d9a499dde5e494a1bb9efbc732ddb290, type: 3}
+    clip: {fileID: 8300000, guid: 1811152cc86654cdd9a799f6b4e47958, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Shoot
-    clip: {fileID: 8300000, guid: 32b2069491d0f4b5a9f6cd7d234d9754, type: 3}
+    clip: {fileID: 8300000, guid: c167ebe19798e4bdb96cdae87cb18d21, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Hit1
-    clip: {fileID: 8300000, guid: 7ca63a39acb4e4a38b2ee56f6dc013ac, type: 3}
+    clip: {fileID: 8300000, guid: 1a8426a5057ad47f19e96b3333d53dda, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Hit2
-    clip: {fileID: 8300000, guid: bce8931a9d5a949b28414e7079c37964, type: 3}
+    clip: {fileID: 8300000, guid: fd1a35bd75638414b9c9113e5fbdcbe2, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Hit3
-    clip: {fileID: 8300000, guid: 369c128bbc072423397316fc68ee41d6, type: 3}
+    clip: {fileID: 8300000, guid: ce79a9cbf6def4aaab92f6e89b928fd8, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Step1
-    clip: {fileID: 8300000, guid: f6843403f7c3242828412da59b70fb5c, type: 3}
+    clip: {fileID: 8300000, guid: 8eb618b5c235c4a79b4615c0e670868b, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: PlayerStep2
-    clip: {fileID: 8300000, guid: bb73c1f0d5846433b9591f5ad6cb7d3c, type: 3}
+    clip: {fileID: 8300000, guid: 875309402fab8415fa75b0a8e9091f65, type: 3}
     volume: 1
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
-  isPlayingHubMusic: 0

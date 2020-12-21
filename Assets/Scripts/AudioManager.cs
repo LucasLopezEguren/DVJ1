@@ -10,7 +10,9 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
-    public bool isPlayingHubMusic = false;
+    private bool isPlayingHubMusic = false;
+
+    private bool isPlayingOverworld = false;
 
     void Awake()
     {
@@ -44,7 +46,7 @@ public class AudioManager : MonoBehaviour
     private void Update()
     {
         CheckPlayHubScene();
-        
+        CheckPlayOverworld();
     }
 
     public void Play(string name)
@@ -58,23 +60,34 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-    //public void isPlaying(string name)
-    //{
-    //    Sound s = Array.Find(sounds, sounds => sounds.name == name);
-    //    if (s == null)
-    //    {
-    //        Debug.LogWarning("Sound: " + name + " not found");
-    //        return;
-    //    }
-        
-    //}
+    public bool isPlaying(string name)
+    {
+        Sound s = Array.Find(sounds, sounds => sounds.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found");
+            return false;
+        }
+        return s.source.isPlaying;
+    }
 
     private void CheckPlayHubScene()
     {
         if (SceneManager.GetActiveScene().name == "Hub" && !isPlayingHubMusic)
         {
             isPlayingHubMusic = true;
+            isPlayingOverworld = false;
             Play("HubPartA");
+        }
+    }
+
+    private void CheckPlayOverworld()
+    {
+        if (SceneManager.GetActiveScene().name == "FirstLevel" && !isPlayingOverworld)
+        {
+            isPlayingOverworld = true;
+            isPlayingHubMusic = false;
+            //Play("Overworld");
         }
     }
 }

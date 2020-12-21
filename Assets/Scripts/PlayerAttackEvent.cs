@@ -176,42 +176,42 @@ public class PlayerAttackEvent : MonoBehaviour
         audioManager.Play("Player_Attack3");
     }
 
-    public void PlayFall()
+    public void PlayFallSound()
     {
         audioManager.Play("Player_Fall");
     }
 
-    public void PlayDash()
+    public void PlayDashSound()
     {
         audioManager.Play("Player_Dash");
     }
 
-    public void PlayShoot()
+    public void PlayShootSound()
     {
         audioManager.Play("Player_Shoot");
     }
 
-    public void PlayHit1()
+    public void PlayHit1Sound()
     {
         audioManager.Play("Player_Hit1");
     }
 
-    public void PlayHit2()
+    public void PlayHit2Sound()
     {
         audioManager.Play("Player_Hit2");
     }
 
-    public void PlayHit3()
+    public void PlayHit3Sound()
     {
         audioManager.Play("Player_Hit3");
     }
 
-    public void PlayStep1()
+    public void PlayStep1Sound()
     {
         audioManager.Play("Player_Step1");
     }
 
-    public void PlayStep2()
+    public void PlayStep2Sound()
     {
         audioManager.Play("Player_Step2");
     }
