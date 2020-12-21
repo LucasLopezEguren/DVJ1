@@ -822,6 +822,8 @@ MonoBehaviour:
   isDashing: 0
   defenseParticles: {fileID: 7319558765477594228}
   rageParticles: {fileID: 8416009376808041801}
+  rageCooldown: 20
+  shieldCooldown: 20
 --- !u!136 &5807258557600647954
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -923,8 +925,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7319558765477594228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.293, z: 0}
-  m_LocalScale: {x: 0.48423254, y: 1, z: 0.54999256}
+  m_LocalPosition: {x: 0, y: -0.103, z: 0}
+  m_LocalScale: {x: 0.71572286, y: 1.4780561, z: 0.8129199}
   m_Children: []
   m_Father: {fileID: 5807258557600647953}
   m_RootOrder: 2
@@ -1181,7 +1183,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5735,8 +5737,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8416009376808041801}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.293, z: 0}
-  m_LocalScale: {x: 0.48423254, y: 1, z: 0.54999256}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
+  m_LocalScale: {x: 0.7323533, y: 1.5124, z: 0.83180875}
   m_Children: []
   m_Father: {fileID: 5807258557600647953}
   m_RootOrder: 4
@@ -5993,7 +5995,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -12431,14 +12433,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3670390299223308503, guid: bd20ed3289f99430c81128544d5e4046, type: 3}
   m_PrefabInstance: {fileID: 5807258556559273393}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2293900875780129957 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5711149623977257236, guid: bd20ed3289f99430c81128544d5e4046, type: 3}
-  m_PrefabInstance: {fileID: 5807258556559273393}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6277243407357004378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bd20ed3289f99430c81128544d5e4046, type: 3}
+  m_PrefabInstance: {fileID: 5807258556559273393}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2293900875780129957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5711149623977257236, guid: bd20ed3289f99430c81128544d5e4046, type: 3}
   m_PrefabInstance: {fileID: 5807258556559273393}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &6653768499436785888 stripped
