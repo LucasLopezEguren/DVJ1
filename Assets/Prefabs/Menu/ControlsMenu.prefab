@@ -425,8 +425,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "ARROWS - MOVE \nZ - ATTACK\nX - SHOOT\nSPACE - JUMP\nLEFT CTRL - CHANGE
-    ACTIVE SKILL\nLEFT ALT - FIRE ACTIVE SKILL"
+  m_text: "ARROWS - MOVE \nZ - ATTACK\nX - SHOOT\nSPACE - JUMP\nLEFT SHIFT - CHANGE
+    ACTIVE SKILL\nLEFT CTRL - FIRE ACTIVE SKILL"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7836401545a3847d991b343a2ba355b1, type: 2}
   m_sharedMaterial: {fileID: -8058801916269603183, guid: 7836401545a3847d991b343a2ba355b1, type: 2}
@@ -500,12 +500,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 1.6975098, w: 0}
   m_textInfo:
     textComponent: {fileID: 2758784847852652935}
-    characterCount: 109
+    characterCount: 111
     spriteCount: 0
     spaceCount: 24
     wordCount: 24
     linkCount: 0
-    lineCount: 16
+    lineCount: 17
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0

@@ -63,7 +63,7 @@ public class SkillsUI : MonoBehaviour
 
     private void ChangeSkillSelected()
     {
-        if(skillTree.skills.SkillsActivatedThatNeedToBeSelected() > 1 && Input.GetKeyDown(KeyCode.LeftControl))
+        if(skillTree.skills.SkillsActivatedThatNeedToBeSelected() > 1 && Input.GetKeyDown(KeyCode.LeftShift))
         {
             index++;
             if (index >= skillsActivated.Length) index = 0;
