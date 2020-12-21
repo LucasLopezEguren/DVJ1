@@ -250,6 +250,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aadaa70dc3a46c4592bd0eb2f6c5a02, type: 3}
+--- !u!1 &37896456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2aadaa70dc3a46c4592bd0eb2f6c5a02, type: 3}
+  m_PrefabInstance: {fileID: 37896455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &37896457
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37896456}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a618718d88cc6484498449738421afa3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &71260544
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 150385164}
   - component: {fileID: 150385165}
+  - component: {fileID: 150385166}
   m_Layer: 0
   m_Name: Player camera
   m_TagString: Untagged
@@ -351,7 +376,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150385163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.375761, y: -4.6552534, z: -4.0116754}
+  m_LocalPosition: {x: -19.415043, y: -4.6552534, z: -4.0116754}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 320746930}
@@ -393,6 +418,23 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 320746930}
+--- !u!114 &150385166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150385163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 0
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: 674522d037e760444b49ce1e70d6993a, type: 2}
 --- !u!1 &167423770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,7 +1280,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d28836b939587a541a7f17c8f212573c, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 609fb904ae1c38045a207be8b87fcd1b, type: 2}
+      objectReference: {fileID: 2100000, guid: 0a360bfdd7b77af43acbc8924852c179, type: 2}
+    - target: {fileID: -7511558181221131132, guid: d28836b939587a541a7f17c8f212573c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e9bfe5917835d69459d813acc65ba519, type: 2}
     - target: {fileID: 919132149155446097, guid: d28836b939587a541a7f17c8f212573c, type: 3}
       propertyPath: m_Name
       value: HUB_Door
@@ -1361,7 +1407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ed15a55cae6cc464ba419809c94dfe31, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ed15a55cae6cc464ba419809c94dfe31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2367,7 +2413,6 @@ GameObject:
   - component: {fileID: 1263383495}
   - component: {fileID: 1263383494}
   - component: {fileID: 1263383493}
-  - component: {fileID: 1263383497}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2383,7 +2428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263383491}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.375761, y: -4.6552534, z: -4.0116754}
+  m_LocalPosition: {x: -19.415043, y: -4.6552534, z: -4.0116754}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1127373144}
@@ -2406,12 +2451,12 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -2505,23 +2550,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &1263383497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263383491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 674522d037e760444b49ce1e70d6993a, type: 2}
 --- !u!1001 &1278037475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2728,11 +2756,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: cb1889d6d282e0243877c66a7a9909a2, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: -1580535799172915004, guid: 5c4247bc544ce204c9d7b17842c229df, type: 3}
+      objectReference: {fileID: 2100000, guid: 0a360bfdd7b77af43acbc8924852c179, type: 2}
     - target: {fileID: -7511558181221131132, guid: cb1889d6d282e0243877c66a7a9909a2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 7654409383689397844, guid: cb1889d6d282e0243877c66a7a9909a2, type: 3}
+      objectReference: {fileID: 2100000, guid: 609fb904ae1c38045a207be8b87fcd1b, type: 2}
     - target: {fileID: 919132149155446097, guid: cb1889d6d282e0243877c66a7a9909a2, type: 3}
       propertyPath: m_Name
       value: HUB_KitchenDoor (1)
@@ -2880,7 +2908,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d28836b939587a541a7f17c8f212573c, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 609fb904ae1c38045a207be8b87fcd1b, type: 2}
+      objectReference: {fileID: 2100000, guid: 0a360bfdd7b77af43acbc8924852c179, type: 2}
+    - target: {fileID: -7511558181221131132, guid: d28836b939587a541a7f17c8f212573c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e9bfe5917835d69459d813acc65ba519, type: 2}
     - target: {fileID: 919132149155446097, guid: d28836b939587a541a7f17c8f212573c, type: 3}
       propertyPath: m_Name
       value: HUB_Door (1)
@@ -3799,7 +3831,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: cb1889d6d282e0243877c66a7a9909a2, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: -1580535799172915004, guid: 5c4247bc544ce204c9d7b17842c229df, type: 3}
+      objectReference: {fileID: 2100000, guid: 0a360bfdd7b77af43acbc8924852c179, type: 2}
     - target: {fileID: -7511558181221131132, guid: cb1889d6d282e0243877c66a7a9909a2, type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
