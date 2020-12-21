@@ -45,14 +45,20 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove = true;
 
-    public bool canDash = true;
-
     public bool isFacingRight = true;
 
     [HideInInspector]
     public Vector3 moveDirection;
 
     private bool canJump = true;
+
+    public float jumpCooldown = 2f; 
+    
+    public float dashCooldown = 2f;
+
+    public bool dashed = false;
+
+    float endDash = 0.2f;
 
     float timeToMove = 0.5f;
 
@@ -113,6 +119,18 @@ public class PlayerController : MonoBehaviour
         {
             timeStunned += Time.deltaTime;
         }
+        if(jumpCooldown < 1.5f)
+        {
+            jumpCooldown += Time.deltaTime;
+        }
+        if(dashCooldown < 1.5f)
+        {
+            dashCooldown += Time.deltaTime;
+        }
+        if(endDash < 0.2f)
+        {
+            endDash += Time.deltaTime;
+        }
         if(!canJump && currentHealth > 0)
         {
             timeNoJump += Time.deltaTime;
@@ -139,8 +157,12 @@ public class PlayerController : MonoBehaviour
         {
             if (canJump && currentHealth > 0 && Input.GetButtonDown("Jump"))
             {
-                anim.SetBool("jump", true);
-                moveDirection.y = jumpForce;
+                if(jumpCooldown >= 1.5f)
+                {
+                    anim.SetBool("jump", true);
+                    moveDirection.y = jumpForce;
+                    jumpCooldown = 0f;
+                }
             }
             anim.SetBool("touchFloor", true);
         }
@@ -200,30 +222,29 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        if(canDash && Mathf.Abs(Input.GetAxis("Horizontal")) > 0)
+        if(Mathf.Abs(Input.GetAxis("Horizontal")) > 0 && dashCooldown >= 1.5f)
         {
             anim.SetTrigger("dash");
-            moveSpeed = moveSpeed * 3;
-            canDash = false;
+            moveSpeed = moveSpeed * 2;
+            dashCooldown = 0;
         }
     }
 
     private void CheckDashAnimation()
     {
-        if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9)
         {
-            anim.ResetTrigger("dash");
             moveSpeed = normalSpeed;
             invincible = false;
-            canDash = true;
+            canFlip = true;
+            canMove = true;
         }
         
-        if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9)
         {
             rigidbody.velocity = Vector3.zero;
             canMove = false;
             canFlip = false;
-            canDash = false;
             invincible = true;
         }
     }
