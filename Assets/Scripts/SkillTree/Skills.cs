@@ -63,4 +63,9 @@ public class Skills
         if (laser) toReturn++;
         return toReturn;
     }
+
+    public bool HasAllSkills()
+    {
+        return shield && rage && hittingDash && doubleJump && superBullets && grenade && laser;
+    }
 }

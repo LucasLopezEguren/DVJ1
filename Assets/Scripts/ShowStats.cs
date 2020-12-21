@@ -13,10 +13,6 @@ public class ShowStats : MonoBehaviour
 
     public GameObject score;
 
-    public GameObject experienceEarned;
-
-    public GameObject level;
-
     public GameObject skillPointsToSpend;
 
     private Stats stats;
@@ -43,9 +39,11 @@ public class ShowStats : MonoBehaviour
         enemyKilled.GetComponent<TMPro.TextMeshProUGUI>().text = stats.EnemyKilled.ToString();
         maxCombo.GetComponent<TMPro.TextMeshProUGUI>().text = stats.MaxCombo.ToString();
         score.GetComponent<TMPro.TextMeshProUGUI>().text = stats.Score.ToString();
-        experienceEarned.GetComponent<TMPro.TextMeshProUGUI>().text = skillTree.experienceEarnedInLevel.ToString();
-        level.GetComponent<TMPro.TextMeshProUGUI>().text = skillTree.level.ToString();
-        skillPointsToSpend.GetComponent<TMPro.TextMeshProUGUI>().text = skillTree.skillsPointToSpend.ToString();
+        if(skillTree.skills.HasAllSkills()) skillPointsToSpend.SetActive(false);
+        else
+        {
+            skillPointsToSpend.GetComponent<TMPro.TextMeshProUGUI>().text = skillTree.skillsPointEarnedInLevel.ToString();           
+        }           
     }
 
     // Update is called once per frame
