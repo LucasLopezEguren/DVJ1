@@ -288,11 +288,67 @@ MonoBehaviour:
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
-    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+    outputAudioMixerGroup: {fileID: 2285026617345954010, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: OverWorldPartB
     clip: {fileID: 8300000, guid: d2e9c0acc03024627a702962ea24ff60, type: 3}
     volume: 1
     pitch: 0.9
     loop: 1
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2285026617345954010, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: Boss_HighAttack
+    clip: {fileID: 8300000, guid: e764ecdc3ad4f4ec8a576928341cfadf, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: Boss_LowAttack
+    clip: {fileID: 8300000, guid: 10c77490e6fd849959ba532d2f018b15, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: Boss_TailAttack
+    clip: {fileID: 8300000, guid: 1a682290731084fd7bc8ccfa39b7aae5, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: Boss_ClawsAttack
+    clip: {fileID: 8300000, guid: 5556c931d932643f78873bab588dd428, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 1
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: Boss_Fall
+    clip: {fileID: 8300000, guid: f8ee9f911d1a94e62a0541660dbe4a71, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: Boss_SwitchSide
+    clip: {fileID: 8300000, guid: 7a3f0c881745c456fbe61edb684fd73b, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: Boss_Dead
+    clip: {fileID: 8300000, guid: cbdafef3e97c842f881ac6f68297ccaa, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: Boss_Summon
+    clip: {fileID: 8300000, guid: e50f8bd4112584c46ae3819d1b5fb207, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
