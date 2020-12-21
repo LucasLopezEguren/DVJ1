@@ -123,14 +123,14 @@ MonoBehaviour:
     outputAudioMixerGroup: {fileID: -8791166895275105435, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: HubPartA
     clip: {fileID: 8300000, guid: d31af5cb57cbd49bebd1aabaeda74a61, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2285026617345954010, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: HubPartB
     clip: {fileID: 8300000, guid: 7e2e80e426ec94a8a98c65115329e295, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 1
     source: {fileID: 0}
