@@ -70,7 +70,7 @@ public class DamageController : MonoBehaviour
                 Instantiate(bloodSplash, splashPositionLow, Quaternion.identity);
                 Instantiate(bloodSplash, splashPositionMid, Quaternion.identity);
                 Instantiate(bloodSplash, splashPositionHigh, Quaternion.identity);
-            } else {
+            } else if (gameObject.name != "Boss") {
                 Instantiate(bloodSplash, transform.position, Quaternion.identity);
             }
             try

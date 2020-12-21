@@ -31,8 +31,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         string actualSceneName = SceneManager.GetActiveScene().name;
-        stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
-        stats.ResetStats();
+        if (GameObject.Find("Stats") != null) {
+            stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
+            stats.ResetStats();
+        }
         try
         {
             maleNarratorActivate = FindObjectOfType<CheatCodes>().maleNarratorActivate;

@@ -60,9 +60,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b30d7f2dbee841a48a129021d2291feb, type: 2}
-  - {fileID: 2100000, guid: e9bfe5917835d69459d813acc65ba519, type: 2}
-  - {fileID: 6631869656517990354, guid: a02ba20a2aab54ca7b8a14d335a15413, type: 3}
+  - {fileID: 2100000, guid: ad719a909c6478543b350346ee250462, type: 2}
+  - {fileID: 2100000, guid: ad719a909c6478543b350346ee250462, type: 2}
+  - {fileID: 2100000, guid: ad719a909c6478543b350346ee250462, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -815,9 +815,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b30d7f2dbee841a48a129021d2291feb, type: 2}
-  - {fileID: 2100000, guid: e9bfe5917835d69459d813acc65ba519, type: 2}
-  - {fileID: 6631869656517990354, guid: a02ba20a2aab54ca7b8a14d335a15413, type: 3}
+  - {fileID: 2100000, guid: ad719a909c6478543b350346ee250462, type: 2}
+  - {fileID: 2100000, guid: ad719a909c6478543b350346ee250462, type: 2}
+  - {fileID: 2100000, guid: ad719a909c6478543b350346ee250462, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -865,7 +865,6 @@ GameObject:
   - component: {fileID: 4631013377603102172}
   - component: {fileID: 8074836859548450672}
   - component: {fileID: 4263301610337025202}
-  - component: {fileID: 1273639925378246816}
   m_Layer: 0
   m_Name: Trap
   m_TagString: Chunk
@@ -972,28 +971,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 80, y: 80, z: 80}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1273639925378246816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2963161505059435243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12392fda2ea81495ebb5d064a5e98c51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platform1: {fileID: 0}
-  platform2: {fileID: 0}
-  platform3: {fileID: 0}
-  platform1Trigger: {fileID: 0}
-  platform2Trigger: {fileID: 0}
-  platform3Trigger: {fileID: 0}
-  platform1GO: {fileID: 0}
-  platform2GO: {fileID: 0}
-  platform3GO: {fileID: 0}
-  flyingEnemies: []
 --- !u!1 &3273019952918778777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1982,11 +1959,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 159e3cc117a534ca68ac792dace110d0, type: 3}
---- !u!4 &5693585208431525096 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6180799164217258025, guid: 159e3cc117a534ca68ac792dace110d0, type: 3}
-  m_PrefabInstance: {fileID: 1929002456084761793}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5693585208431525097 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6180799164217258024, guid: 159e3cc117a534ca68ac792dace110d0, type: 3}
@@ -1998,6 +1970,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c09b58a87f2342e88c3f1b84d40fbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &5693585208431525096 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6180799164217258025, guid: 159e3cc117a534ca68ac792dace110d0, type: 3}
+  m_PrefabInstance: {fileID: 1929002456084761793}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2040277881859202905
 PrefabInstance:
   m_ObjectHideFlags: 0
