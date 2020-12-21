@@ -9,7 +9,22 @@ public class SkillTreeUI : MonoBehaviour
 
     public GameObject skillPoints;
 
-    [Header("Skills buttons")]
+    [Header("Skills bought")]
+    public GameObject shieldBought;
+    public GameObject rageBought;
+    public GameObject hittingDashBought;
+    public GameObject doubleJumppBought;
+    public GameObject superBulletBought;
+    public GameObject grenadeBought;
+    public GameObject laserBought;
+
+    [Header("Skills locked")]
+    public GameObject rageLocked;
+    public GameObject hittingDashLocked;
+    public GameObject grenadeLocked;
+    public GameObject laserLocked;
+
+    [Header("Skills not bought")]
     public GameObject shieldButton;
     public GameObject rageButton;
     public GameObject hittingDashButton;
@@ -22,45 +37,14 @@ public class SkillTreeUI : MonoBehaviour
     void Start()
     {
         skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
-        skillPoints.GetComponent<TMPro.TextMeshProUGUI>().text = skillTree.skillsPointToSpend.ToString();
+        skillPoints.GetComponent<TMPro.TextMeshProUGUI>().text = skillTree.skillsPointToSpend.ToString();        
     }
 
     // Update is called once per frame
     void Update()
     {
         skillPoints.GetComponent<TMPro.TextMeshProUGUI>().text = skillTree.skillsPointToSpend.ToString();
-        if (!skillTree.skills.shield)
-        {
-            rageButton.GetComponent<Button>().interactable = false;
-        }
-        else
-        {
-            rageButton.GetComponent<Button>().interactable = true;
-        }
-        if (!skillTree.skills.rage)
-        {
-            hittingDashButton.GetComponent<Button>().interactable = false;
-        }
-        else
-        {
-            hittingDashButton.GetComponent<Button>().interactable = true;
-        }
-        if (!skillTree.skills.superBullets)
-        {
-            grenadeButton.GetComponent<Button>().interactable = false;
-        }
-        else
-        {
-            grenadeButton.GetComponent<Button>().interactable = true;
-        }
-        if (!skillTree.skills.grenade)
-        {
-            laserButton.GetComponent<Button>().interactable = false;
-        }
-        else
-        {
-            laserButton.GetComponent<Button>().interactable = true;
-        }
+        CheckBoughtSkill();        
     }
 
     public void GetShieldSkill()
@@ -78,7 +62,6 @@ public class SkillTreeUI : MonoBehaviour
         {
             skillTree.skills.rage = true;
             skillTree.skillsPointToSpend--;
-
         }
     }
 
@@ -124,6 +107,85 @@ public class SkillTreeUI : MonoBehaviour
         {
             skillTree.skills.laser = true;
             skillTree.skillsPointToSpend--;
+        }
+    }
+
+    private void CheckBoughtSkill()
+    {
+        if (!skillTree.skills.shield)
+        {
+            shieldButton.SetActive(true);
+            rageLocked.SetActive(true);       
+        }    
+        else
+        {
+            shieldButton.SetActive(false);
+            shieldBought.SetActive(true);
+            rageLocked.SetActive(false);
+        }
+        if (!skillTree.skills.rage)
+        {
+            if (skillTree.skills.shield)
+            {
+                rageButton.SetActive(true);
+            }
+            hittingDashLocked.SetActive(true);
+        }
+        else
+        {
+            rageButton.SetActive(false);
+            rageBought.SetActive(true);
+            hittingDashLocked.SetActive(false);
+        }
+        if (!skillTree.skills.hittingDash)
+        {
+            hittingDashButton.SetActive(true);
+        }
+        else
+        {
+            hittingDashBought.SetActive(true);
+        }
+        if (!skillTree.skills.doubleJump)
+        {
+            doubleJumpButton.SetActive(true);
+        }
+        else
+        {
+            doubleJumpButton.SetActive(false);
+            doubleJumppBought.SetActive(true);
+        }
+        if (!skillTree.skills.superBullets)
+        {
+            superBulletsdButton.SetActive(true);
+            grenadeLocked.SetActive(true);
+        }
+        else
+        {
+            superBulletsdButton.SetActive(false);
+            superBulletBought.SetActive(true);
+            grenadeLocked.SetActive(false);
+        }
+        if (!skillTree.skills.grenade)
+        {
+            if (skillTree.skills.superBullets)
+            {
+                grenadeButton.SetActive(true);
+            }
+            laserLocked.SetActive(true);
+        }
+        else
+        {
+            grenadeButton.SetActive(false);
+            grenadeBought.SetActive(true);
+            laserLocked.SetActive(false);
+        }
+        if (!skillTree.skills.laser)
+        {
+            laserButton.SetActive(true);
+        }
+        else
+        {
+            laserBought.SetActive(true);
         }
     }
 }
