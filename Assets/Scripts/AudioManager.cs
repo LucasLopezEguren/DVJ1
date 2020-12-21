@@ -60,6 +60,14 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    public void StopAll()
+    {
+        foreach (var sound in sounds)
+        {
+            sound.source.Stop();
+        }
+    }
+
     public bool isPlaying(string name)
     {
         Sound s = Array.Find(sounds, sounds => sounds.name == name);
@@ -75,6 +83,7 @@ public class AudioManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Hub" && !isPlayingHubMusic)
         {
+            StopAll();
             isPlayingHubMusic = true;
             isPlayingOverworld = false;
             Play("HubPartA");
@@ -85,9 +94,10 @@ public class AudioManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "FirstLevel" && !isPlayingOverworld)
         {
+            StopAll();
             isPlayingOverworld = true;
             isPlayingHubMusic = false;
-            //Play("Overworld");
+            Play("Overworld");
         }
     }
 }
