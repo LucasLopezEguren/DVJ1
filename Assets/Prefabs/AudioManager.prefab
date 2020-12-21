@@ -219,3 +219,38 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: HeavyEnemy_Step1
+    clip: {fileID: 8300000, guid: c4c2e0e0759a349d7b9d25ee9cca3058, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: HeavyEnemy_Step2
+    clip: {fileID: 8300000, guid: c21a8cfd9b5f9416d9dbaec042a5c9a5, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: HeavyEnemy_Dead
+    clip: {fileID: 8300000, guid: 2999027d11407402abe136e914771987, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: HeavyEnemy_Attack1
+    clip: {fileID: 8300000, guid: 6e699a452966d47dea7bab472b38cf08, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: HeavyEnemy_Attack2
+    clip: {fileID: 8300000, guid: fc8ef2ff600bd47f3ac083939607f885, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}

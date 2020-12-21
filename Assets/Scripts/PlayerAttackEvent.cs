@@ -40,6 +40,11 @@ public class PlayerAttackEvent : MonoBehaviour
 
     private AudioManager audioManager;
 
+    private void Start()
+    {
+        audioManager = (AudioManager)GameObject.Find("AudioManager").GetComponent("AudioManager");
+    }
+
     public void PlayerAttack()
     {
         Collider[] hitColliders = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
@@ -60,8 +65,7 @@ public class PlayerAttackEvent : MonoBehaviour
             }
         }
         Vector3 temp = new Vector3(25, 0, 0);
-        player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
-        audioManager = (AudioManager)GameObject.Find("AudioManager").GetComponent("AudioManager");
+        player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);        
     }
 
     public void ResetHitted()
