@@ -25,13 +25,25 @@ public class FinishLevel : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (stats) stats.LevelComplete = true;
+            if (stats) {
+                stats.LevelComplete = true;
+            }
             if (skillTree && !expAdded)
             {
                 skillTree.LevelComplete();
                 expAdded = true;
             }
-            SceneManager.LoadScene(SceneToLoad);
+            string actualSceneName = SceneManager.GetActiveScene().name;
+            if (actualSceneName.Contains("Level")){
+                stats.AddFinishedChunk();
+                if (stats.finishedChunks % 4 == 0){
+                    SceneManager.LoadScene("BossFight");
+                } else {
+                    SceneManager.LoadScene("ShowStats");
+                }
+            } else {
+                SceneManager.LoadScene(SceneToLoad);
+            }
         }
     }
 }
