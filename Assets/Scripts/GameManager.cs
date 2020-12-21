@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         string actualSceneName = SceneManager.GetActiveScene().name;
         stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
         skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
-        if(stats) stats.ResetStats();
+        if(stats && actualSceneName != "BossFight") stats.ResetStats();
         if(skillTree) skillTree.RestExperiencedEarnedInLevel();
         try
         {
