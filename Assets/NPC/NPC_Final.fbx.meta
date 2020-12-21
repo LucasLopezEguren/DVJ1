@@ -1,9 +1,23 @@
 fileFormatVersion: 2
-guid: 5c4247bc544ce204c9d7b17842c229df
+guid: 2aadaa70dc3a46c4592bd0eb2f6c5a02
 ModelImporter:
   serializedVersion: 20101
-  internalIDToNameTable: []
-  externalObjects: {}
+  internalIDToNameTable:
+  - first:
+      74: -3842312276709699364
+    second: metarig|NPC_Idle
+  - first:
+      74: -5003131165045108139
+    second: metarig|PoseLib
+  - first:
+      74: -7690677468056258323
+    second: metarig|StoolAction
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NPC_Material
+    second: {fileID: 2100000, guid: 9794ed250c17ace4fa6b04a27250350b, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
