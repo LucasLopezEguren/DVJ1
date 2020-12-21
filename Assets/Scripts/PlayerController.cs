@@ -244,7 +244,7 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        if(Mathf.Abs(Input.GetAxis("Horizontal")) > 0 && dashCooldown >= 1.5f)
+        if(Mathf.Abs(Input.GetAxis("Horizontal")) > 0 && dashCooldown >= 1.5f && canMove && attackPhase == 0 && shootPhase == 0)
         {
             anim.SetTrigger("dash");
             moveSpeed = moveSpeed * 2;
