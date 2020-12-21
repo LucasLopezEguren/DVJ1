@@ -2184,6 +2184,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5118631374741519853, guid: c78c5af18ea5549ba8f5b7ab5eef4739, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 41.867188
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118631375786427836, guid: c78c5af18ea5549ba8f5b7ab5eef4739, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 41.867188
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118631376152097520, guid: c78c5af18ea5549ba8f5b7ab5eef4739, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 41.867188
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118631376271203283, guid: c78c5af18ea5549ba8f5b7ab5eef4739, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 41.867188
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c78c5af18ea5549ba8f5b7ab5eef4739, type: 3}
 --- !u!1 &1148885602
@@ -3176,7 +3192,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

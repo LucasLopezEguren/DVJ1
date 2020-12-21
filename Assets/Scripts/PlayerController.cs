@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject weapon;
 
-    public HealthBar healthBar;
+    public HealthBar healthBar;       
 
     private int attackPhase = 0;
 
@@ -35,11 +35,11 @@ public class PlayerController : MonoBehaviour
 
     private GameManager gameManager;
 
-    private Collider _collider;
+    private Collider _collider;    
 
     private List<int> hasBeenHitted;
 
-    public bool invincible = false;
+    private bool invincible = false;
 
     public bool canFlip = true;
 
@@ -53,6 +53,14 @@ public class PlayerController : MonoBehaviour
     public Vector3 moveDirection;
 
     private bool canJump = true;
+
+    public float jumpCooldown = 2f; 
+    
+    public float dashCooldown = 2f;
+
+    public bool dashed = false;
+
+    float endDash = 0.2f;
 
     float timeToMove = 0.5f;
 
@@ -102,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (canMove && currentHealth > 0)
+        if(canMove && currentHealth > 0)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             Vector3 temp = new Vector3(horizontal, 0, 0);
@@ -110,11 +118,11 @@ public class PlayerController : MonoBehaviour
             rigidbody.MovePosition(transform.position + temp);
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if(Input.GetKeyDown(KeyCode.C))
         {
             Dash();
         }
-
+        
         CheckDashAnimation();
     }
 
@@ -124,42 +132,56 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(25);
         }
-        if (!canMove && currentHealth > 0)
+        if(!canMove && currentHealth > 0)
         {
             timeStunned += Time.deltaTime;
         }
-        if (!canJump && currentHealth > 0)
+        if(jumpCooldown < 1.5f)
+        {
+            jumpCooldown += Time.deltaTime;
+        }
+        if(dashCooldown < 1.5f)
+        {
+            dashCooldown += Time.deltaTime;
+        }
+        if(endDash < 0.2f)
+        {
+            endDash += Time.deltaTime;
+        }
+        if(!canJump && currentHealth > 0)
         {
             timeNoJump += Time.deltaTime;
         }
-        if (timeStunned >= timeToMove)
+        if(timeStunned >= timeToMove)
         {
             canMove = true;
             canFlip = true;
             timeStunned = 0;
         }
-        if (timeNoJump >= timeToMove)
+        if(timeNoJump >= timeToMove)
         {
             canJump = true;
         }
-        if (canMove && currentHealth > 0)
+        if(canMove && currentHealth > 0)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             Vector3 temp = new Vector3(horizontal, 0, 0);
             temp = temp.normalized * moveSpeed * Time.deltaTime;
             rigidbody.MovePosition(transform.position + temp);
         }
-
-        if (isGrounded() && canMove)
+        if (isGrounded() && canMove )
         {
             if (canJump && currentHealth > 0 && Input.GetButtonDown("Jump"))
             {
-                anim.SetBool("jump", true);
-                moveDirection.y = jumpForce;
+                if(jumpCooldown >= 1.5f)
+                {
+                    anim.SetBool("jump", true);
+                    moveDirection.y = jumpForce;
+                    jumpCooldown = 0f;
+                }
                 jumps--;
             }
-            anim.SetBool("touchFloor", true);
-            jumps = 2;
+            jumps=2;
         }
         else
         {
@@ -169,27 +191,22 @@ public class PlayerController : MonoBehaviour
                 moveDirection.y = jumpForce;
                 jumps--;
             }
-            anim.SetBool("touchFloor", false);
             anim.SetBool("jump", false);
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (isGrounded())
-            {
+            if(isGrounded()){
                 if (!anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle") && !anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack"))
                 {
                     ComboAttack();
                     anim.SetInteger("attacking", attackPhase);
                 }
-            }
-            else
-            {
+            }else{
                 anim.SetBool("airAttack", true);
-            }
-
+            }            
         }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
+        if(Input.GetKeyDown(KeyCode.X))
+        {   
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
             {
                 playerAttackEvent.typeOfShoot = PlayerAttackEvent.TypeOfShoot.normal;
@@ -197,7 +214,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetInteger("shooting", shootPhase);
             }
         }
-        //if (Input.GetKeyDown(KeyCode.Y))
+        //if(Input.GetKeyDown(KeyCode.Y))
         //{
         //    Vector3 tempi = new Vector3(1000, 0, 0);
         //    rigidbody.AddForce(tempi);
@@ -206,7 +223,7 @@ public class PlayerController : MonoBehaviour
         {
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         }
-        if (rigidbody.velocity.y < -15)
+        if(rigidbody.velocity.y < -15)
         {
             moveDirection.y = -14;
         }
@@ -221,38 +238,40 @@ public class PlayerController : MonoBehaviour
         CheckJumpAnimation();
         CheckStunAnimation();
         CheckDieAnimation();
-        CheckDashAnimation();
+        //CheckDashAnimation();
         CheckSkills();
     }
 
     private void Dash()
     {
-        if (canDash && Mathf.Abs(Input.GetAxis("Horizontal")) > 0)
+        if(Mathf.Abs(Input.GetAxis("Horizontal")) > 0 && dashCooldown >= 1.5f)
         {
             anim.SetTrigger("dash");
-            moveSpeed = moveSpeed * 3;
-            canDash = false;
+            moveSpeed = moveSpeed * 2;
+            dashCooldown = 0;
         }
     }
 
     private void CheckDashAnimation()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9)
         {
             anim.ResetTrigger("dash");
             moveSpeed = normalSpeed;
             invincible = false;
             canDash = true;
+            canFlip = true;
+            canMove = true;
             isDashing = false;
         }
-
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+        
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9)
         {
             rigidbody.velocity = Vector3.zero;
             canMove = false;
             canFlip = false;
             canDash = false;
-            invincible = true;            
+            invincible = true;
         }
     }
 
@@ -260,14 +279,14 @@ public class PlayerController : MonoBehaviour
     {
         if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
             || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle")
-            || anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack")) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            /*|| anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack")*/) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             rigidbody.velocity = Vector3.zero;//for not falling while attacking
             canMove = false;
             canFlip = false;
         }
         else if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
-            || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle"))
+            || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle")) 
             && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
             //If normalizedTime is 0 to 1 means animation is playing, if greater than 1 means finished
@@ -276,16 +295,22 @@ public class PlayerController : MonoBehaviour
             canMove = true;
             canFlip = true;
         }
-
+        
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack"))
         {
             anim.SetBool("airAttack", false);
-            if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8)
+            if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8)
             {
                 canMove = true;
                 canFlip = true;
             }
+        }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.6)
+        {
+            rigidbody.velocity = Vector3.zero;
+            canMove = false;
+            canFlip = false;
         }
     }
 
@@ -312,7 +337,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckJumpAnimation()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("jump_up"))
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("jump_up"))
         {
             anim.speed = 3.4f;
             canJump = false;
@@ -321,23 +346,23 @@ public class PlayerController : MonoBehaviour
         {
             anim.speed = 1;
         }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("landing"))
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("landing"))
         {
-            if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
             {
                 rigidbody.velocity = Vector3.zero;
                 canMove = false;
                 canFlip = false;
                 canJump = false;
             }
-            else if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            else if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
             {
                 canMove = true;
                 canFlip = true;
                 canJump = true;
             }
         }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("falling"))
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("falling"))
         {
             canJump = false;
         }
@@ -345,7 +370,8 @@ public class PlayerController : MonoBehaviour
 
     private void CheckStunAnimation()
     {
-        if ((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death"))
+        if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")
+        || anim.GetCurrentAnimatorStateInfo(0).IsName("reincorp")) 
         && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             invincible = true;
@@ -353,7 +379,8 @@ public class PlayerController : MonoBehaviour
             canFlip = false;
             canJump = false;
         }
-        if ((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death"))
+        if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")
+        || anim.GetCurrentAnimatorStateInfo(0).IsName("reincorp")) 
         && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
             invincible = false;
@@ -362,7 +389,7 @@ public class PlayerController : MonoBehaviour
             canJump = true;
             anim.SetInteger("dmgTaken", 0);
         }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("reincorp"))
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("reincorp"))
         {
             anim.SetInteger("dmgTaken", 0);
             invincible = false;
@@ -371,7 +398,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckDieAnimation()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("death") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9)
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("death") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9)
         {
             canMove = false;
             canFlip = false;
@@ -420,7 +447,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (!invincible)
+        if(!invincible)
         {
             currentHealth -= damage;
             healthBar.SetHealth(currentHealth);
@@ -430,7 +457,7 @@ public class PlayerController : MonoBehaviour
             {
                 gameManager.ComboInterrupt();
             }
-            if (currentHealth < 1)
+            if(currentHealth < 1)
             {
                 Die();
             }
@@ -439,7 +466,7 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("death") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9)
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("death") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9)
         {
             SceneManager.LoadScene("hub");
         }
@@ -447,7 +474,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckMovementDirection()
     {
-        if (canFlip && currentHealth > 0)
+        if(canFlip && currentHealth > 0)
         {
             if (isFacingRight && Input.GetAxis("Horizontal") < 0)
             {
@@ -469,7 +496,7 @@ public class PlayerController : MonoBehaviour
     {
         isFacingRight = !isFacingRight;
         transform.Rotate(0.0f, 180.0f, 0.0f);
-    }
+    }      
 
     public List<int> HasBeenHitted()
     {
@@ -479,16 +506,16 @@ public class PlayerController : MonoBehaviour
     public void ResetHitted()
     {
         hasBeenHitted.Clear();
-    }
+    }   
 
     public void AddHitted(int hitted)
-    {
+    {        
         hasBeenHitted.Add(hitted);
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (moveSpeed > normalSpeed)
+        if(moveSpeed > normalSpeed)
         {
             moveSpeed = normalSpeed;
         }
@@ -563,6 +590,5 @@ public class PlayerController : MonoBehaviour
         //        moveDirection.y = jumpForce;
         //    }
         //}
-    }  
-
+    } 
 }
