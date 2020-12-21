@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerAttackEvent : MonoBehaviour
 {
+    public enum TypeOfShoot
+    {
+        normal,
+        grenade,
+        laser
+    }
+
     public Transform attackPoint;
 
     public float attackRange;
@@ -17,11 +24,19 @@ public class PlayerAttackEvent : MonoBehaviour
     public float knockbackStrength;
 
     public Transform shootPoint;
+
     public GameObject bulletPrefab;
 
-    public GameObject playerrb;
+    public GameObject grenadePrefab;
 
-    bool right = true;
+    public GameObject laserPrefab;
+
+    public GameObject player;
+
+    [HideInInspector]
+    public TypeOfShoot typeOfShoot;
+
+    private bool right = true;
 
     public void PlayerAttack()
     {
@@ -32,7 +47,8 @@ public class PlayerAttackEvent : MonoBehaviour
             {
                 if (!playerController.HasBeenHitted().Contains(enemyHitted.GetInstanceID()))
                 {
-                    enemyHitted.GetComponent<DamageController>().TakeDamage(damage);
+                    if (!playerController.skillTree.skills.rageActive) enemyHitted.GetComponent<DamageController>().TakeDamage(damage);
+                    else enemyHitted.GetComponent<DamageController>().TakeDamage(damage * playerController.skillTree.skills.rageMultiplier);
                     playerController.AddHitted(enemyHitted.GetInstanceID());
                 }
             }
@@ -42,7 +58,7 @@ public class PlayerAttackEvent : MonoBehaviour
             }
         }
         Vector3 temp = new Vector3(25, 0, 0);
-        playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     }
 
     public void ResetHitted()
@@ -59,7 +75,8 @@ public class PlayerAttackEvent : MonoBehaviour
             {
                 if (!playerController.HasBeenHitted().Contains(enemyHitted.GetInstanceID()))
                 {
-                    enemyHitted.GetComponent<DamageController>().TakeDamage(damage);
+                    if (!playerController.skillTree.skills.rageActive) enemyHitted.GetComponent<DamageController>().TakeDamage(damage);
+                    else enemyHitted.GetComponent<DamageController>().TakeDamage(damage * playerController.skillTree.skills.rageMultiplier);
                     playerController.AddHitted(enemyHitted.GetInstanceID());
                     KnockBack(enemyHitted);
                 }
@@ -70,13 +87,13 @@ public class PlayerAttackEvent : MonoBehaviour
             }
         }
         Vector3 temp = new Vector3(30, 0, 0);
-        playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     }
 
-    void KnockBack (Collider collider)
+    void KnockBack(Collider collider)
     {
         Rigidbody rb = collider.GetComponent<Rigidbody>();
-        if(rb != null)
+        if (rb != null)
         {
             Vector3 direction = collider.transform.position - attackPoint.position;
             direction.y = 0;
@@ -85,19 +102,60 @@ public class PlayerAttackEvent : MonoBehaviour
         }
     }
 
-    public void PlayerShoot ()
+    public void PlayerShoot()
     {
-        right = playerrb.GetComponent<PlayerController>().isFacingRight;
-        if(right)
-        {    
-            Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
-        }
-        else
+        if (typeOfShoot == TypeOfShoot.normal)
         {
-            Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+            right = player.GetComponent<PlayerController>().isFacingRight;
+            if (right)
+            {
+                Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+            }
+            Vector3 temp = new Vector3(-15, 0, 0);
+            player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
         }
-        Vector3 temp = new Vector3(-15, 0, 0);
-        playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
-    } 
+        if(typeOfShoot == TypeOfShoot.grenade)
+        {
+            right = player.GetComponent<PlayerController>().isFacingRight;
+            if (right)
+            {
+                Instantiate(grenadePrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                Instantiate(grenadePrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+            }
+            Vector3 temp = new Vector3(-15, 0, 0);
+            player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        }
+        if (typeOfShoot == TypeOfShoot.laser)
+        {
+            right = player.GetComponent<PlayerController>().isFacingRight;
+            if (right)
+            {
+                Instantiate(laserPrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                Instantiate(laserPrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+            }
+            Vector3 temp = new Vector3(-15, 0, 0);
+            player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        }
+    }
+
+    public void StartDashing()
+    {
+        playerController.isDashing = true;
+    }
+
+    public void StopDashing()
+    {
+        playerController.isDashing = false;
+    }
 
 }

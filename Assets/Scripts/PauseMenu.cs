@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject SettingsMenuUI;
 
-    public static bool GameIsPaused = false;
+    public bool GameIsPaused = false;
 
     public GameObject CanvasUI;
     

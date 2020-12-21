@@ -30,8 +30,4 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void Feedback()
-    {
-        Application.OpenURL("https://forms.gle/3o1fGK1hvSGvCsNL8");
-    }
 }

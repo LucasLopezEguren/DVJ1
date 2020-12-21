@@ -15,6 +15,8 @@ public class FlyingEnemyController : MonoBehaviour
 
     public float shootingRange = 5f;
 
+    public int experienceWhenKill = 20;
+
     private Vector3 initialPosition;
 
     private Vector3 minPosition;
@@ -47,12 +49,17 @@ public class FlyingEnemyController : MonoBehaviour
 
     private Stats stats;
 
+    private SkillTree skillTree;
+
+    private bool experienceAdded = false;
+
     private bool killStatsAdded = false;
 
     // Start is called before the first frame update
     void Start()
     {
         stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
+        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
         rb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
         minPosition = new Vector3(initialPosition.x - maxMovementRange, initialPosition.y, initialPosition.z);
@@ -87,6 +94,11 @@ public class FlyingEnemyController : MonoBehaviour
         {
             stats.EnemyKilled++;
             killStatsAdded = true;
+        }
+        if (skillTree && !experienceAdded)
+        {
+            skillTree.AddExperience(experienceWhenKill);
+            experienceAdded = true;
         }
         Destroy(gameObject);
     }
