@@ -352,3 +352,31 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: FlyingEnemy_Fall
+    clip: {fileID: 8300000, guid: abdea4512362a48c6ae2cc18e1472136, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: FlyingEnemy_Shoot
+    clip: {fileID: 8300000, guid: ffa712e40bb3d46fca02b111a6e2e71a, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: FlyingEnemy_Explosion
+    clip: {fileID: 8300000, guid: a8c4b9bffb4614cd5b3b72490597b98e, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: FlyingEnemy_Fly
+    clip: {fileID: 8300000, guid: c148a4a76c69f4393b33f983bf4b3e52, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
