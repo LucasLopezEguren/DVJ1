@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class ShowStats : MonoBehaviour
 {
-    public GameObject time;
+    public GameObject timeSeg;
+
+    public GameObject timeMin;
 
     public GameObject enemyKilled;
 
@@ -35,7 +37,8 @@ public class ShowStats : MonoBehaviour
         {
             secondsToShow = Mathf.RoundToInt(seconds).ToString();
         }
-        time.GetComponent<Text>().text = minutes.ToString() + ":" + secondsToShow;
+        timeSeg.GetComponent<Text>().text = secondsToShow;
+        timeMin.GetComponent<Text>().text = minutes.ToString();
         //time.GetComponent<Text>().text = stats.TimeToCompleteLevel.ToString();
         enemyKilled.GetComponent<Text>().text = stats.EnemyKilled.ToString();
         maxCombo.GetComponent<Text>().text = stats.MaxCombo.ToString();
