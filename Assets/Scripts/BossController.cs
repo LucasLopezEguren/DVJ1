@@ -27,9 +27,10 @@ public class BossController : MonoBehaviour
     public void RemoveAction (string action) {
         possibleActions.RemoveAll(trigger => trigger == action);
     }
-
+    public AudioManager audioManager;
     void Start() {
-        _transform = GetComponent<Transform>();    
+        _transform = GetComponent<Transform>();   
+        audioManager = FindObjectOfType<AudioManager>(); 
     }
 
     private bool dead = false;
@@ -230,5 +231,10 @@ public class BossController : MonoBehaviour
             death.GetComponent<Transform>().Rotate(0.0f, 180.0f, 0.0f);
             enableColliders();
         }
+    }
+
+    
+    public void PlaySound(string sound) {
+        audioManager.Play(sound);
     }
 }

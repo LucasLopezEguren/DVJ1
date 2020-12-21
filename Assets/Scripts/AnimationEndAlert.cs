@@ -11,4 +11,9 @@ public class AnimationEndAlert : MonoBehaviour
         bossController.AlertObservers(message);
         if (hitPlayer != null) hitPlayer.SetReadyToAttack();
     }
+
+    public void PlaySound(string message)
+    {
+        bossController.PlaySound(message);
+    }
 }
