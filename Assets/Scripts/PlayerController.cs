@@ -214,11 +214,6 @@ public class PlayerController : MonoBehaviour
                 anim.SetInteger("shooting", shootPhase);
             }
         }
-        //if(Input.GetKeyDown(KeyCode.Y))
-        //{
-        //    Vector3 tempi = new Vector3(1000, 0, 0);
-        //    rigidbody.AddForce(tempi);
-        //}
         if (!isGrounded())
         {
             moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
@@ -244,7 +239,7 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        if(Mathf.Abs(Input.GetAxis("Horizontal")) > 0 && dashCooldown >= 1.5f)
+        if(Mathf.Abs(Input.GetAxis("Horizontal")) > 0 && dashCooldown >= 1.5f && canMove && attackPhase == 0 && shootPhase == 0)
         {
             anim.SetTrigger("dash");
             moveSpeed = moveSpeed * 2;
@@ -350,6 +345,7 @@ public class PlayerController : MonoBehaviour
         }
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("landing"))
         {
+            playerAttackEvent.PlayFallSound();
             if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
             {
                 rigidbody.velocity = Vector3.zero;

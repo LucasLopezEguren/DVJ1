@@ -216,4 +216,9 @@ public class PlayerAttackEvent : MonoBehaviour
         audioManager.Play("Player_Step2");
     }
 
+    public void PlayHitElvis()
+    {
+        audioManager.Play("Player_HitElvis");
+    }
+
 }

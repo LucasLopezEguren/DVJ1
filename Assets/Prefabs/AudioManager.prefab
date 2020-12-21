@@ -205,7 +205,14 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
-  - name: PlayerStep2
+  - name: Player_Step2
+    clip: {fileID: 8300000, guid: 875309402fab8415fa75b0a8e9091f65, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: Player_HitElvis
     clip: {fileID: 8300000, guid: 875309402fab8415fa75b0a8e9091f65, type: 3}
     volume: 1
     pitch: 0.9
