@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerAttackEvent : MonoBehaviour
 {
+    public enum TypeOfShoot
+    {
+        normal,
+        grenade,
+        laser
+    }
+
     public Transform attackPoint;
 
     public float attackRange;
@@ -17,11 +24,26 @@ public class PlayerAttackEvent : MonoBehaviour
     public float knockbackStrength;
 
     public Transform shootPoint;
+
     public GameObject bulletPrefab;
 
-    public GameObject playerrb;
+    public GameObject grenadePrefab;
 
-    bool right = true;
+    public GameObject laserPrefab;
+
+    public GameObject player;
+
+    [HideInInspector]
+    public TypeOfShoot typeOfShoot;
+
+    private bool right = true;
+
+    private AudioManager audioManager;
+
+    private void Start()
+    {
+        audioManager = (AudioManager)GameObject.Find("AudioManager").GetComponent("AudioManager");
+    }
 
     public void PlayerAttack()
     {
@@ -32,7 +54,8 @@ public class PlayerAttackEvent : MonoBehaviour
             {
                 if (!playerController.HasBeenHitted().Contains(enemyHitted.GetInstanceID()))
                 {
-                    enemyHitted.GetComponent<DamageController>().TakeDamage(damage);
+                    if (!playerController.skillTree.skills.rageActive) enemyHitted.GetComponent<DamageController>().TakeDamage(damage);
+                    else enemyHitted.GetComponent<DamageController>().TakeDamage(damage * playerController.skillTree.skills.rageMultiplier);
                     playerController.AddHitted(enemyHitted.GetInstanceID());
                 }
             }
@@ -42,7 +65,7 @@ public class PlayerAttackEvent : MonoBehaviour
             }
         }
         Vector3 temp = new Vector3(25, 0, 0);
-        playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);        
     }
 
     public void ResetHitted()
@@ -59,7 +82,8 @@ public class PlayerAttackEvent : MonoBehaviour
             {
                 if (!playerController.HasBeenHitted().Contains(enemyHitted.GetInstanceID()))
                 {
-                    enemyHitted.GetComponent<DamageController>().TakeDamage(damage);
+                    if (!playerController.skillTree.skills.rageActive) enemyHitted.GetComponent<DamageController>().TakeDamage(damage);
+                    else enemyHitted.GetComponent<DamageController>().TakeDamage(damage * playerController.skillTree.skills.rageMultiplier);
                     playerController.AddHitted(enemyHitted.GetInstanceID());
                     KnockBack(enemyHitted);
                 }
@@ -70,13 +94,13 @@ public class PlayerAttackEvent : MonoBehaviour
             }
         }
         Vector3 temp = new Vector3(30, 0, 0);
-        playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
     }
 
-    void KnockBack (Collider collider)
+    void KnockBack(Collider collider)
     {
         Rigidbody rb = collider.GetComponent<Rigidbody>();
-        if(rb != null)
+        if (rb != null)
         {
             Vector3 direction = collider.transform.position - attackPoint.position;
             direction.y = 0;
@@ -85,18 +109,120 @@ public class PlayerAttackEvent : MonoBehaviour
         }
     }
 
-    public void PlayerShoot ()
+    public void PlayerShoot()
     {
-        right = playerrb.GetComponent<PlayerController>().isFacingRight;
-        if(right)
-        {    
-            Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
-        }
-        else
+        if (typeOfShoot == TypeOfShoot.normal)
         {
-            Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+            right = player.GetComponent<PlayerController>().isFacingRight;
+            if (right)
+            {
+                Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+            }
+            Vector3 temp = new Vector3(-15, 0, 0);
+            player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
         }
-        Vector3 temp = new Vector3(-15, 0, 0);
-        playerrb.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
-    } 
+        if(typeOfShoot == TypeOfShoot.grenade)
+        {
+            right = player.GetComponent<PlayerController>().isFacingRight;
+            if (right)
+            {
+                Instantiate(grenadePrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                Instantiate(grenadePrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+            }
+            Vector3 temp = new Vector3(-15, 0, 0);
+            player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        }
+        if (typeOfShoot == TypeOfShoot.laser)
+        {
+            right = player.GetComponent<PlayerController>().isFacingRight;
+            if (right)
+            {
+                Instantiate(laserPrefab, shootPoint.position, Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                Instantiate(laserPrefab, shootPoint.position, Quaternion.Euler(0, 180, 0));
+            }
+            Vector3 temp = new Vector3(-15, 0, 0);
+            player.GetComponent<Rigidbody>().AddRelativeForce(temp, ForceMode.Impulse);
+        }
+    }
+
+    public void StartDashing()
+    {
+        playerController.isDashing = true;
+    }
+
+    public void StopDashing()
+    {
+        playerController.isDashing = false;
+    }
+
+    public void PlayFirstAttackSound()
+    {
+        audioManager.Play("Player_Attack1");
+    }
+
+    public void PlaySecondAttackSound()
+    {
+        audioManager.Play("Player_Attack2");
+    }
+
+    public void PlayThirdAttackSound()
+    {
+        audioManager.Play("Player_Attack3");
+    }
+
+    public void PlayFallSound()
+    {
+        audioManager.Play("Player_Fall");
+    }
+
+    public void PlayDashSound()
+    {
+        audioManager.Play("Player_Dash");
+    }
+
+    public void PlayShootSound()
+    {
+        audioManager.Play("Player_Shoot");
+    }
+
+    public void PlayHit1Sound()
+    {
+        audioManager.Play("Player_Hit1");
+    }
+
+    public void PlayHit2Sound()
+    {
+        audioManager.Play("Player_Hit2");
+    }
+
+    public void PlayHit3Sound()
+    {
+        audioManager.Play("Player_Hit3");
+    }
+
+    public void PlayStep1Sound()
+    {
+        audioManager.Play("Player_Step1");
+    }
+
+    public void PlayStep2Sound()
+    {
+        audioManager.Play("Player_Step2");
+    }
+
+    public void PlayHitElvis()
+    {
+        audioManager.Play("Player_HitElvis");
+    }
+
 }

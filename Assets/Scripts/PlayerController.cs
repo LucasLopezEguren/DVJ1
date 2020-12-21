@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
 
+    public float normalSpeed;
+
     public float jumpForce;
 
     public float gravityScale;
@@ -43,12 +45,20 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove = true;
 
+    public bool canDash = true;
+
     public bool isFacingRight = true;
 
     [HideInInspector]
     public Vector3 moveDirection;
 
     private bool canJump = true;
+
+    public float jumpCooldown = 2f; 
+    
+    public float dashCooldown = 2f;
+
+    public bool dashed = false;
 
     float timeToMove = 0.5f;
 
@@ -59,6 +69,26 @@ public class PlayerController : MonoBehaviour
     float distToGround;
 
     public LayerMask Ground;
+
+    [HideInInspector]
+    public SkillTree skillTree;
+
+    private SkillsUI skillsUI;
+
+    public PlayerAttackEvent playerAttackEvent;
+
+    [HideInInspector]
+    public bool isDashing = false;
+
+    private int jumps = 2;
+
+    public GameObject defenseParticles;
+
+    public GameObject rageParticles;
+
+    public float rageCooldown = 20f;
+
+    public float shieldCooldown = 20f;
 
     void Start()
     {
@@ -78,6 +108,10 @@ public class PlayerController : MonoBehaviour
             //Debug.Log(e.Message);
         }
         distToGround = _collider.bounds.extents.y;
+        normalSpeed = moveSpeed;
+        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
+        skillsUI = (SkillsUI)GameObject.Find("SkillsUI").GetComponent("SkillsUI");
+        playerAttackEvent.typeOfShoot = PlayerAttackEvent.TypeOfShoot.normal;
     }
 
     void FixedUpdate()
@@ -89,6 +123,13 @@ public class PlayerController : MonoBehaviour
             temp = temp.normalized * moveSpeed * Time.deltaTime;
             rigidbody.MovePosition(transform.position + temp);
         }
+
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            Dash();
+        }
+        
+        CheckDashAnimation();
     }
 
     void Update()
@@ -100,6 +141,26 @@ public class PlayerController : MonoBehaviour
         if(!canMove && currentHealth > 0)
         {
             timeStunned += Time.deltaTime;
+        }
+        if(jumpCooldown < 1.5f)
+        {
+            jumpCooldown += Time.deltaTime;
+        }
+        if(dashCooldown < 1.5f)
+        {
+            dashCooldown += Time.deltaTime;
+        }
+        if(dashCooldown < 1.5f)
+        {
+            dashCooldown += Time.deltaTime;
+        }
+        if(rageCooldown < 20f)
+        {
+            rageCooldown += Time.deltaTime;
+        }
+        if(shieldCooldown < 20f)
+        {
+            shieldCooldown += Time.deltaTime;
         }
         if(!canJump && currentHealth > 0)
         {
@@ -122,19 +183,28 @@ public class PlayerController : MonoBehaviour
             temp = temp.normalized * moveSpeed * Time.deltaTime;
             rigidbody.MovePosition(transform.position + temp);
         }
-
         if (isGrounded() && canMove )
         {
             if (canJump && currentHealth > 0 && Input.GetButtonDown("Jump"))
             {
-                anim.SetBool("jump", true);
-                moveDirection.y = jumpForce;
+                if(jumpCooldown >= 1.5f)
+                {
+                    anim.SetBool("jump", true);
+                    moveDirection.y = jumpForce;
+                    jumpCooldown = 0f;
+                }
+                jumps--;
             }
-            anim.SetBool("touchFloor", true);
+            jumps=2;
         }
         else
         {
-            anim.SetBool("touchFloor", false);
+            if(skillTree.skills.doubleJump && jumps > 1 && currentHealth > 0 && Input.GetButtonDown("Jump"))
+            {
+                anim.SetBool("jump", true);
+                moveDirection.y = jumpForce;
+                jumps--;
+            }
             anim.SetBool("jump", false);
         }
         if (Input.GetKeyDown(KeyCode.Z))
@@ -147,21 +217,16 @@ public class PlayerController : MonoBehaviour
                 }
             }else{
                 anim.SetBool("airAttack", true);
-            }
-            
+            }            
         }
         if(Input.GetKeyDown(KeyCode.X))
         {   
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
             {
+                playerAttackEvent.typeOfShoot = PlayerAttackEvent.TypeOfShoot.normal;
                 ComboShoot();
                 anim.SetInteger("shooting", shootPhase);
             }
-        }
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            Vector3 tempi = new Vector3(1000, 0, 0);
-            rigidbody.AddForce(tempi);
         }
         if (!isGrounded())
         {
@@ -182,14 +247,50 @@ public class PlayerController : MonoBehaviour
         CheckJumpAnimation();
         CheckStunAnimation();
         CheckDieAnimation();
+        //CheckDashAnimation();
+        CheckSkills();
     }
 
+    private void Dash()
+    {
+        if(Mathf.Abs(Input.GetAxis("Horizontal")) > 0 && dashCooldown >= 1.5f && canMove && attackPhase == 0 && shootPhase == 0)
+        {
+            anim.SetTrigger("dash");
+            moveSpeed = moveSpeed * 2;
+            dashCooldown = 0;
+            gravityScale = 0;
+        }
+    }
+
+    private void CheckDashAnimation()
+    {
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9)
+        {
+            anim.ResetTrigger("dash");
+            moveSpeed = normalSpeed;
+            invincible = false;
+            canDash = true;
+            canFlip = true;
+            canMove = true;
+            isDashing = false;
+            gravityScale = 5;
+        }
+        
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9)
+        {
+            rigidbody.velocity = Vector3.zero;
+            canMove = false;
+            canFlip = false;
+            canDash = false;
+            invincible = true;
+        }
+    }
 
     private void CheckAttackAnimation()
     {
         if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
             || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle")
-            || anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack")) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            /*|| anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack")*/) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             rigidbody.velocity = Vector3.zero;//for not falling while attacking
             canMove = false;
@@ -215,6 +316,12 @@ public class PlayerController : MonoBehaviour
                 canMove = true;
                 canFlip = true;
             }
+        }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.6)
+        {
+            rigidbody.velocity = Vector3.zero;
+            canMove = false;
+            canFlip = false;
         }
     }
 
@@ -252,6 +359,7 @@ public class PlayerController : MonoBehaviour
         }
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("landing"))
         {
+            playerAttackEvent.PlayFallSound();
             if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
             {
                 rigidbody.velocity = Vector3.zero;
@@ -274,7 +382,8 @@ public class PlayerController : MonoBehaviour
 
     private void CheckStunAnimation()
     {
-        if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")) 
+        if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")
+        || anim.GetCurrentAnimatorStateInfo(0).IsName("reincorp")) 
         && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             invincible = true;
@@ -282,7 +391,8 @@ public class PlayerController : MonoBehaviour
             canFlip = false;
             canJump = false;
         }
-        if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")) 
+        if((anim.GetCurrentAnimatorStateInfo(0).IsName("stun_soft") || anim.GetCurrentAnimatorStateInfo(0).IsName("death")
+        || anim.GetCurrentAnimatorStateInfo(0).IsName("reincorp")) 
         && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
             invincible = false;
@@ -346,6 +456,7 @@ public class PlayerController : MonoBehaviour
             shootPhase = 1;
         }
     }
+
     public void TakeDamage(int damage)
     {
         if(!invincible)
@@ -390,17 +501,6 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded()
     {
-        /*Vector3 start = transform.position;
-        float maxDistance = 0.5f;
-        start.y = start.y + (Vector3.down * 0.8f).y;
-        bool raycastHit = Physics.Raycast(start, Vector3.down, maxDistance);
-        Vector3 end = start + (Vector3.down * maxDistance);
-        Color color = Color.magenta;
-        if (!raycastHit){
-            color = Color.yellow;
-        }
-        Debug.DrawLine(start, end, color);
-        return raycastHit;*/
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f, Ground.value);
     }
 
@@ -425,4 +525,90 @@ public class PlayerController : MonoBehaviour
         hasBeenHitted.Add(hitted);
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if(moveSpeed > normalSpeed)
+        {
+            moveSpeed = normalSpeed;
+        }
+    }
+
+    private void CheckSkills()
+    {
+        if (skillTree.skills.shield)
+        {
+            if (skillsUI.selectedSkill.name == "Shield" && Input.GetKeyDown(KeyCode.LeftControl) && !skillTree.skills.rageActive 
+            && shieldCooldown >= 20)
+            {
+                skillTree.skills.shieldActive = true;
+                defenseParticles.SetActive(true);
+                skillTree.skills.timerShield = skillTree.skills.timeOfShield;
+                invincible = true;
+                shieldCooldown = 0;
+            }
+            if (skillTree.skills.shieldActive)
+            {
+                skillTree.skills.timerShield -= Time.deltaTime;
+                if (skillTree.skills.timerShield <= 0)
+                {
+                    skillTree.skills.shieldActive = false;
+                    defenseParticles.SetActive(false);
+                    invincible = false;
+                }
+            }
+        }
+        if (skillTree.skills.rage)
+        {
+            if (skillsUI.selectedSkill.name == "Rage" && Input.GetKeyDown(KeyCode.LeftControl) && !skillTree.skills.shieldActive 
+            && rageCooldown >= 20)
+            {
+                skillTree.skills.rageActive = true;
+                rageParticles.SetActive(true);
+                skillTree.skills.timerRage = skillTree.skills.timeOfRage;
+                rageCooldown = 0;
+            }
+            if (skillTree.skills.rageActive)
+            {
+                skillTree.skills.timerRage -= Time.deltaTime;
+                if (skillTree.skills.timerRage <= 0)
+                {
+                    skillTree.skills.rageActive = false;
+                    rageParticles.SetActive(false);
+                }
+            }
+        }
+        if (skillTree.skills.grenade)
+        {
+            if (skillsUI.selectedSkill.name == "Grenade" && Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
+                {
+                    playerAttackEvent.typeOfShoot = PlayerAttackEvent.TypeOfShoot.grenade;
+                    ComboShoot();
+                    anim.SetInteger("shooting", shootPhase);
+                }
+            }
+        }
+        if (skillTree.skills.laser)
+        {
+            if (skillsUI.selectedSkill.name == "Laser" && Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
+                {
+                    playerAttackEvent.typeOfShoot = PlayerAttackEvent.TypeOfShoot.laser;
+                    ComboShoot();
+                    anim.SetInteger("shooting", shootPhase);
+                }
+            }
+        }
+        //if (skillTree.skills.doubleJump)
+        //{
+        //    if(doubleJump == 1 && Input.GetButtonDown("Jump"))
+        //    {
+        //        doubleJump--;
+        //        anim.SetBool("jump", true);
+        //        moveDirection.y = jumpForce;
+        //    }
+        //}
+    } 
 }

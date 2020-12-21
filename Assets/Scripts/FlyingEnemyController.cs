@@ -7,10 +7,15 @@ using UnityEngine.UI;
 public class FlyingEnemyController : MonoBehaviour
 {
     public float movementSpeed = 3.0f;
+    public bool summonedUnit = false;
+    public SpawnController summoner;
+    public int summonValor = 1;
 
     public float maxMovementRange = 5f;
 
     public float shootingRange = 5f;
+
+    public int experienceWhenKill = 20;
 
     private Vector3 initialPosition;
 
@@ -26,6 +31,9 @@ public class FlyingEnemyController : MonoBehaviour
 
     public int maxHealth = 100;
 
+    [SerializeField]
+    private float timeToDissappearAfterDie = 5f;
+
     private Rigidbody rb;
 
     public GameObject healthBarUI;
@@ -36,6 +44,8 @@ public class FlyingEnemyController : MonoBehaviour
 
     public GameObject laser;
 
+    public Animator anim;
+
     private DamageController damageController;
 
     public GameObject bloodSplash;
@@ -44,24 +54,39 @@ public class FlyingEnemyController : MonoBehaviour
 
     private Stats stats;
 
+    private SkillTree skillTree;
+
+    private bool experienceAdded = false;
+
     private bool killStatsAdded = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        anim.SetBool("isDying", false);
         stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
+        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
         rb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
         minPosition = new Vector3(initialPosition.x - maxMovementRange, initialPosition.y, initialPosition.z);
         maxPosition = new Vector3(initialPosition.x + maxMovementRange, initialPosition.y, initialPosition.z);
         damageController = this.GetComponent<DamageController>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        InvokeRepeating(nameof(EnableAttack), 0f, 2f);
+        InvokeRepeating(nameof(EnableAttack), 0f, 3f);
+        if (summonedUnit && summoner != null) {
+            summoner.enemiesAlive += summonValor;    
+        }
     }
 
+    private bool isDead = false;
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if (!IsAlive() && summonedUnit && !isDead) {
+            summoner.enemiesAlive -= summonValor; 
+            isDead = true;
+        }
+        UpdateAnimations();
         Movement();
         CheckShootingRange();
         if (!IsAlive())
@@ -70,25 +95,61 @@ public class FlyingEnemyController : MonoBehaviour
         }
     }
 
+    private void UpdateAnimations()
+    {
+        if(!isAttacking) 
+        { 
+            anim.SetBool("isBomb", false);
+            anim.SetBool("isLaser", false);
+        }
+        /*anim.SetBool("isWalking", !isAttacking);
+        anim.SetBool("isbomb", isAttacking && isBomb);
+        anim.SetBool("isLaser", isAttacking && !isBomb);
+        if (isAttacking && isBomb)
+        {
+            anim.SetTrigger("DropBomb");
+        }
+        if (isAttacking && !isBomb)
+        {
+            anim.SetTrigger("ShootLaser");
+        }*/
+
+        if (!IsAlive())
+        {
+            Die();
+        }
+    }
+
     private void Die()
     {
+        rb.useGravity = true;
+        anim.SetBool("isDying", true);
+        gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
         if (stats && !killStatsAdded)
         {
             stats.EnemyKilled++;
             killStatsAdded = true;
         }
-        Destroy(gameObject);
+
+        if (skillTree && !experienceAdded)
+        {
+            skillTree.AddExperience(experienceWhenKill);
+            experienceAdded = true;
+        }
+        Destroy(gameObject, timeToDissappearAfterDie);
     }
 
     public void Shoot()
     {
         if (isBomb)
         {
+            anim.SetBool("isBomb", true);
             GameObject b = Instantiate(bomb);
             b.transform.position = transform.position;
         }
         else
         {
+            anim.SetBool("isLaser", true);
             GameObject b = Instantiate(laser);
             b.transform.position = transform.position;
         }

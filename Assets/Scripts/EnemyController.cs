@@ -20,6 +20,8 @@ public class EnemyController : MonoBehaviour
 
     public GameObject bloodSplash;
 
+    public int experienceWhenKill = 10;
+
     [SerializeField]
     private float timeToDissappearAfterDie = 5f;
 
@@ -47,6 +49,10 @@ public class EnemyController : MonoBehaviour
 
     private bool killStatsAdded = false;
 
+    private SkillTree skillTree;
+
+    private bool experienceAdded = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +63,7 @@ public class EnemyController : MonoBehaviour
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
+        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
     }
 
     // Update is called once per frame
@@ -183,6 +190,11 @@ public class EnemyController : MonoBehaviour
         {
             stats.EnemyKilled++;
             killStatsAdded = true;
+        }
+        if(skillTree && !experienceAdded)
+        {
+            skillTree.AddExperience(experienceWhenKill);
+            experienceAdded = true;
         }
         Destroy(gameObject, timeToDissappearAfterDie);
     }

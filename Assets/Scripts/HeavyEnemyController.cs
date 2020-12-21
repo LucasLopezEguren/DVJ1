@@ -5,6 +5,10 @@ public class HeavyEnemyController : MonoBehaviour
 {
     public float movementSpeed = 3.0f;
 
+    public bool summonedUnit = false;
+    public SpawnController summoner;
+    public int summonValor = 2;
+
     public float distanceToStand = 1.3f;
 
     public float chasingSpeed = 5.0f;
@@ -12,6 +16,8 @@ public class HeavyEnemyController : MonoBehaviour
     public float rangeForChasing = 5f;
 
     public int damageToPlayer = 15;
+
+    public int experienceWhenKill = 30;
 
     [SerializeField]
     private float timeToDissappearAfterDie = 5f;
@@ -42,7 +48,13 @@ public class HeavyEnemyController : MonoBehaviour
 
     private bool killStatsAdded = false;
 
+    private SkillTree skillTree;
+
+    private bool experienceAdded = false;
+
     private bool canHit = false;
+
+    private bool canFlip = true;
 
     // Start is called before the first frame update
     void Start()
@@ -51,11 +63,21 @@ public class HeavyEnemyController : MonoBehaviour
         damageController = this.GetComponent<DamageController>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         anim.SetBool("isDying", false);
+        stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
+        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
+        if (summonedUnit && summoner != null) {
+            summoner.enemiesAlive += summonValor;    
+        }
     }
 
+    private bool isDead = false;
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!IsAlive() && summonedUnit && !isDead) {
+            summoner.enemiesAlive -= summonValor; 
+            isDead = true;
+        }
         UpdateAnimations();
         CheckMovement();
         CheckDirection(transform.position.x, targetPlayer.position.x);
@@ -112,6 +134,11 @@ public class HeavyEnemyController : MonoBehaviour
             stats.EnemyKilled++;
             killStatsAdded = true;
         }
+        if (skillTree && !experienceAdded)
+        {
+            skillTree.AddExperience(experienceWhenKill);
+            experienceAdded = true;
+        }
         Destroy(gameObject, timeToDissappearAfterDie);
     }
 
@@ -143,14 +170,14 @@ public class HeavyEnemyController : MonoBehaviour
         {
             if (positionX < targetPositionX)
             {
-                if (!isFacingRight && !isPlayingAttackAnimation())
+                if (!isFacingRight && canFlip)
                 {
                     Flip();
                 }
             }
             else
             {
-                if (isFacingRight && !isPlayingAttackAnimation())
+                if (isFacingRight && canFlip)
                 {
                     Flip();
                 }
@@ -191,5 +218,15 @@ public class HeavyEnemyController : MonoBehaviour
     public void StopHit()
     {
         canHit = false;
+    }
+
+    public void CanFlip()
+    {
+        canFlip = true;
+    }
+
+    public void CantFlip()
+    {
+        canFlip = false;
     }
 }

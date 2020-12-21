@@ -25,6 +25,13 @@ public class Stats : MonoBehaviour
 
     public static Stats instance;
 
+    public int finishedChunks = 0;
+
+    public void AddFinishedChunk() {
+        finishedChunks = finishedChunks + 1;
+    }
+
+
     [HideInInspector]
     public bool LevelComplete = false;
 

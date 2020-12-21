@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class DamageController : MonoBehaviour
 {
     public GameObject healthBarUI;
-
+    public bool hasDrop;
+    public GameObject drop;
     public Slider slider;
 
     public int maxHealth;
@@ -21,6 +22,8 @@ public class DamageController : MonoBehaviour
 
     private GameManager gameManager;
 
+    private AudioManager audioManager;
+
     void Start()
     {
         //rb = GetComponent<Rigidbody>();
@@ -30,6 +33,7 @@ public class DamageController : MonoBehaviour
             slider.value = CalculateHealth();
         }
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        audioManager = (AudioManager)GameObject.Find("AudioManager").GetComponent("AudioManager");
     }
 
     private void Update()
@@ -48,6 +52,7 @@ public class DamageController : MonoBehaviour
     {
         if (CalculateHealth() > 0)
         {
+            PlayHitSound();
             if (isStunned)
             {
                 isStillStunned = true;
@@ -69,7 +74,7 @@ public class DamageController : MonoBehaviour
                 Instantiate(bloodSplash, splashPositionLow, Quaternion.identity);
                 Instantiate(bloodSplash, splashPositionMid, Quaternion.identity);
                 Instantiate(bloodSplash, splashPositionHigh, Quaternion.identity);
-            } else {
+            } else if (gameObject.name != "Boss") {
                 Instantiate(bloodSplash, transform.position, Quaternion.identity);
             }
             try
@@ -84,7 +89,38 @@ public class DamageController : MonoBehaviour
             if (health <= 0)
             {
                 healthBarUI.SetActive(false);
+                if (hasDrop && drop != null){
+                    Vector3 powerUpPosition = transform.position;
+                    powerUpPosition.y = transform.position.y + 0.5f;
+                    powerUpPosition.z = transform.position.z + 0f;
+                    Instantiate(drop, powerUpPosition, transform.rotation);
+                }
             }
         }
     }
+
+    private void PlayHitSound()
+    {
+        int random = 0;
+        if (audioManager)
+        {
+            random = Random.Range(1, 3);
+            switch (random)
+            {
+                case 1:
+                    audioManager.Play("Player_Hit1");
+                    break;
+                case 2:
+                    audioManager.Play("Player_Hit2");
+                    break;
+                case 3:
+                    audioManager.Play("Player_Hit3");
+                    break;
+                default:
+                    audioManager.Play("Player_Hit1");
+                    break;
+            };
+        }
+    }
+
 }
