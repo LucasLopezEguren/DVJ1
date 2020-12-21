@@ -210,7 +210,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "ARROWS - MOVE \nZ - ATTACK\nX - SHOOT\nC - DASH\nSPACE - JUMP\nLEFT SHIFT
-    - CHANGE ACTIVE SKILL\nLEFT CTRL - FIRE ACTIVE SKILL"
+    - CHANGE SPECIAL POWER\nLEFT CTRL - SPECIAL POWER"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7836401545a3847d991b343a2ba355b1, type: 2}
   m_sharedMaterial: {fileID: -8058801916269603183, guid: 7836401545a3847d991b343a2ba355b1, type: 2}
