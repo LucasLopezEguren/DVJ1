@@ -57,6 +57,7 @@ public class FlyingEnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim.SetBool("isDying", false);
         stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
         rb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
@@ -89,24 +90,24 @@ public class FlyingEnemyController : MonoBehaviour
 
     private void UpdateAnimations()
     {
-        if (!isAttacking) 
-        {
-            anim.ResetTrigger("DropBomb");
-            anim.ResetTrigger("ShootLaser");
-            anim.SetTrigger("Idle"); 
+        if(!isAttacking) 
+        { 
+            anim.SetBool("isBomb", false);
+            anim.SetBool("isLaser", false);
         }
+        /*anim.SetBool("isWalking", !isAttacking);
+        anim.SetBool("isbomb", isAttacking && isBomb);
+        anim.SetBool("isLaser", isAttacking && !isBomb);
         if (isAttacking && isBomb)
         {
-            anim.ResetTrigger("Idle");
             anim.SetTrigger("DropBomb");
         }
         if (isAttacking && !isBomb)
         {
-            anim.ResetTrigger("Idle");
             anim.SetTrigger("ShootLaser");
-        }
+        }*/
 
-        if (CalculateHealth() <= 0)
+        if (!IsAlive())
         {
             Die();
         }
@@ -115,8 +116,7 @@ public class FlyingEnemyController : MonoBehaviour
     private void Die()
     {
         rb.useGravity = true;
-        anim.ResetTrigger("Idle");
-        anim.SetTrigger("Die");
+        anim.SetBool("isDying", true);
         gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
         if (stats && !killStatsAdded)
         {
@@ -130,11 +130,13 @@ public class FlyingEnemyController : MonoBehaviour
     {
         if (isBomb)
         {
+            anim.SetBool("isBomb", true);
             GameObject b = Instantiate(bomb);
             b.transform.position = transform.position;
         }
         else
         {
+            anim.SetBool("isLaser", true);
             GameObject b = Instantiate(laser);
             b.transform.position = transform.position;
         }
