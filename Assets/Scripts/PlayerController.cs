@@ -525,7 +525,7 @@ public class PlayerController : MonoBehaviour
     {
         if (skillTree.skills.shield)
         {
-            if (skillsUI.selectedSkill.name == "Shield" && Input.GetKeyDown(KeyCode.LeftAlt) && !skillTree.skills.shieldActive)
+            if (skillsUI.selectedSkill.name == "Shield" && Input.GetKeyDown(KeyCode.LeftControl) && !skillTree.skills.shieldActive)
             {
                 skillTree.skills.shieldActive = true;
                 skillTree.skills.timerShield = skillTree.skills.timeOfShield;
@@ -543,7 +543,7 @@ public class PlayerController : MonoBehaviour
         }
         if (skillTree.skills.rage)
         {
-            if (skillsUI.selectedSkill.name == "Rage" && Input.GetKeyDown(KeyCode.LeftAlt) && !skillTree.skills.rageActive)
+            if (skillsUI.selectedSkill.name == "Rage" && Input.GetKeyDown(KeyCode.LeftControl) && !skillTree.skills.rageActive)
             {
                 skillTree.skills.rageActive = true;
                 skillTree.skills.timerRage = skillTree.skills.timeOfRage;
@@ -559,7 +559,7 @@ public class PlayerController : MonoBehaviour
         }
         if (skillTree.skills.grenade)
         {
-            if (skillsUI.selectedSkill.name == "Grenade" && Input.GetKeyDown(KeyCode.LeftAlt))
+            if (skillsUI.selectedSkill.name == "Grenade" && Input.GetKeyDown(KeyCode.LeftControl))
             {
                 if (!anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
                 {
@@ -571,7 +571,7 @@ public class PlayerController : MonoBehaviour
         }
         if (skillTree.skills.laser)
         {
-            if (skillsUI.selectedSkill.name == "Laser" && Input.GetKeyDown(KeyCode.LeftAlt))
+            if (skillsUI.selectedSkill.name == "Laser" && Input.GetKeyDown(KeyCode.LeftControl))
             {
                 if (!anim.GetCurrentAnimatorStateInfo(0).IsName("third_shoot"))
                 {

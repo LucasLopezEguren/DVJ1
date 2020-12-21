@@ -35,14 +35,15 @@ public class ShowStats : MonoBehaviour
         {
             secondsToShow = Mathf.RoundToInt(seconds).ToString();
         }
-        time.GetComponent<TMPro.TextMeshProUGUI>().text = minutes.ToString() + ":" + secondsToShow;
-        enemyKilled.GetComponent<TMPro.TextMeshProUGUI>().text = stats.EnemyKilled.ToString();
-        maxCombo.GetComponent<TMPro.TextMeshProUGUI>().text = stats.MaxCombo.ToString();
-        score.GetComponent<TMPro.TextMeshProUGUI>().text = stats.Score.ToString();
+        time.GetComponent<Text>().text = minutes.ToString() + ":" + secondsToShow;
+        //time.GetComponent<Text>().text = stats.TimeToCompleteLevel.ToString();
+        enemyKilled.GetComponent<Text>().text = stats.EnemyKilled.ToString();
+        maxCombo.GetComponent<Text>().text = stats.MaxCombo.ToString();
+        score.GetComponent<Text>().text = stats.Score.ToString();
         if(skillTree.skills.HasAllSkills()) skillPointsToSpend.SetActive(false);
         else
         {
-            skillPointsToSpend.GetComponent<TMPro.TextMeshProUGUI>().text = skillTree.skillsPointEarnedInLevel.ToString();           
+            skillPointsToSpend.GetComponent<Text>().text = skillTree.skillsPointEarnedInLevel.ToString();           
         }           
     }
 
