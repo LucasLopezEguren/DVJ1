@@ -7775,6 +7775,7 @@ MonoBehaviour:
   anim: {fileID: 2618390594361260405}
   checkEdge: {fileID: 992625368442067046}
   bloodSplash: {fileID: 309094709680483209, guid: 6a029431e6700495aa51b0344ae5a713, type: 3}
+  experienceWhenKill: 10
   timeToDissappearAfterDie: 5
 --- !u!54 &4874737682469985073
 Rigidbody:
@@ -8972,7 +8973,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 59bb2afac16a8473d8bd096ab3b2102d, type: 2}
+  - {fileID: 2100000, guid: da2b718712901e24cb46e03a49d222e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
