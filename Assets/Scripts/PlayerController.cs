@@ -164,11 +164,9 @@ public class PlayerController : MonoBehaviour
                     jumpCooldown = 0f;
                 }
             }
-            anim.SetBool("touchFloor", true);
         }
         else
         {
-            anim.SetBool("touchFloor", false);
             anim.SetBool("jump", false);
         }
         if (Input.GetKeyDown(KeyCode.Z))
@@ -253,7 +251,7 @@ public class PlayerController : MonoBehaviour
     {
         if ((anim.GetCurrentAnimatorStateInfo(0).IsName("FirstAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("SecondAttack")
             || anim.GetCurrentAnimatorStateInfo(0).IsName("ThirdAttack") || anim.GetCurrentAnimatorStateInfo(0).IsName("AttackBackToIdle")
-            || anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack")) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            /*|| anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack")*/) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             rigidbody.velocity = Vector3.zero;//for not falling while attacking
             canMove = false;
@@ -279,6 +277,12 @@ public class PlayerController : MonoBehaviour
                 canMove = true;
                 canFlip = true;
             }
+        }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("air_attack") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.6)
+        {
+            rigidbody.velocity = Vector3.zero;
+            canMove = false;
+            canFlip = false;
         }
     }
 
