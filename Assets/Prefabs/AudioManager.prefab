@@ -282,3 +282,17 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: OverWorldPartA
+    clip: {fileID: 8300000, guid: fd1b3ed49c1eb4cd49e24d3c1592cd31, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: OverWorldPartB
+    clip: {fileID: 8300000, guid: d2e9c0acc03024627a702962ea24ff60, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 1
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}

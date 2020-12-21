@@ -10,9 +10,13 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
-    private bool isPlayingHubMusic = false;
+    private bool isPlayingHubMusicPartA = false;
 
-    private bool isPlayingOverworld = false;
+    private bool isPlayingHubMusicPartB = false;
+
+    private bool isPlayingOverworldPartA = false;
+
+    private bool isPlayingOverworldPartB = false;
 
     void Awake()
     {
@@ -81,23 +85,41 @@ public class AudioManager : MonoBehaviour
 
     private void CheckPlayHubScene()
     {
-        if (SceneManager.GetActiveScene().name == "Hub" && !isPlayingHubMusic)
+        if (SceneManager.GetActiveScene().name == "Hub" && !isPlayingHubMusicPartA)
         {
             StopAll();
-            isPlayingHubMusic = true;
-            isPlayingOverworld = false;
+            isPlayingHubMusicPartA = true;
+            isPlayingOverworldPartA = false;
+            isPlayingOverworldPartB = false;
             Play("HubPartA");
+        }
+        if (isPlayingHubMusicPartA && !isPlayingHubMusicPartB)
+        {
+            if (!isPlaying("HubPartA"))
+            {
+                isPlayingHubMusicPartB = true;
+                Play("HubPartB");
+            }
         }
     }
 
     private void CheckPlayOverworld()
     {
-        if (SceneManager.GetActiveScene().name == "FirstLevel" && !isPlayingOverworld)
+        if (SceneManager.GetActiveScene().name == "FirstLevel" && !isPlayingOverworldPartA)
         {
             StopAll();
-            isPlayingOverworld = true;
-            isPlayingHubMusic = false;
-            Play("Overworld");
+            isPlayingOverworldPartA = true;
+            isPlayingHubMusicPartA = false;
+            isPlayingHubMusicPartB = false;
+            Play("OverWorldPartA");
+        }
+        if (isPlayingOverworldPartA && !isPlayingOverworldPartB)
+        {
+            if (!isPlaying("OverWorldPartA"))
+            {
+                isPlayingOverworldPartB = true;
+                Play("OverWorldPartB");
+            }
         }
     }
 }
