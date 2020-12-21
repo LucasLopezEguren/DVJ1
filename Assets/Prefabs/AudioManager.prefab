@@ -171,7 +171,7 @@ MonoBehaviour:
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Shoot
-    clip: {fileID: 8300000, guid: c167ebe19798e4bdb96cdae87cb18d21, type: 3}
+    clip: {fileID: 8300000, guid: 87ac678a08c5e4eca8321564c1a89fe9, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -304,21 +304,21 @@ MonoBehaviour:
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 7738974629272879313, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Boss_LowAttack
-    clip: {fileID: 8300000, guid: 10c77490e6fd849959ba532d2f018b15, type: 3}
+    clip: {fileID: 8300000, guid: 7933716555dea417a899bdd575a38f75, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 7738974629272879313, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Boss_TailAttack
-    clip: {fileID: 8300000, guid: 1a682290731084fd7bc8ccfa39b7aae5, type: 3}
+    clip: {fileID: 8300000, guid: 7ff4235f8dfe148de81f2e480f04be46, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 7738974629272879313, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Boss_ClawsAttack
-    clip: {fileID: 8300000, guid: 5556c931d932643f78873bab588dd428, type: 3}
+    clip: {fileID: 8300000, guid: f38d140667ccc4678920aa94929b7f5c, type: 3}
     volume: 1
     pitch: 1
     loop: 1
