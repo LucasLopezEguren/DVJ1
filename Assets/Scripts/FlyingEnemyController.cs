@@ -29,6 +29,9 @@ public class FlyingEnemyController : MonoBehaviour
 
     public int maxHealth = 100;
 
+    [SerializeField]
+    private float timeToDissappearAfterDie = 5f;
+
     private Rigidbody rb;
 
     public GameObject healthBarUI;
@@ -38,6 +41,8 @@ public class FlyingEnemyController : MonoBehaviour
     public GameObject bomb;
 
     public GameObject laser;
+
+    public Animator anim;
 
     private DamageController damageController;
 
@@ -67,12 +72,13 @@ public class FlyingEnemyController : MonoBehaviour
 
     private bool isDead = false;
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!IsAlive() && summonedUnit && !isDead) {
             summoner.enemiesAlive -= summonValor; 
             isDead = true;
         }
+        UpdateAnimations();
         Movement();
         CheckShootingRange();
         if (!IsAlive())
@@ -81,14 +87,43 @@ public class FlyingEnemyController : MonoBehaviour
         }
     }
 
+    private void UpdateAnimations()
+    {
+        if (!isAttacking) 
+        {
+            anim.ResetTrigger("DropBomb");
+            anim.ResetTrigger("ShootLaser");
+            anim.SetTrigger("Idle"); 
+        }
+        if (isAttacking && isBomb)
+        {
+            anim.ResetTrigger("Idle");
+            anim.SetTrigger("DropBomb");
+        }
+        if (isAttacking && !isBomb)
+        {
+            anim.ResetTrigger("Idle");
+            anim.SetTrigger("ShootLaser");
+        }
+
+        if (CalculateHealth() <= 0)
+        {
+            Die();
+        }
+    }
+
     private void Die()
     {
+        rb.useGravity = true;
+        anim.ResetTrigger("Idle");
+        anim.SetTrigger("Die");
+        gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
         if (stats && !killStatsAdded)
         {
             stats.EnemyKilled++;
             killStatsAdded = true;
         }
-        Destroy(gameObject);
+        Destroy(gameObject, timeToDissappearAfterDie);
     }
 
     public void Shoot()
