@@ -31,6 +31,9 @@ public class FlyingEnemyController : MonoBehaviour
 
     public int maxHealth = 100;
 
+    [SerializeField]
+    private float timeToDissappearAfterDie = 5f;
+
     private Rigidbody rb;
 
     public GameObject healthBarUI;
@@ -40,6 +43,8 @@ public class FlyingEnemyController : MonoBehaviour
     public GameObject bomb;
 
     public GameObject laser;
+
+    public Animator anim;
 
     private DamageController damageController;
 
@@ -58,6 +63,7 @@ public class FlyingEnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim.SetBool("isDying", false);
         stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
         skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
         rb = GetComponent<Rigidbody>();
@@ -74,12 +80,13 @@ public class FlyingEnemyController : MonoBehaviour
 
     private bool isDead = false;
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!IsAlive() && summonedUnit && !isDead) {
             summoner.enemiesAlive -= summonValor; 
             isDead = true;
         }
+        UpdateAnimations();
         Movement();
         CheckShootingRange();
         if (!IsAlive())
@@ -88,30 +95,61 @@ public class FlyingEnemyController : MonoBehaviour
         }
     }
 
+    private void UpdateAnimations()
+    {
+        if(!isAttacking) 
+        { 
+            anim.SetBool("isBomb", false);
+            anim.SetBool("isLaser", false);
+        }
+        /*anim.SetBool("isWalking", !isAttacking);
+        anim.SetBool("isbomb", isAttacking && isBomb);
+        anim.SetBool("isLaser", isAttacking && !isBomb);
+        if (isAttacking && isBomb)
+        {
+            anim.SetTrigger("DropBomb");
+        }
+        if (isAttacking && !isBomb)
+        {
+            anim.SetTrigger("ShootLaser");
+        }*/
+
+        if (!IsAlive())
+        {
+            Die();
+        }
+    }
+
     private void Die()
     {
+        rb.useGravity = true;
+        anim.SetBool("isDying", true);
+        gameObject.layer = LayerMask.NameToLayer("DeadEnemies");
         if (stats && !killStatsAdded)
         {
             stats.EnemyKilled++;
             killStatsAdded = true;
         }
+
         if (skillTree && !experienceAdded)
         {
             skillTree.AddExperience(experienceWhenKill);
             experienceAdded = true;
         }
-        Destroy(gameObject);
+        Destroy(gameObject, timeToDissappearAfterDie);
     }
 
     public void Shoot()
     {
         if (isBomb)
         {
+            anim.SetBool("isBomb", true);
             GameObject b = Instantiate(bomb);
             b.transform.position = transform.position;
         }
         else
         {
+            anim.SetBool("isLaser", true);
             GameObject b = Instantiate(laser);
             b.transform.position = transform.position;
         }
