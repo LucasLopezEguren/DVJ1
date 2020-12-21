@@ -60,8 +60,6 @@ public class PlayerController : MonoBehaviour
 
     public bool dashed = false;
 
-    float endDash = 0.2f;
-
     float timeToMove = 0.5f;
 
     float timeStunned = 0f;
@@ -83,6 +81,14 @@ public class PlayerController : MonoBehaviour
     public bool isDashing = false;
 
     private int jumps = 2;
+
+    public GameObject defenseParticles;
+
+    public GameObject rageParticles;
+
+    public float rageCooldown = 20f;
+
+    public float shieldCooldown = 20f;
 
     void Start()
     {
@@ -144,9 +150,17 @@ public class PlayerController : MonoBehaviour
         {
             dashCooldown += Time.deltaTime;
         }
-        if(endDash < 0.2f)
+        if(dashCooldown < 1.5f)
         {
-            endDash += Time.deltaTime;
+            dashCooldown += Time.deltaTime;
+        }
+        if(rageCooldown < 20f)
+        {
+            rageCooldown += Time.deltaTime;
+        }
+        if(shieldCooldown < 20f)
+        {
+            shieldCooldown += Time.deltaTime;
         }
         if(!canJump && currentHealth > 0)
         {
@@ -523,11 +537,14 @@ public class PlayerController : MonoBehaviour
     {
         if (skillTree.skills.shield)
         {
-            if (skillsUI.selectedSkill.name == "Shield" && Input.GetKeyDown(KeyCode.LeftControl) && !skillTree.skills.shieldActive)
+            if (skillsUI.selectedSkill.name == "Shield" && Input.GetKeyDown(KeyCode.LeftControl) && !skillTree.skills.rageActive 
+            && shieldCooldown >= 20)
             {
                 skillTree.skills.shieldActive = true;
+                defenseParticles.SetActive(true);
                 skillTree.skills.timerShield = skillTree.skills.timeOfShield;
                 invincible = true;
+                shieldCooldown = 0;
             }
             if (skillTree.skills.shieldActive)
             {
@@ -535,16 +552,20 @@ public class PlayerController : MonoBehaviour
                 if (skillTree.skills.timerShield <= 0)
                 {
                     skillTree.skills.shieldActive = false;
+                    defenseParticles.SetActive(false);
                     invincible = false;
                 }
             }
         }
         if (skillTree.skills.rage)
         {
-            if (skillsUI.selectedSkill.name == "Rage" && Input.GetKeyDown(KeyCode.LeftControl) && !skillTree.skills.rageActive)
+            if (skillsUI.selectedSkill.name == "Rage" && Input.GetKeyDown(KeyCode.LeftControl) && !skillTree.skills.shieldActive 
+            && rageCooldown >= 20)
             {
                 skillTree.skills.rageActive = true;
+                rageParticles.SetActive(true);
                 skillTree.skills.timerRage = skillTree.skills.timeOfRage;
+                rageCooldown = 0;
             }
             if (skillTree.skills.rageActive)
             {
@@ -552,6 +573,7 @@ public class PlayerController : MonoBehaviour
                 if (skillTree.skills.timerRage <= 0)
                 {
                     skillTree.skills.rageActive = false;
+                    rageParticles.SetActive(false);
                 }
             }
         }

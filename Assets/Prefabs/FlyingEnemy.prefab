@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.0131917, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.29803923, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -389,11 +389,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 3
+  summonedUnit: 0
+  summoner: {fileID: 0}
+  summonValor: 1
   maxMovementRange: 5
   shootingRange: 5
-  initialPosition: {x: 0, y: 0, z: 0}
-  minPosition: {x: 0, y: 0, z: 0}
-  maxPosition: {x: 0, y: 0, z: 0}
+  experienceWhenKill: 20
   isFacingRight: 0
   isAttacking: 0
   isBomb: 1
@@ -446,6 +447,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarUI: {fileID: 7939081122650914941}
+  hasDrop: 0
+  drop: {fileID: 0}
   slider: {fileID: 6634510885678832801}
   maxHealth: 10
   health: 10
