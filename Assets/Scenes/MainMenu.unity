@@ -2006,30 +2006,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 526062730}
-    - target: {fileID: 2758784847260185273, guid: ae152d73358f347288bb26a07797851a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 526062730}
-    - target: {fileID: 2758784847852652935, guid: ae152d73358f347288bb26a07797851a, type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2758784847852652935, guid: ae152d73358f347288bb26a07797851a, type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2758784847852652935, guid: ae152d73358f347288bb26a07797851a, type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2758784847852652935, guid: ae152d73358f347288bb26a07797851a, type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2758784847852652935, guid: ae152d73358f347288bb26a07797851a, type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2758784848444906364, guid: ae152d73358f347288bb26a07797851a, type: 3}
       propertyPath: m_Name
       value: ControlsMenu
@@ -2118,6 +2094,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5584727065799751030, guid: ae152d73358f347288bb26a07797851a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 526062730}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae152d73358f347288bb26a07797851a, type: 3}
 --- !u!1 &1903826860
