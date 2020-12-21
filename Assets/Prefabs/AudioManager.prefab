@@ -254,3 +254,31 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: BasicEnemy_Step1
+    clip: {fileID: 8300000, guid: a502efc16c2d3420583d4e8b25abb4fb, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: BasicEnemy_Step2
+    clip: {fileID: 8300000, guid: 20d42c08a762d4c0b85d321cb0ee4f15, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: BasicEnemy_Dead
+    clip: {fileID: 8300000, guid: f59be125f7bf24990aaf1c400e94ac9e, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
+  - name: BasicEnemy_Slash
+    clip: {fileID: 8300000, guid: ed3669f68ae2b4ae68fdb2b8acef29d9, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
