@@ -124,217 +124,217 @@ MonoBehaviour:
   - name: HubPartA
     clip: {fileID: 8300000, guid: d31af5cb57cbd49bebd1aabaeda74a61, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2285026617345954010, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: HubPartB
     clip: {fileID: 8300000, guid: 7e2e80e426ec94a8a98c65115329e295, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 1
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2285026617345954010, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Attack1
     clip: {fileID: 8300000, guid: 31175159fab404fd5983e2db2ae9070e, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Attack2
     clip: {fileID: 8300000, guid: 6edbdd64f3d994be480357c0ab674865, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Attack3
     clip: {fileID: 8300000, guid: 569ab600d1792489885354b625133b7d, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Fall
     clip: {fileID: 8300000, guid: e65c0d98a001c4398b457ee921057f09, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Dash
     clip: {fileID: 8300000, guid: 1811152cc86654cdd9a799f6b4e47958, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Shoot
     clip: {fileID: 8300000, guid: c167ebe19798e4bdb96cdae87cb18d21, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Hit1
     clip: {fileID: 8300000, guid: 1a8426a5057ad47f19e96b3333d53dda, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Hit2
     clip: {fileID: 8300000, guid: fd1a35bd75638414b9c9113e5fbdcbe2, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Hit3
     clip: {fileID: 8300000, guid: ce79a9cbf6def4aaab92f6e89b928fd8, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Step1
     clip: {fileID: 8300000, guid: 8eb618b5c235c4a79b4615c0e670868b, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_Step2
     clip: {fileID: 8300000, guid: 875309402fab8415fa75b0a8e9091f65, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Player_HitElvis
     clip: {fileID: 8300000, guid: 875309402fab8415fa75b0a8e9091f65, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: HeavyEnemy_Step1
     clip: {fileID: 8300000, guid: c4c2e0e0759a349d7b9d25ee9cca3058, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: HeavyEnemy_Step2
     clip: {fileID: 8300000, guid: c21a8cfd9b5f9416d9dbaec042a5c9a5, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: HeavyEnemy_Dead
     clip: {fileID: 8300000, guid: 2999027d11407402abe136e914771987, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: HeavyEnemy_Attack1
     clip: {fileID: 8300000, guid: 6e699a452966d47dea7bab472b38cf08, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: HeavyEnemy_Attack2
     clip: {fileID: 8300000, guid: fc8ef2ff600bd47f3ac083939607f885, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: BasicEnemy_Step1
     clip: {fileID: 8300000, guid: a502efc16c2d3420583d4e8b25abb4fb, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: BasicEnemy_Step2
     clip: {fileID: 8300000, guid: 20d42c08a762d4c0b85d321cb0ee4f15, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: BasicEnemy_Dead
     clip: {fileID: 8300000, guid: f59be125f7bf24990aaf1c400e94ac9e, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: BasicEnemy_Slash
     clip: {fileID: 8300000, guid: ed3669f68ae2b4ae68fdb2b8acef29d9, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: OverWorldPartA
     clip: {fileID: 8300000, guid: fd1b3ed49c1eb4cd49e24d3c1592cd31, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2285026617345954010, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: OverWorldPartB
     clip: {fileID: 8300000, guid: d2e9c0acc03024627a702962ea24ff60, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 1
     loop: 1
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2285026617345954010, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Boss_HighAttack
     clip: {fileID: 8300000, guid: e764ecdc3ad4f4ec8a576928341cfadf, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Boss_LowAttack
     clip: {fileID: 8300000, guid: 10c77490e6fd849959ba532d2f018b15, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Boss_TailAttack
     clip: {fileID: 8300000, guid: 1a682290731084fd7bc8ccfa39b7aae5, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Boss_ClawsAttack
     clip: {fileID: 8300000, guid: 5556c931d932643f78873bab588dd428, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 1
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Boss_Fall
     clip: {fileID: 8300000, guid: f8ee9f911d1a94e62a0541660dbe4a71, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: Boss_SwitchSide
     clip: {fileID: 8300000, guid: 7a3f0c881745c456fbe61edb684fd73b, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
@@ -348,35 +348,35 @@ MonoBehaviour:
   - name: Boss_Summon
     clip: {fileID: 8300000, guid: e50f8bd4112584c46ae3819d1b5fb207, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: FlyingEnemy_Fall
     clip: {fileID: 8300000, guid: abdea4512362a48c6ae2cc18e1472136, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: FlyingEnemy_Shoot
     clip: {fileID: 8300000, guid: ffa712e40bb3d46fca02b111a6e2e71a, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: FlyingEnemy_Explosion
     clip: {fileID: 8300000, guid: a8c4b9bffb4614cd5b3b72490597b98e, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
   - name: FlyingEnemy_Fly
     clip: {fileID: 8300000, guid: c148a4a76c69f4393b33f983bf4b3e52, type: 3}
     volume: 0.5
-    pitch: 0.9
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     outputAudioMixerGroup: {fileID: 2061524639511543931, guid: c0f076386fbeb4eb9bb74e097ab40998, type: 2}
