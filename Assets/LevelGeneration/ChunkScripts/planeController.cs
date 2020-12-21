@@ -25,7 +25,7 @@ public class planeController : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (Input.GetButtonDown("Jump")){
+        if (Input.GetButtonDown("Jump") || Input.GetAxisRaw("Vertical") < 0){
             StartCoroutine("EnableCollider");
         }
     }

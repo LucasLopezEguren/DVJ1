@@ -11,6 +11,7 @@ TagManager:
   - GameManager
   - Ground
   - AudioManager
+  - DeadEnemies
   layers:
   - Default
   - TransparentFX
