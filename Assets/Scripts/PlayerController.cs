@@ -249,6 +249,7 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("dash");
             moveSpeed = moveSpeed * 2;
             dashCooldown = 0;
+            gravityScale = 0;
         }
     }
 
@@ -263,6 +264,7 @@ public class PlayerController : MonoBehaviour
             canFlip = true;
             canMove = true;
             isDashing = false;
+            gravityScale = 5;
         }
         
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("dash") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9)
