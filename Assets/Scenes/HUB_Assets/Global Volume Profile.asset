@@ -19,12 +19,12 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.256
+    m_Value: 0.378
     min: 0
     max: 1
   response:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 0.757
     min: 0
     max: 1
   texture:
@@ -62,15 +62,15 @@ MonoBehaviour:
   m_AdvancedMode: 0
   threshold:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 0.3
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 1
     min: 0
   scatter:
     m_OverrideState: 1
-    m_Value: 0.4
+    m_Value: 0.2
     min: 0
     max: 1
   clamp:
@@ -118,7 +118,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.15
+    m_Value: 0.301
     min: 0
     max: 1
   smoothness:

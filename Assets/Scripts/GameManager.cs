@@ -19,12 +19,17 @@ public class GameManager : MonoBehaviour
     public GameObject[] FinishingChunks;
     public int amountChunks;
     public Text comboNumber;
-    public Text comboText;
     public GameObject hitCombo;
+    public GameObject deorbitalImg;
+    public GameObject cosmicalImg;
+    public GameObject blackHolishImg;
+    public GameObject astronomicalImg;
+    public GameObject superNovaImg;
     private Color transparencyNumber;
     private Color transparencyText;
     private bool maleNarratorActivate;
     private Stats stats;
+    private SkillTree skillTree;
     private Combo actualCombo = Combo.normal;
 
     // Start is called before the first frame update
@@ -32,7 +37,9 @@ public class GameManager : MonoBehaviour
     {
         string actualSceneName = SceneManager.GetActiveScene().name;
         stats = (Stats)GameObject.Find("Stats").GetComponent("Stats");
-        stats.ResetStats();
+        skillTree = (SkillTree)GameObject.Find("SkillTree").GetComponent("SkillTree");
+        if(stats && actualSceneName != "BossFight") stats.ResetStats();
+        if(skillTree) skillTree.RestExperiencedEarnedInLevel();
         try
         {
             maleNarratorActivate = FindObjectOfType<CheatCodes>().maleNarratorActivate;
@@ -62,10 +69,8 @@ public class GameManager : MonoBehaviour
             Instantiate(finishingChunk, new Vector3(nextPosition + ((finishingChunk.GetComponent<BoxCollider>().size.x) / 2), 0, 0), Quaternion.identity);
         }
         comboNumber.text = "";
-        comboText.text = "";
         transparencyNumber = comboNumber.color;
         transparencyNumber.a = 0.0f;
-        transparencyText = comboText.color;
         transparencyText.a = 0.0f;
         hitCombo.SetActive(false);
     }
@@ -93,12 +98,12 @@ public class GameManager : MonoBehaviour
             comboNumber.text = comboCount.ToString();
             if (comboCount < 5)
             {
-                comboText.text = "";
             }
             else if (comboCount < 8)
             {
-                comboText.text = "Deorbital";
                 if (!deorbital) {
+                    TurnOffRanks();
+                    deorbitalImg.SetActive(true);
                     deorbital = true;
                     if (maleNarratorActivate) {
                         FindObjectOfType<AudioManager>().Play("Deorbital");
@@ -107,9 +112,10 @@ public class GameManager : MonoBehaviour
                     }
                 }
             } else if ( comboCount < 13 ) {
-                comboText.text = "Cosmical";
                 if (!cosmic) {
                     cosmic = true;
+                    TurnOffRanks();
+                    cosmicalImg.SetActive(true);
                     if (maleNarratorActivate) {
                         FindObjectOfType<AudioManager>().Play("Cosmic");
                     } else {
@@ -117,9 +123,10 @@ public class GameManager : MonoBehaviour
                     }
                 }
             } else if ( comboCount < 21) {
-                comboText.text = "Black holish";
                 if (!blackHolish) {
                     blackHolish = true;
+                    TurnOffRanks();
+                    blackHolishImg.SetActive(true);
                     if (maleNarratorActivate) {
                         FindObjectOfType<AudioManager>().Play("BlackHolish");
                     } else {
@@ -127,9 +134,10 @@ public class GameManager : MonoBehaviour
                     }
                 }
             } else if (comboCount < 34) {
-                comboText.text = "Astronomical";
                 if (!astonomical) {
                     astonomical = true;
+                    TurnOffRanks();
+                    astronomicalImg.SetActive(true);
                     if (maleNarratorActivate) {
                         FindObjectOfType<AudioManager>().Play("Astronomical");
                     } else {
@@ -137,11 +145,12 @@ public class GameManager : MonoBehaviour
                     }
                 }
             } else if (comboCount >= 34) {
-                comboText.text = "SuperNova";
                 actualCombo = Combo.supernova;
                 if (!superNova)
                 {
                     superNova = true;
+                    TurnOffRanks();
+                    superNovaImg.SetActive(true);
                     if (maleNarratorActivate)
                     {
                         FindObjectOfType<AudioManager>().Play("SuperNova");
@@ -153,9 +162,7 @@ public class GameManager : MonoBehaviour
                 }
             }
             transparencyNumber.a = transparency;
-            transparencyText.a = transparency;
             comboNumber.color = transparencyNumber;
-            comboText.color = transparencyText;
         }
         if (comboCount > 0)
         {
@@ -164,11 +171,11 @@ public class GameManager : MonoBehaviour
         if (comboCount < 3)
         {
             hitCombo.SetActive(false);
+            TurnOffRanks();
             transparency = 0;
             transparencyNumber.a = transparency;
             transparencyText.a = transparency;
             comboNumber.color = transparencyNumber;
-            comboText.color = transparencyText;
             superNova = false;
             astonomical = false;
             blackHolish = false;
@@ -218,5 +225,13 @@ public class GameManager : MonoBehaviour
         }
         comboCount = 0;
         actualCombo = Combo.normal;
+    }
+
+    public void TurnOffRanks() {
+        deorbitalImg.SetActive(false);
+        cosmicalImg.SetActive(false);
+        blackHolishImg.SetActive(false);
+        astronomicalImg.SetActive(false);
+        superNovaImg.SetActive(false);
     }
 }

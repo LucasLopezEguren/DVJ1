@@ -8,7 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Black_Material
-    second: {fileID: -1580535799172915004, guid: 5c4247bc544ce204c9d7b17842c229df, type: 3}
+    second: {fileID: 2100000, guid: 9fb7148192f5a4de5be1fde0181e56c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door_Material
+    second: {fileID: 2100000, guid: 9fb7148192f5a4de5be1fde0181e56c7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -55,7 +60,7 @@ ModelImporter:
     importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1

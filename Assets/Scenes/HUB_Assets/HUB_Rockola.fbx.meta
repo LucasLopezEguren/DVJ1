@@ -3,7 +3,12 @@ guid: 740df8462c85b0b4a91dce1c0eb815d8
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rockola_Mat
+    second: {fileID: 2100000, guid: a2b584b3d70f513468bab5b3e18bb963, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
